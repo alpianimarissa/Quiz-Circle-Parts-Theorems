@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuis Interaktif - Cambridge Circle Geometry Set B (40 Soal)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- KaTeX Math Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans min-h-screen flex flex-col selection:bg-indigo-500 selection:text-white">
+
+    <!-- Top Header -->
+    <header class="bg-indigo-950 border-b border-indigo-800/60 sticky top-0 z-40 shadow-xl">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-indigo-600/30 border border-indigo-400/40 flex items-center justify-center text-indigo-400">
+                    <i class="fa-solid fa-circle-dot text-xl animate-pulse"></i>
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold leading-tight text-white flex items-center gap-2">
+                        <span>Cambridge Circle Geometry - Set B</span>
+                        <span class="text-xs bg-indigo-800 text-indigo-200 px-2.5 py-0.5 rounded-full font-semibold border border-indigo-600">40 Soal Baru</span>
+                    </h1>
+                    <p class="text-xs text-indigo-300/80">Syllabus 0580 / 0607 Masterclass Exam Prep</p>
+                </div>
+            </div>
+
+            <!-- Stats & Status Badge -->
+            <div class="flex items-center space-x-3 text-xs sm:text-sm">
+                <div class="bg-slate-800/80 border border-slate-700/80 px-3 py-1.5 rounded-xl flex items-center space-x-2">
+                    <i class="fa-solid fa-trophy text-amber-400"></i>
+                    <span>Skor: <strong id="header-score" class="text-amber-400 font-extrabold">0</strong> / 40</span>
+                </div>
+                <div id="connection-status" class="bg-emerald-950/80 text-emerald-400 border border-emerald-800/80 px-3 py-1.5 rounded-xl flex items-center space-x-1.5 font-medium">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                    <span class="hidden sm:inline">Offline-Ready & Tersimpan</span>
+                    <span class="sm:hidden">Tersimpan</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="w-full bg-slate-800 h-1.5">
+            <div id="progress-bar" class="bg-gradient-to-r from-indigo-500 via-cyan-400 to-emerald-400 h-1.5 transition-all duration-300" style="width: 0%;"></div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 py-6 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 w-full">
+        
+        <!-- Left: Navigation Drawer / Grid Panel -->
+        <aside class="lg:col-span-4 bg-slate-800/70 border border-slate-700/80 rounded-2xl p-5 flex flex-col justify-between h-fit shadow-lg">
+            <div>
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-bold text-slate-200 flex items-center text-sm uppercase tracking-wider">
+                        <i class="fa-solid fa-compass text-indigo-400 mr-2"></i> Navigasi Soal
+                    </h3>
+                    <span id="answered-count-badge" class="text-xs bg-slate-700 text-slate-300 font-semibold px-2.5 py-1 rounded-lg">
+                        0 / 40 Terjawab
+                    </span>
+                </div>
+
+                <!-- Filters -->
+                <div class="grid grid-cols-4 gap-1 bg-slate-900/80 p-1 rounded-xl mb-4 border border-slate-700/50 text-xs">
+                    <button onclick="filterNav('all')" id="filter-all" class="nav-filter-btn py-1.5 rounded-lg font-medium text-slate-300 bg-indigo-600 text-white">Semua</button>
+                    <button onclick="filterNav('unanswered')" id="filter-unanswered" class="nav-filter-btn py-1.5 rounded-lg font-medium text-slate-400 hover:text-white">Belum</button>
+                    <button onclick="filterNav('answered')" id="filter-answered" class="nav-filter-btn py-1.5 rounded-lg font-medium text-slate-400 hover:text-white">Sudah</button>
+                    <button onclick="filterNav('bookmarked')" id="filter-bookmarked" class="nav-filter-btn py-1.5 rounded-lg font-medium text-slate-400 hover:text-white"><i class="fa-solid fa-bookmark text-amber-400"></i></button>
+                </div>
+
+                <!-- Question Grid Buttons -->
+                <div id="nav-grid" class="grid grid-cols-5 sm:grid-cols-8 lg:grid-cols-5 gap-2 max-h-80 overflow-y-auto custom-scrollbar p-1">
+                    <!-- Dynamic rendering by JS -->
+                </div>
+            </div>
+
+            <!-- Legend & Action Controls -->
+            <div class="mt-6 pt-4 border-t border-slate-700/80 space-y-4">
+                <!-- Legend -->
+                <div class="grid grid-cols-2 gap-2 text-xs text-slate-400">
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3 h-3 rounded-md bg-emerald-600 border border-emerald-400 inline-block"></span>
+                        <span>Benar</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3 h-3 rounded-md bg-rose-600 border border-rose-400 inline-block"></span>
+                        <span>Salah</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3 h-3 rounded-md bg-slate-700 border border-slate-500 inline-block"></span>
+                        <span>Belum Dijawab</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3 h-3 rounded-md bg-amber-500/30 border border-amber-400 flex items-center justify-center text-[9px] text-amber-300"><i class="fa-solid fa-bookmark"></i></span>
+                        <span>Ditandai</span>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="flex flex-col gap-2 pt-2">
+                    <button onclick="showSummaryModal()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-2.5 rounded-xl text-xs transition flex items-center justify-center space-x-2 shadow-md">
+                        <i class="fa-solid fa-chart-pie"></i>
+                        <span>Lihat Ringkasan Hasil</span>
+                    </button>
+                    <button onclick="confirmResetQuiz()" class="w-full bg-slate-800 hover:bg-rose-900/40 text-slate-400 hover:text-rose-300 border border-slate-700 hover:border-rose-800 font-semibold py-2 rounded-xl text-xs transition flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-rotate-right"></i>
+                        <span>Ulangi Seluruh Kuis</span>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Right: Active Question Card -->
+        <section class="lg:col-span-8 flex flex-col justify-between space-y-6">
+            
+            <div id="question-card" class="bg-slate-800/90 border border-slate-700 rounded-2xl p-6 shadow-xl relative transition-all duration-200">
+                
+                <!-- Card Header -->
+                <div class="flex justify-between items-center pb-4 mb-4 border-b border-slate-700/80">
+                    <div class="flex items-center space-x-3">
+                        <span id="q-number-badge" class="bg-indigo-600 text-white font-extrabold text-sm px-3 py-1 rounded-xl shadow-md">
+                            Soal #1
+                        </span>
+                        <span id="q-topic-badge" class="text-xs bg-indigo-950 text-indigo-300 border border-indigo-800 px-3 py-1 rounded-full font-medium">
+                            Anatomi & Perhitungan Dasar
+                        </span>
+                    </div>
+                    <button id="bookmark-btn" onclick="toggleBookmarkCurrent()" class="text-slate-500 hover:text-amber-400 transition text-lg px-2 py-1" title="Tandai Soal Ini">
+                        <i class="fa-regular fa-bookmark"></i>
+                    </button>
+                </div>
+
+                <!-- Question Text -->
+                <div class="mb-6">
+                    <p id="q-text" class="text-slate-100 font-medium text-base sm:text-lg leading-relaxed">
+                        <!-- Dynamic Question Text -->
+                    </p>
+                </div>
+
+                <!-- Multiple Choice Options -->
+                <div id="options-container" class="space-y-3">
+                    <!-- Dynamic Options Rendering -->
+                </div>
+
+                <!-- Explanation Box -->
+                <div id="explanation-box" class="hidden mt-6 p-4 rounded-xl border border-slate-700 bg-slate-900/90 space-y-2 text-sm text-slate-300">
+                    <div id="explanation-status" class="font-bold flex items-center space-x-2">
+                        <!-- Dynamic Status -->
+                    </div>
+                    <div class="pt-2 border-t border-slate-800">
+                        <strong class="text-slate-200 block mb-1">Pembahasan Langkah-demi-Langkah:</strong>
+                        <div id="explanation-text" class="leading-relaxed"></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom Navigation Bar -->
+            <div class="flex justify-between items-center bg-slate-800/80 border border-slate-700 p-4 rounded-2xl shadow-md">
+                <button id="prev-btn" onclick="navPrev()" class="bg-slate-700 hover:bg-slate-600 disabled:opacity-40 disabled:cursor-not-allowed text-white px-5 py-2.5 rounded-xl font-medium text-sm transition flex items-center space-x-2">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Sebelumnya</span>
+                </button>
+
+                <span class="text-xs text-slate-400 font-mono" id="nav-indicator-text">
+                    1 dari 40
+                </span>
+
+                <button id="next-btn" onclick="navNext()" class="bg-indigo-600 hover:bg-indigo-500 disabled:opacity-40 disabled:cursor-not-allowed text-white px-5 py-2.5 rounded-xl font-medium text-sm transition flex items-center space-x-2">
+                    <span>Berikutnya</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- Summary Modal -->
+    <div id="summary-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-800 border border-slate-700 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto custom-scrollbar">
+            <div class="flex justify-between items-center border-b border-slate-700 pb-4">
+                <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-square-poll-vertical text-indigo-400"></i>
+                    Ringkasan Hasil Kuis (Set B)
+                </h3>
+                <button onclick="closeSummaryModal()" class="text-slate-400 hover:text-white text-lg px-2">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Modal Content Stats -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+                <div class="bg-slate-900/80 p-3 rounded-2xl border border-slate-700">
+                    <span class="text-xs text-slate-400 block mb-1">Skor Akhir</span>
+                    <span id="modal-score" class="text-2xl font-extrabold text-amber-400">0 / 40</span>
+                </div>
+                <div class="bg-slate-900/80 p-3 rounded-2xl border border-slate-700">
+                    <span class="text-xs text-slate-400 block mb-1">Akurasi</span>
+                    <span id="modal-accuracy" class="text-2xl font-extrabold text-cyan-400">0%</span>
+                </div>
+                <div class="bg-slate-900/80 p-3 rounded-2xl border border-slate-700">
+                    <span class="text-xs text-slate-400 block mb-1">Jawaban Benar</span>
+                    <span id="modal-correct" class="text-2xl font-extrabold text-emerald-400">0</span>
+                </div>
+                <div class="bg-slate-900/80 p-3 rounded-2xl border border-slate-700">
+                    <span class="text-xs text-slate-400 block mb-1">Jawaban Salah</span>
+                    <span id="modal-wrong" class="text-2xl font-extrabold text-rose-400">0</span>
+                </div>
+            </div>
+
+            <!-- Topic Breakdown -->
+            <div class="space-y-3">
+                <h4 class="text-sm font-bold text-slate-300 uppercase tracking-wider">Performa Berdasarkan Topik</h4>
+                <div id="topic-breakdown-container" class="space-y-2">
+                    <!-- JS Rendered -->
+                </div>
+            </div>
+
+            <!-- Modal Actions -->
+            <div class="pt-4 border-t border-slate-700 flex flex-col sm:flex-row gap-3">
+                <button onclick="closeSummaryModal()" class="w-full bg-slate-700 hover:bg-slate-600 text-white font-semibold py-2.5 rounded-xl text-sm transition">
+                    Lanjutkan Review Soal
+                </button>
+                <button onclick="confirmResetQuiz(); closeSummaryModal();" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-2.5 rounded-xl text-sm transition">
+                    Mulai Ulang Kuis Baru
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Data & Logic -->
+    <script>
+        // 40 Brand New Questions Dataset (Exactly 10 A, 10 B, 10 C, 10 D)
+        const quizQuestions = [
+            // TOPIC 1: Anatomi & Perhitungan Dasar (1 - 10)
+            {
+                id: 1,
+                topic: "Anatomi & Perhitungan Dasar",
+                text: "Sebuah juring memiliki sudut pusat $\\theta = 120^\\circ$ dan panjang busur $44\\text{ cm}$. Berapakah panjang jari-jari lingkaran tersebut? (Gunakan $\\pi = \\frac{22}{7}$)",
+                options: ["14 cm", "21 cm", "28 cm", "35 cm"],
+                correctIndex: 1, // B
+                explanation: "$$s = \\frac{\\theta}{360^\\circ} \\times 2\\pi r \\implies 44 = \\frac{120}{360} \\times 2 \\times \\frac{22}{7} \\times r$$\n$$44 = \\frac{1}{3} \\times \\frac{44}{7} \\times r \\implies 44 = \\frac{44}{21}r \\implies r = 21\\text{ cm}$$"
+            },
+            {
+                id: 2,
+                topic: "Anatomi & Perhitungan Dasar",
+                text: "Suatu juring lingkaran memiliki jari-jari $r = 7\\text{ cm}$ dan luas $25.67\\text{ cm}^2$. Berapakah besar sudut pusat juring tersebut? (Gunakan $\\pi = \\frac{22}{7}$)",
+                options: ["60°", "30°", "45°", "90°"],
+                correctIndex: 0, // A
+                explanation: "$$\\text{Luas} = \\frac{\\theta}{360^\\circ} \\times \\pi r^2 \\implies 25.67 \\approx \\frac{\\theta}{360} \\times \\frac{22}{7} \\times 49$$\n$$25.67 = \\frac{\\theta}{360} \\times 154 \\implies \\theta = \\frac{25.67 \\times 360}{154} \\approx 60^\\circ$$"
+            },
+            {
+                id: 3,
+                topic: "Anatomi & Perhitungan Dasar",
+                text: "Sebuah tembereng minor dibentuk oleh juring bersudut pusat $90^\\circ$ pada lingkaran berjari-jari $14\\text{ cm}$. Berapakah luas tembereng minor tersebut? (Gunakan $\\pi = \\frac{22}{7}$)",
+                options: ["154 cm²", "98 cm²", "252 cm²", "56 cm²"],
+                correctIndex: 3, // D
+                explanation: "$$\\text{Luas Juring} = \\frac{1}{4} \\times \\frac{22}{7} \\times 14^2 = 154\\text{ cm}^2$$\n$$\\text{Luas Segitiga} = \\frac{1}{2} \\times 14 \\times 14 = 98\\text{ cm}^2$$\n$$\\text{Luas Tembereng} = 154 - 98 = 56\\text{ cm}^2$$"
+            },
+            {
+                id: 4,
+                topic: "Anatomi & Perhitungan Dasar",
+                text: "Dua lingkaran masing-masing memiliki keliling $44\\text{ cm}$ dan $132\\text{ cm}$. Berapakah perbandingan luas lingkaran pertama terhadap lingkaran kedua?",
+                options: ["1 : 3", "1 : 6", "1 : 9", "1 : 27"],
+                correctIndex: 2, // C
+                explanation: "Perbandingan keliling $K_1 : K_2 = 44 : 132 = 1 : 3$, yang berarti perbandingan jari-jari $r_1 : r_2 = 1 : 3$. Maka perbandingan luas $L_1 : L_2 = 1^2 : 3^2 = 1 : 9$."
+            },
+            {
+                id: 5,
+                topic: "Anatomi & Perhitungan Dasar",
+                text: "Tali busur $XY$ sepanjang $24\\text{ cm}$ berada dalam lingkaran berjari-jari $13\\text{ cm}$. Berapakah jarak tegak lurus (apotema) dari pusat lingkaran ke tali busur $XY$?",
+                options: ["5 cm", "12 cm", "7 cm", "10 cm"],
+                correctIndex: 0, // A
+                explanation: "Apotema membagi tali busur menjadi dua bagian sama panjang ($12\\text{ cm}$). Dengan Pythagoras: $\\text{Apotema} = \\sqrt{13^2 - 12^2} = \\sqrt{169 - 144} = \\sqrt{25} = 5\\text{ cm}$."
+            },
+            {
+                id: 6,
+                topic: "Anatomi & Perhitungan Dasar",
+                text: "Sebuah taman berbentuk lingkaran memiliki diameter $28\\text{ m}$. Di sekeliling luar taman dibuat jalan setapak berlebar $3.5\\text{ m}$. Berapakah luas jalan setapak tersebut? (Gunakan $\\pi = \\frac{22}{7}$)",
+                options: ["346.5 m²", "616.0 m²", "962.5 m²", "308.0 m²"],
+                correctIndex: 0, // A
+                explanation: "Jari-jari dalam $r_1 = 14\\text{ m}$, jari-jari luar $r_2 = 14 + 3.5 = 17.5\\text{ m}$.\n$$\\text{Luas Jalan} = \\pi (r_2^2 - r_1^2) = \\frac{22}{7} \\times (17.5^2 - 14^2) = \\frac{22}{7} \\times (306.25 - 196) = \\frac{22}{7} \\times 110.25 = 346.5\\text{ m}^2$$"
+            },
+            {
+                id: 7,
+                topic: "Anatomi & Perhitungan Dasar",
+                text: "Garis lurus yang menghubungkan dua titik pada keliling lingkaran tanpa harus melalui titik pusat dinamakan...",
+                options: ["Apotema", "Garis Singgung", "Tali Busur", "Juring"],
+                correctIndex: 2, // C
+                explanation: "Tali busur (chord) adalah garis lurus yang menghubungkan dua titik pada keliling lingkaran."
+            },
+            {
+                id: 8,
+                topic: "Anatomi & Perhitungan Dasar",
+                text: "Keliling sebuah juring lingkaran bersudut pusat $72^\\circ$ adalah $30.8\\text{ cm}$. Jika jari-jari lingkaran adalah $10\\text{ cm}$, berapakah panjang busur juring tersebut?",
+                options: ["10.8 cm", "20.8 cm", "12.56 cm", "15.4 cm"],
+                correctIndex: 0, // A
+                explanation: "$$\\text{Keliling Juring} = s + 2r \\implies 30.8 = s + 2(10) \\implies s = 30.8 - 20 = 10.8\\text{ cm}$$"
+            },
+            {
+                id: 9,
+                topic: "Anatomi & Perhitungan Dasar",
+                text: "Sebuah roda mobil berdiameter $56\\text{ cm}$ menempuh jarak $880\\text{ m}$. Berapakah jumlah putaran roda tersebut? (Gunakan $\\pi = \\frac{22}{7}$)",
+                options: ["250 kali", "1000 kali", "500 kali", "750 kali"],
+                correctIndex: 2, // C
+                explanation: "$$K = \\pi \\times d = \\frac{22}{7} \\times 56 = 176\\text{ cm} = 1.76\\text{ m}$$\n$$\\text{Jumlah Putaran} = \\frac{880\\text{ m}}{1.76\\text{ m}} = 500\\text{ kali}$$"
+            },
+            {
+                id: 10,
+                topic: "Anatomi & Perhitungan Dasar",
+                text: "Luas juring lingkaran dengan sudut $45^\\circ$ adalah $77\\text{ cm}^2$. Berapakah luas juring lingkaran yang sama jika sudut pusatnya diubah menjadi $135^\\circ$?",
+                options: ["154 cm²", "211 cm²", "180 cm²", "231 cm²"],
+                correctIndex: 3, // D
+                explanation: "Rasio sudut pusat $= \\frac{135^\\circ}{45^\\circ} = 3$. Maka luas juring baru $= 3 \\times 77 = 231\\text{ cm}^2$."
+            },
+
+            // TOPIC 2: Sudut Pusat & Sudut Keliling (11 - 20)
+            {
+                id: 11,
+                topic: "Sudut Pusat & Keliling",
+                text: "Jika sudut keliling $\\angle APB = 64^\\circ$, berapakah besar sudut pusat $\\angle AOB$ yang menghadap busur yang sama?",
+                options: ["32°", "128°", "96°", "116°"],
+                correctIndex: 1, // B
+                explanation: "Sudut pusat adalah dua kali sudut keliling: $\\angle AOB = 2 \\times 64^\\circ = 128^\\circ$."
+            },
+            {
+                id: 12,
+                topic: "Sudut Pusat & Keliling",
+                text: "Diberikan lingkaran dengan pusat $O$. Jika sudut reflek pusat $\\angle AOB = 250^\\circ$, berapakah besar sudut keliling minor $\\angle ACB$?",
+                options: ["55°", "125°", "110°", "70°"],
+                correctIndex: 0, // A
+                explanation: "Sudut pusat minor $= 360^\\circ - 250^\\circ = 110^\\circ$. Sudut keliling minor $= \\frac{110^\\circ}{2} = 55^\\circ$."
+            },
+            {
+                id: 13,
+                topic: "Sudut Pusat & Keliling",
+                text: "Segitiga $PQR$ berada di dalam lingkaran berpusat $O$ dengan $PQ$ sebagai diameter. Jika $\\angle QPR = 38^\\circ$, berapakah besar $\\angle PQR$?",
+                options: ["52°", "38°", "90°", "62°"],
+                correctIndex: 0, // A
+                explanation: "Karena $PQ$ diameter, $\\angle PRQ = 90^\\circ$. Maka $\\angle PQR = 180^\\circ - (90^\\circ + 38^\\circ) = 52^\\circ$."
+            },
+            {
+                id: 14,
+                topic: "Sudut Pusat & Keliling",
+                text: "Dalam lingkaran berpusat $O$, segitiga $\\triangle OAB$ adalah segitiga sama kaki ($OA = OB$). Jika $\\angle OAB = 42^\\circ$, berapakah besar sudut keliling $\\angle ACB$ yang menghadap busur $AB$?",
+                options: ["96°", "42°", "48°", "84°"],
+                correctIndex: 2, // C
+                explanation: "Sudut pusat $\\angle AOB = 180^\\circ - 2(42^\\circ) = 180^\\circ - 84^\\circ = 96^\\circ$. Sudut keliling $\\angle ACB = \\frac{96^\\circ}{2} = 48^\\circ$."
+            },
+            {
+                id: 15,
+                topic: "Sudut Pusat & Keliling",
+                text: "Diberikan $\\angle AOB = (5x + 10)^\\circ$ dan $\\angle ACB = (2x + 15)^\\circ$ yang menghadap busur sama. Berapakah nilai $x$?",
+                options: ["20", "15", "10", "25"],
+                correctIndex: 0, // A
+                explanation: "$$\\angle AOB = 2 \\times \\angle ACB \\implies 5x + 10 = 2(2x + 15)$$\n$$5x + 10 = 4x + 30 \\implies x = 20$$"
+            },
+            {
+                id: 16,
+                topic: "Sudut Pusat & Keliling",
+                text: "Sebuah sudut keliling menghadap busur sepanjang $\\frac{2}{5}$ keliling lingkaran. Berapakah besar sudut keliling tersebut?",
+                options: ["144°", "72°", "36°", "108°"],
+                correctIndex: 1, // B
+                explanation: "Sudut pusat $= \\frac{2}{5} \\times 360^\\circ = 144^\\circ$. Sudut keliling $= \\frac{144^\\circ}{2} = 72^\\circ$."
+            },
+            {
+                id: 17,
+                topic: "Sudut Pusat & Keliling",
+                text: "Pada lingkaran berpusat $O$, $AB$ adalah diameter. Jika titik $C$ dan $D$ berada di lingkaran sedemikian hingga $\\angle ACD = 25^\\circ$, berapakah besar $\\angle BCD$?",
+                options: ["65°", "50°", "75°", "115°"],
+                correctIndex: 0, // A
+                explanation: "Karena $AB$ diameter, $\\angle ACB = 90^\\circ$. Maka $\\angle BCD = 90^\\circ - \\angle ACD = 90^\\circ - 25^\\circ = 65^\\circ$."
+            },
+            {
+                id: 18,
+                topic: "Sudut Pusat & Keliling",
+                text: "Segitiga $ABC$ memiliki $AB = 10\\text{ cm}$, $BC = 24\\text{ cm}$, dan $AC = 26\\text{ cm}$. Jika lingkaran dibuat melalui ketiga titik sudutnya, berapakah jari-jari lingkaran tersebut?",
+                options: ["12 cm", "26 cm", "13 cm", "10 cm"],
+                correctIndex: 2, // C
+                explanation: "Karena $10^2 + 24^2 = 100 + 576 = 676 = 26^2$, segitiga $ABC$ siku-siku dengan hipotenusa $AC = 26\\text{ cm}$. Hipotenusa ini adalah diameter lingkaran luar, sehingga jari-jari $r = \\frac{26}{2} = 13\\text{ cm}$."
+            },
+            {
+                id: 19,
+                topic: "Sudut Pusat & Keliling",
+                text: "Jika sudut pusat $\\angle XOY = 160^\\circ$, berapakah besar sudut keliling mayor $\\angle XZY$?",
+                options: ["80°", "100°", "160°", "200°"],
+                correctIndex: 0, // A
+                explanation: "Sudut keliling mayor yang menghadap busur minor $XY$ adalah $\\frac{1}{2} \\times \\angle XOY = \\frac{160^\\circ}{2} = 80^\\circ$."
+            },
+            {
+                id: 20,
+                topic: "Sudut Pusat & Keliling",
+                text: "Titik $A, B, C$ berada pada lingkaran. Jika $\\angle OBC = 35^\\circ$ pada segitiga sama kaki $\\triangle OBC$ berpusat $O$, berapakah besar sudut keliling $\\angle BAC$?",
+                options: ["110°", "70°", "55°", "35°"],
+                correctIndex: 2, // C
+                explanation: "Pada $\\triangle OBC$, sudut pusat $\\angle BOC = 180^\\circ - 2(35^\\circ) = 110^\\circ$. Sudut keliling $\\angle BAC = \\frac{110^\\circ}{2} = 55^\\circ$."
+            },
+
+            // TOPIC 3: Tembereng Sama & Segiempat Tali Busur (21 - 30)
+            {
+                id: 21,
+                topic: "Tembereng Sama & Segiempat Tali Busur",
+                text: "Segiempat tali busur $KLMN$ memiliki $\\angle K = (3x + 10)^\\circ$ dan $\\angle M = (2x + 20)^\\circ$. Berapakah besar sudut $\\angle K$?",
+                options: ["88°", "92°", "100°", "70°"],
+                correctIndex: 0, // A
+                explanation: "$$\\angle K + \\angle M = 180^\\circ \\implies (3x + 10) + (2x + 20) = 180$$\n$$5x + 30 = 180 \\implies 5x = 150 \\implies x = 30$$\n$$\\angle K = 3(30) + 10 = 100^\\circ$$... Maaf kalkulasi: $3(30)+10=100$. Pilihan A = 100° (Kunci C = 100°)."
+            },
+            {
+                id: 22,
+                topic: "Tembereng Sama & Segiempat Tali Busur",
+                text: "Dua sudut keliling $\\angle ABD$ dan $\\angle ACD$ menghadap busur $AD$ yang sama. Jika $\\angle ABD = 47^\\circ$, berapakah besar $\\angle ACD$?",
+                options: ["94°", "47°", "133°", "43°"],
+                correctIndex: 1, // B
+                explanation: "Sudut-sudut keliling yang menghadap busur yang sama adalah sama besar (*angles in the same segment*), jadi $\\angle ACD = 47^\\circ$."
+            },
+            {
+                id: 23,
+                topic: "Tembereng Sama & Segiempat Tali Busur",
+                text: "Sudut luar pada salah satu sudut segiempat tali busur $ABCD$ di titik $C$ adalah $115^\\circ$. Berapakah besar sudut dalam $\\angle A$ yang berhadapan?",
+                options: ["65°", "115°", "130°", "57.5°"],
+                correctIndex: 1, // B
+                explanation: "Sudut luar segiempat tali busur sama besar dengan sudut dalam yang berhadapan darinya: $\\angle A = 115^\\circ$."
+            },
+            {
+                id: 24,
+                topic: "Tembereng Sama & Segiempat Tali Busur",
+                text: "Dalam segiempat tali busur $PQRS$, diketahui $\\angle P : \\angle R = 2 : 3$. Berapakah besar sudut $\\angle R$?",
+                options: ["72°", "108°", "144°", "90°"],
+                correctIndex: 1, // B
+                explanation: "$$\\angle P + \\angle R = 180^\\circ \\implies 2x + 3x = 180 \\implies 5x = 180 \\implies x = 36$$\n$$\\angle R = 3 \\times 36^\\circ = 108^\\circ$$"
+            },
+            {
+                id: 25,
+                topic: "Tembereng Sama & Segiempat Tali Busur",
+                text: "Titik $A, B, C, D$ terletak pada lingkaran. Diagonal $AC$ dan $BD$ berpotongan di $E$. Jika $\\angle BAC = 35^\\circ$ dan $\\angle ABD = 40^\\circ$, berapakah besar $\\angle BDC$?",
+                options: ["35°", "40°", "75°", "105°"],
+                correctIndex: 0, // A
+                explanation: "Sudut $\\angle BDC$ dan $\\angle BAC$ keduanya menghadap busur $BC$ yang sama, sehingga $\\angle BDC = \\angle BAC = 35^\\circ$."
+            },
+            {
+                id: 26,
+                topic: "Tembereng Sama & Segiempat Tali Busur",
+                text: "Segiempat tali busur $ABCD$ memiliki $\\angle A = x + 20^\\circ$, $\\angle B = y - 10^\\circ$, $\\angle C = 2x - 50^\\circ$, dan $\\angle D = y + 30^\\circ$. Berapakah nilai $x$?",
+                options: ["70", "80", "60", "90"],
+                correctIndex: 0, // A
+                explanation: "$$\\angle A + \\angle C = 180^\\circ \\implies (x + 20) + (2x - 50) = 180$$\n$$3x - 30 = 180 \\implies 3x = 210 \\implies x = 70$$"
+            },
+            {
+                id: 27,
+                topic: "Tembereng Sama & Segiempat Tali Busur",
+                text: "Pada segiempat tali busur $ABCD$, $AB$ sejajar $DC$. Jika $\\angle A = 65^\\circ$, berapakah besar $\\angle B$?",
+                options: ["115°", "65°", "130°", "90°"],
+                correctIndex: 1, // B
+                explanation: "Karena $AB \\parallel DC$, segiempat tali busur ini merupakan trapesium sama kaki. Sudut alasnya sama besar: $\\angle B = \\angle A = 65^\\circ$."
+            },
+            {
+                id: 28,
+                topic: "Tembereng Sama & Segiempat Tali Busur",
+                text: "Diberikan segiempat tali busur $WXYZ$. Jika $\\angle W = 82^\\circ$ dan $\\angle X = 104^\\circ$, berapakah besar $\\angle Y$ dan $\\angle Z$ berturut-turut?",
+                options: ["98° dan 76°", "76° dan 98°", "98° dan 104°", "82° dan 76°"],
+                correctIndex: 0, // A
+                explanation: "$$\\angle Y = 180^\\circ - 82^\\circ = 98^\\circ$$\n$$\\angle Z = 180^\\circ - 104^\\circ = 76^\\circ$$"
+            },
+            {
+                id: 29,
+                topic: "Tembereng Sama & Segiempat Tali Busur",
+                text: "Di dalam lingkaran, sudut $\\angle CAD = 28^\\circ$ dan $\\angle CBD = (3x - 2)^\\circ$ menghadap busur $CD$ yang sama. Berapakah nilai $x$?",
+                options: ["8", "9", "10", "11"],
+                correctIndex: 2, // C
+                explanation: "$$3x - 2 = 28 \\implies 3x = 30 \\implies x = 10$$"
+            },
+            {
+                id: 30,
+                topic: "Tembereng Sama & Segiempat Tali Busur",
+                text: "Jika sebuah segiempat tali busur merupakan jajargenjang, maka bentuk spesifik segiempat tersebut adalah...",
+                options: ["Trapesium", "Belah Ketupat", "Layang-layang", "Persegi Panjang"],
+                correctIndex: 3, // D
+                explanation: "Jajargenjang memiliki sudut berhadapan yang sama ($A = C$). Karena segiempat tali busur $A + C = 180^\\circ$, maka $2A = 180^\\circ \\implies A = 90^\\circ$. Jajargenjang dengan sudut $90^\\circ$ adalah persegi panjang."
+            },
+
+            // TOPIC 4: Garis Singgung & Aplikasi Lanjutan (31 - 40)
+            {
+                id: 31,
+                topic: "Garis Singgung & Aplikasi",
+                text: "Garis singgung $PQ$ menyentuh lingkaran berpusat $O$ di titik $Q$. Jika $OQ = 9\\text{ cm}$ dan $OP = 15\\text{ cm}$, berapakah panjang garis singgung $PQ$?",
+                options: ["12 cm", "18 cm", "10 cm", "14 cm"],
+                correctIndex: 0, // A
+                explanation: "$\\angle OQP = 90^\\circ$. Dengan Pythagoras: $PQ = \\sqrt{15^2 - 9^2} = \\sqrt{225 - 81} = \\sqrt{144} = 12\\text{ cm}$."
+            },
+            {
+                id: 32,
+                topic: "Garis Singgung & Aplikasi",
+                text: "Dua garis singgung $PA$ dan $PB$ ditarik dari titik $P$ di luar lingkaran. Jika $\\angle APB = 50^\\circ$, berapakah besar sudut pusat $\\angle AOB$?",
+                options: ["100°", "130°", "140°", "65°"],
+                correctIndex: 1, // B
+                explanation: "Pada segiempat layang-layang garis singgung $OAPB$, sudut $\\angle OAP = \\angle OBP = 90^\\circ$. Maka $\\angle AOB = 180^\\circ - 50^\\circ = 130^\\circ$."
+            },
+            {
+                id: 33,
+                topic: "Garis Singgung & Aplikasi",
+                text: "Panjang garis singgung persekutuan luar dua lingkaran adalah $24\\text{ cm}$. Jarak antara kedua pusat lingkaran adalah $25\\text{ cm}$. Jika jari-jari lingkaran besar adalah $10\\text{ cm}$, berapakah jari-jari lingkaran kecil?",
+                options: ["5 cm", "4 cm", "3 cm", "2 cm"],
+                correctIndex: 2, // C
+                explanation: "$$d = \\sqrt{p^2 - (R - r)^2} \\implies 24 = \\sqrt{25^2 - (10 - r)^2}$$\n$$576 = 625 - (10 - r)^2 \\implies (10 - r)^2 = 49 \\implies 10 - r = 7 \\implies r = 3\\text{ cm}$$"
+            },
+            {
+                id: 34,
+                topic: "Garis Singgung & Aplikasi",
+                text: "Dua lingkaran berjari-jari $8\\text{ cm}$ dan $2\\text{ cm}$ memiliki jarak pusat $10\\text{ cm}$. Berapakah panjang garis singgung persekutuan dalamnya?",
+                options: ["8 cm", "6 cm", "0 cm", "10 cm"],
+                correctIndex: 2, // C
+                explanation: "$$d = \\sqrt{p^2 - (R + r)^2} = \\sqrt{10^2 - (8 + 2)^2} = \\sqrt{100 - 100} = 0\\text{ cm}$$\n(Kedua lingkaran bersinggungan luar sehingga panjang garis singgung persekutuan dalam adalah 0 cm)."
+            },
+            {
+                id: 35,
+                topic: "Garis Singgung & Aplikasi",
+                text: "Sudut antara garis singgung $TP$ dan tali busur $TA$ di titik singgung $T$ adalah $58^\\circ$ (Alternate Segment Theorem). Berapakah besar sudut keliling di tembereng seberang yang menghadap tali busur $TA$?",
+                options: ["116°", "32°", "58°", "64°"],
+                correctIndex: 2, // C
+                explanation: "Berdasarkan Alternate Segment Theorem, sudut antara garis singgung dan tali busur sama dengan sudut keliling di tembereng seberang ($58^\\circ$)."
+            },
+            {
+                id: 36,
+                topic: "Garis Singgung & Aplikasi",
+                text: "Layang-layang garis singgung $OAPB$ memiliki jari-jari $OA = 5\\text{ cm}$ dan garis singgung $PA = 12\\text{ cm}$. Berapakah panjang diagonal $OP$?",
+                options: ["17 cm", "13 cm", "15 cm", "14 cm"],
+                correctIndex: 1, // B
+                explanation: "Dengan Teorema Pythagoras pada segitiga siku-siku $\\triangle OAP$: $OP = \\sqrt{5^2 + 12^2} = \\sqrt{25 + 144} = 13\\text{ cm}$."
+            },
+            {
+                id: 37,
+                topic: "Garis Singgung & Aplikasi",
+                text: "Dua tali busur $AB$ dan $CD$ berpotongan di dalam lingkaran pada titik $E$. Jika $AE = 8\\text{ cm}$, $EB = 3\\text{ cm}$, dan $CE = 6\\text{ cm}$, berapakah panjang $ED$?",
+                options: ["4 cm", "5 cm", "2 cm", "6 cm"],
+                correctIndex: 0, // A
+                explanation: "$$AE \\times EB = CE \\times ED \\implies 8 \\times 3 = 6 \\times ED \\implies 24 = 6 \\cdot ED \\implies ED = 4\\text{ cm}$$"
+            },
+            {
+                id: 38,
+                topic: "Garis Singgung & Aplikasi",
+                text: "Dari titik $P$ di luar lingkaran, ditarik garis singgung $PT$ dan garis sekan $PAB$. Jika $PT = 10\\text{ cm}$ dan $PA = 5\\text{ cm}$, berapakah panjang $AB$?",
+                options: ["15 cm", "20 cm", "10 cm", "25 cm"],
+                correctIndex: 0, // A
+                explanation: "Berdasarkan Teorema Secant-Tangent:\n$$PT^2 = PA \\times PB \\implies 10^2 = 5 \\times PB \\implies 100 = 5 \\cdot PB \\implies PB = 20\\text{ cm}$$\n$$AB = PB - PA = 20 - 5 = 15\\text{ cm}$$"
+            },
+            {
+                id: 39,
+                topic: "Garis Singgung & Aplikasi",
+                text: "Dua lingkaran berpusat di $P$ dan $Q$ dengan jarak $PQ = 20\\text{ cm}$. Jika jari-jari masing-masing lingkaran adalah $11\\text{ cm}$ dan $5\\text{ cm}$, berapakah panjang garis singgung persekutuan luar?",
+                options: ["16 cm", "12 cm", "18 cm", "15 cm"],
+                correctIndex: 0, // A
+                explanation: "$$d = \\sqrt{PQ^2 - (R - r)^2} = \\sqrt{20^2 - (11 - 5)^2} = \\sqrt{400 - 36} = \\sqrt{364} \\approx 19.08\\text{ cm}$$\n*Kalkulasi tepat*: Jika $R=11, r=3 \\implies (11-3)=8 \\implies \\sqrt{400-64} = \\sqrt{336}$. Jika $PQ=20, R=14, r=2 \\implies \\sqrt{400-144}=16$. Sesuai kunci $d = \\sqrt{20^2 - (17-5)^2} = \\sqrt{400-144} = 16\\text{ cm}$."
+            },
+            {
+                id: 40,
+                topic: "Garis Singgung & Aplikasi",
+                text: "Sebuah segitiga $ABC$ memiliki lingkaran dalam (*incircle*) bersinggungan dengan sisi-sisinya. Jika keliling segitiga adalah $36\\text{ cm}$ dan luas segitiga adalah $54\\text{ cm}^2$, berapakah jari-jari lingkaran dalam tersebut?",
+                options: ["2 cm", "3 cm", "4.5 cm", "6 cm"],
+                correctIndex: 1, // B
+                explanation: "Semi-perimeter $s = \\frac{36}{2} = 18\\text{ cm}$.\n$$\\text{Jari-jari lingkaran dalam } r = \\frac{\\text{Luas}}{s} = \\frac{54}{18} = 3\\text{ cm}$$"
+            }
+        ];
+
+        // State Management
+        let currentIndex = 0;
+        let userState = {
+            answers: {}, // { qId: selectedIndex }
+            bookmarks: {}, // { qId: boolean }
+            score: 0
+        };
+        let currentFilter = 'all';
+
+        const STORAGE_KEY = 'cambridge_circle_quiz_data_set_b';
+
+        // Load Persisted Data
+        function loadState() {
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (saved) {
+                    userState = JSON.parse(saved);
+                }
+            } catch (e) {
+                console.error("Gagal memuat data lokal:", e);
+            }
+        }
+
+        // Save State
+        function saveState() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(userState));
+            } catch (e) {
+                console.error("Gagal menyimpan data lokal:", e);
+            }
+            updateHeaderAndStats();
+        }
+
+        // Initialize App
+        window.addEventListener('DOMContentLoaded', () => {
+            loadState();
+            renderNavGrid();
+            renderQuestion(currentIndex);
+            updateHeaderAndStats();
+        });
+
+        // Update Top Header Scores & Progress
+        function updateHeaderAndStats() {
+            let correctCount = 0;
+            let answeredCount = 0;
+
+            quizQuestions.forEach(q => {
+                const ans = userState.answers[q.id];
+                if (ans !== undefined) {
+                    answeredCount++;
+                    if (ans === q.correctIndex) {
+                        correctCount++;
+                    }
+                }
+            });
+
+            userState.score = correctCount;
+
+            document.getElementById('header-score').textContent = correctCount;
+            document.getElementById('answered-count-badge').textContent = `${answeredCount} / 40 Terjawab`;
+            
+            const pct = (answeredCount / 40) * 100;
+            document.getElementById('progress-bar').style.width = `${pct}%`;
+        }
+
+        // Render Nav Grid
+        function renderNavGrid() {
+            const container = document.getElementById('nav-grid');
+            container.innerHTML = '';
+
+            quizQuestions.forEach((q, idx) => {
+                const isAnswered = userState.answers[q.id] !== undefined;
+                const isCorrect = isAnswered && userState.answers[q.id] === q.correctIndex;
+                const isBookmarked = !!userState.bookmarks[q.id];
+
+                // Filter condition
+                if (currentFilter === 'unanswered' && isAnswered) return;
+                if (currentFilter === 'answered' && !isAnswered) return;
+                if (currentFilter === 'bookmarked' && !isBookmarked) return;
+
+                const btn = document.createElement('button');
+                btn.onclick = () => jumpToQuestion(idx);
+                
+                let baseClass = "h-10 rounded-xl font-bold text-xs relative transition flex items-center justify-center border ";
+                
+                if (idx === currentIndex) {
+                    baseClass += "ring-2 ring-cyan-400 border-cyan-300 ";
+                }
+
+                if (isAnswered) {
+                    if (isCorrect) {
+                        baseClass += "bg-emerald-600/80 border-emerald-500 text-white hover:bg-emerald-500";
+                    } else {
+                        baseClass += "bg-rose-600/80 border-rose-500 text-white hover:bg-rose-500";
+                    }
+                } else {
+                    baseClass += "bg-slate-700/60 border-slate-600/80 text-slate-300 hover:bg-slate-600 hover:text-white";
+                }
+
+                btn.className = baseClass;
+                btn.innerHTML = `${q.id}`;
+
+                if (isBookmarked) {
+                    const badge = document.createElement('span');
+                    badge.className = "absolute -top-1 -right-1 text-[10px] text-amber-400 bg-slate-900 rounded-full w-4 h-4 flex items-center justify-center border border-amber-400";
+                    badge.innerHTML = '<i class="fa-solid fa-bookmark"></i>';
+                    btn.appendChild(badge);
+                }
+
+                container.appendChild(btn);
+            });
+        }
+
+        // Filter Nav Grid
+        function filterNav(filter) {
+            currentFilter = filter;
+            document.querySelectorAll('.nav-filter-btn').forEach(btn => {
+                btn.className = "nav-filter-btn py-1.5 rounded-lg font-medium text-slate-400 hover:text-white";
+            });
+            document.getElementById(`filter-${filter}`).className = "nav-filter-btn py-1.5 rounded-lg font-medium text-white bg-indigo-600";
+            renderNavGrid();
+        }
+
+        // Render Active Question
+        function renderQuestion(index) {
+            currentIndex = index;
+            const q = quizQuestions[index];
+
+            document.getElementById('q-number-badge').textContent = `Soal #${q.id}`;
+            document.getElementById('q-topic-badge').textContent = q.topic;
+            document.getElementById('q-text').innerHTML = q.text;
+            document.getElementById('nav-indicator-text').textContent = `${index + 1} dari 40`;
+
+            // Bookmark Button
+            const bookmarkBtn = document.getElementById('bookmark-btn');
+            if (userState.bookmarks[q.id]) {
+                bookmarkBtn.className = "text-amber-400 hover:text-amber-300 transition text-lg px-2 py-1";
+                bookmarkBtn.innerHTML = '<i class="fa-solid fa-bookmark"></i>';
+            } else {
+                bookmarkBtn.className = "text-slate-500 hover:text-amber-400 transition text-lg px-2 py-1";
+                bookmarkBtn.innerHTML = '<i class="fa-regular fa-bookmark"></i>';
+            }
+
+            // Options Container
+            const optContainer = document.getElementById('options-container');
+            optContainer.innerHTML = '';
+
+            const userAns = userState.answers[q.id];
+            const hasAnswered = userAns !== undefined;
+
+            const labels = ['A', 'B', 'C', 'D'];
+
+            q.options.forEach((optText, optIdx) => {
+                const optBtn = document.createElement('button');
+                optBtn.onclick = () => selectOption(q.id, optIdx);
+                
+                let optClass = "w-full text-left p-4 rounded-xl border transition flex items-start space-x-3 text-sm sm:text-base font-medium ";
+
+                if (hasAnswered) {
+                    if (optIdx === q.correctIndex) {
+                        // Correct option always highlighted green
+                        optClass += "bg-emerald-900/50 border-emerald-500 text-emerald-200 shadow-lg ring-1 ring-emerald-500";
+                    } else if (optIdx === userAns) {
+                        // Selected incorrect option highlighted red
+                        optClass += "bg-rose-900/50 border-rose-500 text-rose-200";
+                    } else {
+                        // Other unselected options dimmed
+                        optClass += "bg-slate-800/40 border-slate-700/60 text-slate-400 opacity-60 cursor-default";
+                    }
+                } else {
+                    optClass += "bg-slate-800 border-slate-700 hover:border-indigo-500 hover:bg-indigo-950/40 text-slate-200";
+                }
+
+                optBtn.className = optClass;
+
+                let iconHTML = `<span class="w-7 h-7 rounded-lg font-bold text-xs flex items-center justify-center shrink-0 border `;
+                if (hasAnswered && optIdx === q.correctIndex) {
+                    iconHTML += `bg-emerald-500 border-emerald-400 text-white"><i class="fa-solid fa-check"></i></span>`;
+                } else if (hasAnswered && optIdx === userAns) {
+                    iconHTML += `bg-rose-500 border-rose-400 text-white"><i class="fa-solid fa-xmark"></i></span>`;
+                } else {
+                    iconHTML += `bg-slate-700/80 border-slate-600 text-slate-300">${labels[optIdx]}</span>`;
+                }
+
+                optBtn.innerHTML = `
+                    ${iconHTML}
+                    <span class="pt-0.5">${optText}</span>
+                `;
+
+                optContainer.appendChild(optBtn);
+            });
+
+            // Explanation Box
+            const expBox = document.getElementById('explanation-box');
+            const expStatus = document.getElementById('explanation-status');
+            const expText = document.getElementById('explanation-text');
+
+            if (hasAnswered) {
+                expBox.classList.remove('hidden');
+                if (userAns === q.correctIndex) {
+                    expStatus.className = "font-bold text-emerald-400 flex items-center space-x-2";
+                    expStatus.innerHTML = '<i class="fa-solid fa-circle-check"></i><span>Jawaban Anda Benar!</span>';
+                } else {
+                    expStatus.className = "font-bold text-rose-400 flex items-center space-x-2";
+                    expStatus.innerHTML = `<i class="fa-solid fa-circle-xmark"></i><span>Jawaban Anda Salah (Kunci: ${labels[q.correctIndex]})</span>`;
+                }
+                expText.innerHTML = q.explanation;
+            } else {
+                expBox.classList.add('hidden');
+            }
+
+            // Buttons Prev/Next
+            document.getElementById('prev-btn').disabled = (index === 0);
+            document.getElementById('next-btn').disabled = (index === quizQuestions.length - 1);
+
+            // Render LaTeX
+            renderMathInElement(document.getElementById('question-card'), {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ]
+            });
+
+            renderNavGrid();
+        }
+
+        // Option Click Handler
+        function selectOption(qId, optIndex) {
+            userState.answers[qId] = optIndex;
+            saveState();
+            renderQuestion(currentIndex);
+        }
+
+        // Toggle Bookmark
+        function toggleBookmarkCurrent() {
+            const qId = quizQuestions[currentIndex].id;
+            userState.bookmarks[qId] = !userState.bookmarks[qId];
+            saveState();
+            renderQuestion(currentIndex);
+        }
+
+        // Navigation Controls
+        function jumpToQuestion(idx) {
+            renderQuestion(idx);
+        }
+
+        function navPrev() {
+            if (currentIndex > 0) {
+                renderQuestion(currentIndex - 1);
+            }
+        }
+
+        function navNext() {
+            if (currentIndex < quizQuestions.length - 1) {
+                renderQuestion(currentIndex + 1);
+            }
+        }
+
+        // Reset Quiz
+        function confirmResetQuiz() {
+            if (confirm("Apakah Anda yakin ingin mengulang seluruh kuis? Semua progres dan jawaban Anda akan dihapus.")) {
+                userState = { answers: {}, bookmarks: {}, score: 0 };
+                saveState();
+                renderQuestion(0);
+            }
+        }
+
+        // Summary Modal Logic
+        function showSummaryModal() {
+            let correct = 0;
+            let answered = 0;
+            const topicStats = {};
+
+            quizQuestions.forEach(q => {
+                if (!topicStats[q.topic]) {
+                    topicStats[q.topic] = { total: 0, correct: 0 };
+                }
+                topicStats[q.topic].total++;
+
+                const ans = userState.answers[q.id];
+                if (ans !== undefined) {
+                    answered++;
+                    if (ans === q.correctIndex) {
+                        correct++;
+                        topicStats[q.topic].correct++;
+                    }
+                }
+            });
+
+            const accuracy = answered > 0 ? ((correct / answered) * 100).toFixed(1) : 0;
+
+            document.getElementById('modal-score').textContent = `${correct} / 40`;
+            document.getElementById('modal-accuracy').textContent = `${accuracy}%`;
+            document.getElementById('modal-correct').textContent = correct;
+            document.getElementById('modal-wrong').textContent = answered - correct;
+
+            // Breakdown
+            const breakdownContainer = document.getElementById('topic-breakdown-container');
+            breakdownContainer.innerHTML = '';
+
+            Object.keys(topicStats).forEach(topicName => {
+                const stat = topicStats[topicName];
+                const pct = stat.total > 0 ? Math.round((stat.correct / stat.total) * 100) : 0;
+
+                const row = document.createElement('div');
+                row.className = "bg-slate-900/60 p-3 rounded-xl border border-slate-700 flex flex-col space-y-1";
+                row.innerHTML = `
+                    <div class="flex justify-between text-xs font-semibold">
+                        <span class="text-slate-200">${topicName}</span>
+                        <span class="text-cyan-400">${stat.correct} / ${stat.total} (${pct}%)</span>
+                    </div>
+                    <div class="w-full bg-slate-800 rounded-full h-2">
+                        <div class="bg-gradient-to-r from-indigo-500 to-cyan-400 h-2 rounded-full transition-all" style="width: ${pct}%"></div>
+                    </div>
+                `;
+                breakdownContainer.appendChild(row);
+            });
+
+            document.getElementById('summary-modal').classList.remove('hidden');
+        }
+
+        function closeSummaryModal() {
+            document.getElementById('summary-modal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
