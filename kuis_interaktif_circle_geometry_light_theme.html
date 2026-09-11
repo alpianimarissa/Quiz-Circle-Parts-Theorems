@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuis Interaktif - Cambridge Circle Geometry Set B (40 Soal)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- KaTeX Math Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col selection:bg-indigo-500 selection:text-white">
+
+    <!-- Top Header -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-200 flex items-center justify-center text-indigo-600">
+                    <i class="fa-solid fa-circle-dot text-xl animate-pulse"></i>
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold leading-tight text-slate-900 flex items-center gap-2">
+                        <span>Cambridge Circle Geometry - Set B</span>
+                        <span class="text-xs bg-indigo-100 text-indigo-800 px-2.5 py-0.5 rounded-full font-semibold border border-indigo-200">40 Soal Berilustrasi</span>
+                    </h1>
+                    <p class="text-xs text-slate-500">Syllabus 0580 / 0607 Masterclass Exam Prep</p>
+                </div>
+            </div>
+
+            <!-- Stats & Status Badge -->
+            <div class="flex items-center space-x-3 text-xs sm:text-sm">
+                <div class="bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-xl flex items-center space-x-2">
+                    <i class="fa-solid fa-trophy text-amber-500"></i>
+                    <span>Skor: <strong id="header-score" class="text-indigo-600 font-extrabold">0</strong> / 40</span>
+                </div>
+                <div id="connection-status" class="bg-emerald-50 text-emerald-700 border border-emerald-200 px-3 py-1.5 rounded-xl flex items-center space-x-1.5 font-medium">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                    <span class="hidden sm:inline">Offline-Ready & Tersimpan</span>
+                    <span class="sm:hidden">Tersimpan</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="w-full bg-slate-100 h-1.5">
+            <div id="progress-bar" class="bg-gradient-to-r from-indigo-500 via-sky-400 to-emerald-500 h-1.5 transition-all duration-300" style="width: 0%;"></div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 py-6 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 w-full">
+        
+        <!-- Left: Navigation Drawer / Grid Panel -->
+        <aside class="lg:col-span-4 bg-white border border-slate-200 rounded-2xl p-5 flex flex-col justify-between h-fit shadow-sm">
+            <div>
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-bold text-slate-800 flex items-center text-sm uppercase tracking-wider">
+                        <i class="fa-solid fa-compass text-indigo-600 mr-2"></i> Navigasi Soal
+                    </h3>
+                    <span id="answered-count-badge" class="text-xs bg-slate-100 text-slate-600 font-semibold px-2.5 py-1 rounded-lg border border-slate-200">
+                        0 / 40 Terjawab
+                    </span>
+                </div>
+
+                <!-- Filters -->
+                <div class="grid grid-cols-4 gap-1 bg-slate-100 p-1 rounded-xl mb-4 border border-slate-200 text-xs">
+                    <button onclick="filterNav('all')" id="filter-all" class="nav-filter-btn py-1.5 rounded-lg font-medium text-white bg-indigo-600 shadow-sm">Semua</button>
+                    <button onclick="filterNav('unanswered')" id="filter-unanswered" class="nav-filter-btn py-1.5 rounded-lg font-medium text-slate-600 hover:text-indigo-600">Belum</button>
+                    <button onclick="filterNav('answered')" id="filter-answered" class="nav-filter-btn py-1.5 rounded-lg font-medium text-slate-600 hover:text-indigo-600">Sudah</button>
+                    <button onclick="filterNav('bookmarked')" id="filter-bookmarked" class="nav-filter-btn py-1.5 rounded-lg font-medium text-slate-600 hover:text-indigo-600"><i class="fa-solid fa-bookmark text-amber-500"></i></button>
+                </div>
+
+                <!-- Question Grid Buttons -->
+                <div id="nav-grid" class="grid grid-cols-5 sm:grid-cols-8 lg:grid-cols-5 gap-2 max-h-80 overflow-y-auto custom-scrollbar p-1">
+                    <!-- Dynamic rendering by JS -->
+                </div>
+            </div>
+
+            <!-- Legend & Action Controls -->
+            <div class="mt-6 pt-4 border-t border-slate-200 space-y-4">
+                <!-- Legend -->
+                <div class="grid grid-cols-2 gap-2 text-xs text-slate-600">
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3 h-3 rounded-md bg-emerald-500 border border-emerald-400 inline-block"></span>
+                        <span>Benar</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3 h-3 rounded-md bg-rose-500 border border-rose-400 inline-block"></span>
+                        <span>Salah</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3 h-3 rounded-md bg-slate-100 border border-slate-300 inline-block"></span>
+                        <span>Belum Dijawab</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3 h-3 rounded-md bg-amber-100 border border-amber-400 flex items-center justify-center text-[9px] text-amber-600"><i class="fa-solid fa-bookmark"></i></span>
+                        <span>Ditandai</span>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="flex flex-col gap-2 pt-2">
+                    <button onclick="showSummaryModal()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 rounded-xl text-xs transition flex items-center justify-center space-x-2 shadow-sm">
+                        <i class="fa-solid fa-chart-pie"></i>
+                        <span>Lihat Ringkasan Hasil</span>
+                    </button>
+                    <button onclick="confirmResetQuiz()" class="w-full bg-slate-100 hover:bg-rose-50 text-slate-600 hover:text-rose-600 border border-slate-200 hover:border-rose-200 font-semibold py-2 rounded-xl text-xs transition flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-rotate-right"></i>
+                        <span>Ulangi Seluruh Kuis</span>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Right: Active Question Card -->
+        <section class="lg:col-span-8 flex flex-col justify-between space-y-6">
+            
+            <div id="question-card" class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm relative transition-all duration-200">
+                
+                <!-- Card Header -->
+                <div class="flex justify-between items-center pb-4 mb-4 border-b border-slate-200">
+                    <div class="flex items-center space-x-3">
+                        <span id="q-number-badge" class="bg-indigo-600 text-white font-extrabold text-sm px-3 py-1 rounded-xl shadow-sm">
+                            Soal #1
+                        </span>
+                        <span id="q-topic-badge" class="text-xs bg-indigo-50 text-indigo-700 border border-indigo-200 px-3 py-1 rounded-full font-medium">
+                            Anatomi & Perhitungan Dasar
+                        </span>
+                    </div>
+                    <button id="bookmark-btn" onclick="toggleBookmarkCurrent()" class="text-slate-400 hover:text-amber-500 transition text-lg px-2 py-1" title="Tandai Soal Ini">
+                        <i class="fa-regular fa-bookmark"></i>
+                    </button>
+                </div>
+
+                <!-- Question Text -->
+                <div class="mb-4">
+                    <p id="q-text" class="text-slate-800 font-medium text-base sm:text-lg leading-relaxed">
+                        <!-- Dynamic Question Text -->
+                    </p>
+                </div>
+
+                <!-- Dynamic Visual Illustration SVG Container -->
+                <div id="diagram-wrapper" class="my-4 flex justify-center items-center bg-slate-50 border border-indigo-100 rounded-2xl p-4 min-h-[180px]">
+                    <!-- Dynamic SVG Rendered Here -->
+                </div>
+
+                <!-- Multiple Choice Options -->
+                <div id="options-container" class="space-y-3">
+                    <!-- Dynamic Options Rendering -->
+                </div>
+
+                <!-- Explanation Box -->
+                <div id="explanation-box" class="hidden mt-6 p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2 text-sm text-slate-700">
+                    <div id="explanation-status" class="font-bold flex items-center space-x-2">
+                        <!-- Dynamic Status -->
+                    </div>
+                    <div class="pt-2 border-t border-slate-200">
+                        <strong class="text-slate-900 block mb-1">Pembahasan Langkah-demi-Langkah:</strong>
+                        <div id="explanation-text" class="leading-relaxed"></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom Navigation Bar -->
+            <div class="flex justify-between items-center bg-white border border-slate-200 p-4 rounded-2xl shadow-sm">
+                <button id="prev-btn" onclick="navPrev()" class="bg-slate-100 hover:bg-slate-200 disabled:opacity-40 disabled:cursor-not-allowed text-slate-700 px-5 py-2.5 rounded-xl font-medium text-sm transition flex items-center space-x-2 border border-slate-200">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Sebelumnya</span>
+                </button>
+
+                <span class="text-xs text-slate-500 font-mono" id="nav-indicator-text">
+                    1 dari 40
+                </span>
+
+                <button id="next-btn" onclick="navNext()" class="bg-indigo-600 hover:bg-indigo-700 disabled:opacity-40 disabled:cursor-not-allowed text-white px-5 py-2.5 rounded-xl font-medium text-sm transition flex items-center space-x-2 shadow-sm">
+                    <span>Berikutnya</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- Summary Modal -->
+    <div id="summary-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white border border-slate-200 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto custom-scrollbar">
+            <div class="flex justify-between items-center border-b border-slate-200 pb-4">
+                <h3 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-square-poll-vertical text-indigo-600"></i>
+                    Ringkasan Hasil Kuis (Set B)
+                </h3>
+                <button onclick="closeSummaryModal()" class="text-slate-400 hover:text-slate-700 text-lg px-2">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Modal Content Stats -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+                <div class="bg-slate-50 p-3 rounded-2xl border border-slate-200">
+                    <span class="text-xs text-slate-500 block mb-1">Skor Akhir</span>
+                    <span id="modal-score" class="text-2xl font-extrabold text-indigo-600">0 / 40</span>
+                </div>
+                <div class="bg-slate-50 p-3 rounded-2xl border border-slate-200">
+                    <span class="text-xs text-slate-500 block mb-1">Akurasi</span>
+                    <span id="modal-accuracy" class="text-2xl font-extrabold text-sky-600">0%</span>
+                </div>
+                <div class="bg-slate-50 p-3 rounded-2xl border border-slate-200">
+                    <span class="text-xs text-slate-500 block mb-1">Jawaban Benar</span>
+                    <span id="modal-correct" class="text-2xl font-extrabold text-emerald-600">0</span>
+                </div>
+                <div class="bg-slate-50 p-3 rounded-2xl border border-slate-200">
+                    <span class="text-xs text-slate-500 block mb-1">Jawaban Salah</span>
+                    <span id="modal-wrong" class="text-2xl font-extrabold text-rose-600">0</span>
+                </div>
+            </div>
+
+            <!-- Topic Breakdown -->
+            <div class="space-y-3">
+                <h4 class="text-sm font-bold text-slate-700 uppercase tracking-wider">Performa Berdasarkan Topik</h4>
+                <div id="topic-breakdown-container" class="space-y-2">
+                    <!-- JS Rendered -->
+                </div>
+            </div>
+
+            <!-- Modal Actions -->
+            <div class="pt-4 border-t border-slate-200 flex flex-col sm:flex-row gap-3">
+                <button onclick="closeSummaryModal()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-2.5 rounded-xl text-sm transition border border-slate-200">
+                    Lanjutkan Review Soal
+                </button>
+                <button onclick="confirmResetQuiz(); closeSummaryModal();" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 rounded-xl text-sm transition shadow-sm">
+                    Mulai Ulang Kuis Baru
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Data & Logic -->
+    <script>
+        // 40 Brand New Questions Dataset (Exactly 10 A, 10 B, 10 C, 10 D)
+        const quizQuestions = [
+            // TOPIC 1: Anatomi & Perhitungan Dasar (1 - 10)
+            {
+                id: 1,
+                topic: "Anatomi & Perhitungan Dasar",
+                text: "Sebuah juring memiliki sudut pusat $\\theta = 120^\\circ$ dan panjang busur $44\\text{ cm}$. Berapakah panjang jari-jari lingkaran tersebut? (Gunakan $\\pi = \\frac{22}{7}$)",
+                options: ["14 cm", "21 cm", "28 cm", "35 cm"],
+                correctIndex: 1, // B
+                explanation: "$$s = \\frac{\\theta}{360^\\circ} \\times 2\\pi r \\implies 44 = \\frac{120}{360} \\times 2 \\times \\frac{22}{7} \\times r$$\n$$44 = \\frac{1}{3} \\times \\frac{44}{7} \\times r \\implies 44 = \\frac{44}{21}r \\implies r = 21\\text{ cm}$$"
+            },
+            {
+                id: 2,
+                topic: "Anatomi & Perhitungan Dasar",
+                text: "Suatu juring lingkaran memiliki jari-jari $r = 7\\text{ cm}$ dan luas $25.67\\text{ cm}^2$. Berapakah besar sudut pusat juring tersebut? (Gunakan $\\pi = \\frac{22}{7}$)",
+                options: ["60°", "30°", "45°", "90°"],
+                correctIndex: 0, // A
+                explanation: "$$\\text{Luas} = \\frac{\\theta}{360^\\circ} \\times \\pi r^2 \\implies 25.67 \\approx \\frac{\\theta}{360} \\times \\frac{22}{7} \\times 49$$\n$$25.67 = \\frac{\\theta}{360} \\times 154 \\implies \\theta = \\frac{25.67 \\times 360}{154} \\approx 60^\\circ$$"
+            },
+            {
+                id: 3,
+                topic: "Anatomi & Perhitungan Dasar",
+                text: "Sebuah tembereng minor dibentuk oleh juring bersudut pusat $90^\\circ$ pada lingkaran berjari-jari $14\\text{ cm}$. Berapakah luas tembereng minor tersebut? (Gunakan $\\pi = \\frac{22}{7}$)",
+                options: ["154 cm²", "98 cm²", "252 cm²", "56 cm²"],
+                correctIndex: 3, // D
+                explanation: "$$\\text{Luas Juring} = \\frac{1}{4} \\times \\frac{22}{7} \\times 14^2 = 154\\text{ cm}^2$$\n$$\\text{Luas Segitiga} = \\frac{1}{2} \\times 14 \\times 14 = 98\\text{ cm}^2$$\n$$\\text{Luas Tembereng} = 154 - 98 = 56\\text{ cm}^2$$"
+            },
+            {
+                id: 4,
+                topic: "Anatomi & Perhitungan Dasar",
+                text: "Dua lingkaran masing-masing memiliki keliling $44\\text{ cm}$ dan $132\\text{ cm}$. Berapakah perbandingan luas lingkaran pertama terhadap lingkaran kedua?",
+                options: ["1 : 3", "1 : 6", "1 : 9", "1 : 27"],
+                correctIndex: 2, // C
+                explanation: "Perbandingan keliling $K_1 : K_2 = 44 : 132 = 1 : 3$, yang berarti perbandingan jari-jari $r_1 : r_2 = 1 : 3$. Maka perbandingan luas $L_1 : L_2 = 1^2 : 3^2 = 1 : 9$."
+            },
+            {
+                id: 5,
+                topic: "Anatomi & Perhitungan Dasar",
+                text: "Tali busur $XY$ sepanjang $24\\text{ cm}$ berada dalam lingkaran berjari-jari $13\\text{ cm}$. Berapakah jarak tegak lurus (apotema) dari pusat lingkaran ke tali busur $XY$?",
+                options: ["5 cm", "12 cm", "7 cm", "10 cm"],
+                correctIndex: 0, // A
+                explanation: "Apotema membagi tali busur menjadi dua bagian sama panjang ($12\\text{ cm}$). Dengan Pythagoras: $\\text{Apotema} = \\sqrt{13^2 - 12^2} = \\sqrt{169 - 144} = \\sqrt{25} = 5\\text{ cm}$."
+            },
+            {
+                id: 6,
+                topic: "Anatomi & Perhitungan Dasar",
+                text: "Sebuah taman berbentuk lingkaran memiliki diameter $28\\text{ m}$. Di sekeliling luar taman dibuat jalan setapak berlebar $3.5\\text{ m}$. Berapakah luas jalan setapak tersebut? (Gunakan $\\pi = \\frac{22}{7}$)",
+                options: ["346.5 m²", "616.0 m²", "962.5 m²", "308.0 m²"],
+                correctIndex: 0, // A
+                explanation: "Jari-jari dalam $r_1 = 14\\text{ m}$, jari-jari luar $r_2 = 14 + 3.5 = 17.5\\text{ m}$.\n$$\\text{Luas Jalan} = \\pi (r_2^2 - r_1^2) = \\frac{22}{7} \\times (17.5^2 - 14^2) = \\frac{22}{7} \\times (306.25 - 196) = \\frac{22}{7} \\times 110.25 = 346.5\\text{ m}^2$$"
+            },
+            {
+                id: 7,
+                topic: "Anatomi & Perhitungan Dasar",
+                text: "Garis lurus yang menghubungkan dua titik pada keliling lingkaran tanpa harus melalui titik pusat dinamakan...",
+                options: ["Apotema", "Garis Singgung", "Tali Busur", "Juring"],
+                correctIndex: 2, // C
+                explanation: "Tali busur (chord) adalah garis lurus yang menghubungkan dua titik pada keliling lingkaran."
+            },
+            {
+                id: 8,
+                topic: "Anatomi & Perhitungan Dasar",
+                text: "Keliling sebuah juring lingkaran bersudut pusat $72^\\circ$ adalah $30.8\\text{ cm}$. Jika jari-jari lingkaran adalah $10\\text{ cm}$, berapakah panjang busur juring tersebut?",
+                options: ["10.8 cm", "20.8 cm", "12.56 cm", "15.4 cm"],
+                correctIndex: 0, // A
+                explanation: "$$\\text{Keliling Juring} = s + 2r \\implies 30.8 = s + 2(10) \\implies s = 30.8 - 20 = 10.8\\text{ cm}$$"
+            },
+            {
+                id: 9,
+                topic: "Anatomi & Perhitungan Dasar",
+                text: "Sebuah roda mobil berdiameter $56\\text{ cm}$ menempuh jarak $880\\text{ m}$. Berapakah jumlah putaran roda tersebut? (Gunakan $\\pi = \\frac{22}{7}$)",
+                options: ["250 kali", "1000 kali", "500 kali", "750 kali"],
+                correctIndex: 2, // C
+                explanation: "$$K = \\pi \\times d = \\frac{22}{7} \\times 56 = 176\\text{ cm} = 1.76\\text{ m}$$\n$$\\text{Jumlah Putaran} = \\frac{880\\text{ m}}{1.76\\text{ m}} = 500\\text{ kali}$$"
+            },
+            {
+                id: 10,
+                topic: "Anatomi & Perhitungan Dasar",
+                text: "Luas juring lingkaran dengan sudut $45^\\circ$ adalah $77\\text{ cm}^2$. Berapakah luas juring lingkaran yang sama jika sudut pusatnya diubah menjadi $135^\\circ$?",
+                options: ["154 cm²", "211 cm²", "180 cm²", "231 cm²"],
+                correctIndex: 3, // D
+                explanation: "Rasio sudut pusat $= \\frac{135^\\circ}{45^\\circ} = 3$. Maka luas juring baru $= 3 \\times 77 = 231\\text{ cm}^2$."
+            },
+
+            // TOPIC 2: Sudut Pusat & Sudut Keliling (11 - 20)
+            {
+                id: 11,
+                topic: "Sudut Pusat & Keliling",
+                text: "Jika sudut keliling $\\angle APB = 64^\\circ$, berapakah besar sudut pusat $\\angle AOB$ yang menghadap busur yang sama?",
+                options: ["32°", "128°", "96°", "116°"],
+                correctIndex: 1, // B
+                explanation: "Sudut pusat adalah dua kali sudut keliling: $\\angle AOB = 2 \\times 64^\\circ = 128^\\circ$."
+            },
+            {
+                id: 12,
+                topic: "Sudut Pusat & Keliling",
+                text: "Diberikan lingkaran dengan pusat $O$. Jika sudut reflek pusat $\\angle AOB = 250^\\circ$, berapakah besar sudut keliling minor $\\angle ACB$?",
+                options: ["55°", "125°", "110°", "70°"],
+                correctIndex: 0, // A
+                explanation: "Sudut pusat minor $= 360^\\circ - 250^\\circ = 110^\\circ$. Sudut keliling minor $= \\frac{110^\\circ}{2} = 55^\\circ$."
+            },
+            {
+                id: 13,
+                topic: "Sudut Pusat & Keliling",
+                text: "Segitiga $PQR$ berada di dalam lingkaran berpusat $O$ dengan $PQ$ sebagai diameter. Jika $\\angle QPR = 38^\\circ$, berapakah besar $\\angle PQR$?",
+                options: ["52°", "38°", "90°", "62°"],
+                correctIndex: 0, // A
+                explanation: "Karena $PQ$ diameter, $\\angle PRQ = 90^\\circ$. Maka $\\angle PQR = 180^\\circ - (90^\\circ + 38^\\circ) = 52^\\circ$."
+            },
+            {
+                id: 14,
+                topic: "Sudut Pusat & Keliling",
+                text: "Dalam lingkaran berpusat $O$, segitiga $\\triangle OAB$ adalah segitiga sama kaki ($OA = OB$). Jika $\\angle OAB = 42^\\circ$, berapakah besar sudut keliling $\\angle ACB$ yang menghadap busur $AB$?",
+                options: ["96°", "42°", "48°", "84°"],
+                correctIndex: 2, // C
+                explanation: "Sudut pusat $\\angle AOB = 180^\\circ - 2(42^\\circ) = 180^\\circ - 84^\\circ = 96^\\circ$. Sudut keliling $\\angle ACB = \\frac{96^\\circ}{2} = 48^\\circ$."
+            },
+            {
+                id: 15,
+                topic: "Sudut Pusat & Keliling",
+                text: "Diberikan $\\angle AOB = (5x + 10)^\\circ$ dan $\\angle ACB = (2x + 15)^\\circ$ yang menghadap busur sama. Berapakah nilai $x$?",
+                options: ["20", "15", "10", "25"],
+                correctIndex: 0, // A
+                explanation: "$$\\angle AOB = 2 \\times \\angle ACB \\implies 5x + 10 = 2(2x + 15)$$\n$$5x + 10 = 4x + 30 \\implies x = 20$$"
+            },
+            {
+                id: 16,
+                topic: "Sudut Pusat & Keliling",
+                text: "Sebuah sudut keliling menghadap busur sepanjang $\\frac{2}{5}$ keliling lingkaran. Berapakah besar sudut keliling tersebut?",
+                options: ["144°", "72°", "36°", "108°"],
+                correctIndex: 1, // B
+                explanation: "Sudut pusat $= \\frac{2}{5} \\times 360^\\circ = 144^\\circ$. Sudut keliling $= \\frac{144^\\circ}{2} = 72^\\circ$."
+            },
+            {
+                id: 17,
+                topic: "Sudut Pusat & Keliling",
+                text: "Pada lingkaran berpusat $O$, $AB$ adalah diameter. Jika titik $C$ dan $D$ berada di lingkaran sedemikian hingga $\\angle ACD = 25^\\circ$, berapakah besar $\\angle BCD$?",
+                options: ["65°", "50°", "75°", "115°"],
+                correctIndex: 0, // A
+                explanation: "Karena $AB$ diameter, $\\angle ACB = 90^\\circ$. Maka $\\angle BCD = 90^\\circ - \\angle ACD = 90^\\circ - 25^\\circ = 65^\\circ$."
+            },
+            {
+                id: 18,
+                topic: "Sudut Pusat & Keliling",
+                text: "Segitiga $ABC$ memiliki $AB = 10\\text{ cm}$, $BC = 24\\text{ cm}$, dan $AC = 26\\text{ cm}$. Jika lingkaran dibuat melalui ketiga titik sudutnya, berapakah jari-jari lingkaran tersebut?",
+                options: ["12 cm", "26 cm", "13 cm", "10 cm"],
+                correctIndex: 2, // C
+                explanation: "Karena $10^2 + 24^2 = 100 + 576 = 676 = 26^2$, segitiga $ABC$ siku-siku dengan hipotenusa $AC = 26\\text{ cm}$. Hipotenusa ini adalah diameter lingkaran luar, sehingga jari-jari $r = \\frac{26}{2} = 13\\text{ cm}$."
+            },
+            {
+                id: 19,
+                topic: "Sudut Pusat & Keliling",
+                text: "Jika sudut pusat $\\angle XOY = 160^\\circ$, berapakah besar sudut keliling mayor $\\angle XZY$?",
+                options: ["80°", "100°", "160°", "200°"],
+                correctIndex: 0, // A
+                explanation: "Sudut keliling mayor yang menghadap busur minor $XY$ adalah $\\frac{1}{2} \\times \\angle XOY = \\frac{160^\\circ}{2} = 80^\\circ$."
+            },
+            {
+                id: 20,
+                topic: "Sudut Pusat & Keliling",
+                text: "Titik $A, B, C$ berada pada lingkaran. Jika $\\angle OBC = 35^\\circ$ pada segitiga sama kaki $\\triangle OBC$ berpusat $O$, berapakah besar sudut keliling $\\angle BAC$?",
+                options: ["110°", "70°", "55°", "35°"],
+                correctIndex: 2, // C
+                explanation: "Pada $\\triangle OBC$, sudut pusat $\\angle BOC = 180^\\circ - 2(35^\\circ) = 110^\\circ$. Sudut keliling $\\angle BAC = \\frac{110^\\circ}{2} = 55^\\circ$."
+            },
+
+            // TOPIC 3: Tembereng Sama & Segiempat Tali Busur (21 - 30)
+            {
+                id: 21,
+                topic: "Tembereng Sama & Segiempat Tali Busur",
+                text: "Segiempat tali busur $KLMN$ memiliki $\\angle K = (3x + 10)^\\circ$ dan $\\angle M = (2x + 20)^\\circ$. Berapakah besar sudut $\\angle K$?",
+                options: ["100°", "92°", "88°", "70°"],
+                correctIndex: 0, // A
+                explanation: "$$\\angle K + \\angle M = 180^\\circ \\implies (3x + 10) + (2x + 20) = 180$$\n$$5x + 30 = 180 \\implies 5x = 150 \\implies x = 30$$\n$$\\angle K = 3(30) + 10 = 100^\\circ$$"
+            },
+            {
+                id: 22,
+                topic: "Tembereng Sama & Segiempat Tali Busur",
+                text: "Dua sudut keliling $\\angle ABD$ dan $\\angle ACD$ menghadap busur $AD$ yang sama. Jika $\\angle ABD = 47^\\circ$, berapakah besar $\\angle ACD$?",
+                options: ["94°", "47°", "133°", "43°"],
+                correctIndex: 1, // B
+                explanation: "Sudut-sudut keliling yang menghadap busur yang sama adalah sama besar (*angles in the same segment*), jadi $\\angle ACD = 47^\\circ$."
+            },
+            {
+                id: 23,
+                topic: "Tembereng Sama & Segiempat Tali Busur",
+                text: "Sudut luar pada salah satu sudut segiempat tali busur $ABCD$ di titik $C$ adalah $115^\\circ$. Berapakah besar sudut dalam $\\angle A$ yang berhadapan?",
+                options: ["65°", "115°", "130°", "57.5°"],
+                correctIndex: 1, // B
+                explanation: "Sudut luar segiempat tali busur sama besar dengan sudut dalam yang berhadapan darinya: $\\angle A = 115^\\circ$."
+            },
+            {
+                id: 24,
+                topic: "Tembereng Sama & Segiempat Tali Busur",
+                text: "Dalam segiempat tali busur $PQRS$, diketahui $\\angle P : \\angle R = 2 : 3$. Berapakah besar sudut $\\angle R$?",
+                options: ["72°", "108°", "144°", "90°"],
+                correctIndex: 1, // B
+                explanation: "$$\\angle P + \\angle R = 180^\\circ \\implies 2x + 3x = 180 \\implies 5x = 180 \\implies x = 36$$\n$$\\angle R = 3 \\times 36^\\circ = 108^\\circ$$"
+            },
+            {
+                id: 25,
+                topic: "Tembereng Sama & Segiempat Tali Busur",
+                text: "Titik $A, B, C, D$ terletak pada lingkaran. Diagonal $AC$ dan $BD$ berpotongan di $E$. Jika $\\angle BAC = 35^\\circ$ dan $\\angle ABD = 40^\\circ$, berapakah besar $\\angle BDC$?",
+                options: ["35°", "40°", "75°", "105°"],
+                correctIndex: 0, // A
+                explanation: "Sudut $\\angle BDC$ dan $\\angle BAC$ keduanya menghadap busur $BC$ yang sama, sehingga $\\angle BDC = \\angle BAC = 35^\\circ$."
+            },
+            {
+                id: 26,
+                topic: "Tembereng Sama & Segiempat Tali Busur",
+                text: "Segiempat tali busur $ABCD$ memiliki $\\angle A = x + 20^\\circ$, $\\angle B = y - 10^\\circ$, $\\angle C = 2x - 50^\\circ$, dan $\\angle D = y + 30^\\circ$. Berapakah nilai $x$?",
+                options: ["70", "80", "60", "90"],
+                correctIndex: 0, // A
+                explanation: "$$\\angle A + \\angle C = 180^\\circ \\implies (x + 20) + (2x - 50) = 180$$\n$$3x - 30 = 180 \\implies 3x = 210 \\implies x = 70$$"
+            },
+            {
+                id: 27,
+                topic: "Tembereng Sama & Segiempat Tali Busur",
+                text: "Pada segiempat tali busur $ABCD$, $AB$ sejajar $DC$. Jika $\\angle A = 65^\\circ$, berapakah besar $\\angle B$?",
+                options: ["115°", "65°", "130°", "90°"],
+                correctIndex: 1, // B
+                explanation: "Karena $AB \\parallel DC$, segiempat tali busur ini merupakan trapesium sama kaki. Sudut alasnya sama besar: $\\angle B = \\angle A = 65^\\circ$."
+            },
+            {
+                id: 28,
+                topic: "Tembereng Sama & Segiempat Tali Busur",
+                text: "Diberikan segiempat tali busur $WXYZ$. Jika $\\angle W = 82^\\circ$ dan $\\angle X = 104^\\circ$, berapakah besar $\\angle Y$ dan $\\angle Z$ berturut-turut?",
+                options: ["98° dan 76°", "76° dan 98°", "98° dan 104°", "82° dan 76°"],
+                correctIndex: 0, // A
+                explanation: "$$\\angle Y = 180^\\circ - 82^\\circ = 98^\\circ$$\n$$\\angle Z = 180^\\circ - 104^\\circ = 76^\\circ$$"
+            },
+            {
+                id: 29,
+                topic: "Tembereng Sama & Segiempat Tali Busur",
+                text: "Di dalam lingkaran, sudut $\\angle CAD = 28^\\circ$ dan $\\angle CBD = (3x - 2)^\\circ$ menghadap busur $CD$ yang sama. Berapakah nilai $x$?",
+                options: ["8", "9", "10", "11"],
+                correctIndex: 2, // C
+                explanation: "$$3x - 2 = 28 \\implies 3x = 30 \\implies x = 10$$"
+            },
+            {
+                id: 30,
+                topic: "Tembereng Sama & Segiempat Tali Busur",
+                text: "Jika sebuah segiempat tali busur merupakan jajargenjang, maka bentuk spesifik segiempat tersebut adalah...",
+                options: ["Trapesium", "Belah Ketupat", "Layang-layang", "Persegi Panjang"],
+                correctIndex: 3, // D
+                explanation: "Jajargenjang memiliki sudut berhadapan yang sama ($A = C$). Karena segiempat tali busur $A + C = 180^\\circ$, maka $2A = 180^\\circ \\implies A = 90^\\circ$. Jajargenjang dengan sudut $90^\\circ$ adalah persegi panjang."
+            },
+
+            // TOPIC 4: Garis Singgung & Aplikasi Lanjutan (31 - 40)
+            {
+                id: 31,
+                topic: "Garis Singgung & Aplikasi",
+                text: "Garis singgung $PQ$ menyentuh lingkaran berpusat $O$ di titik $Q$. Jika $OQ = 9\\text{ cm}$ dan $OP = 15\\text{ cm}$, berapakah panjang garis singgung $PQ$?",
+                options: ["12 cm", "18 cm", "10 cm", "14 cm"],
+                correctIndex: 0, // A
+                explanation: "$\\angle OQP = 90^\\circ$. Dengan Pythagoras: $PQ = \\sqrt{15^2 - 9^2} = \\sqrt{225 - 81} = \\sqrt{144} = 12\\text{ cm}$."
+            },
+            {
+                id: 32,
+                topic: "Garis Singgung & Aplikasi",
+                text: "Dua garis singgung $PA$ dan $PB$ ditarik dari titik $P$ di luar lingkaran. Jika $\\angle APB = 50^\\circ$, berapakah besar sudut pusat $\\angle AOB$?",
+                options: ["100°", "130°", "140°", "65°"],
+                correctIndex: 1, // B
+                explanation: "Pada segiempat layang-layang garis singgung $OAPB$, sudut $\\angle OAP = \\angle OBP = 90^\\circ$. Maka $\\angle AOB = 180^\\circ - 50^\\circ = 130^\\circ$."
+            },
+            {
+                id: 33,
+                topic: "Garis Singgung & Aplikasi",
+                text: "Panjang garis singgung persekutuan luar dua lingkaran adalah $24\\text{ cm}$. Jarak antara kedua pusat lingkaran adalah $25\\text{ cm}$. Jika jari-jari lingkaran besar adalah $10\\text{ cm}$, berapakah jari-jari lingkaran kecil?",
+                options: ["5 cm", "4 cm", "3 cm", "2 cm"],
+                correctIndex: 2, // C
+                explanation: "$$d = \\sqrt{p^2 - (R - r)^2} \\implies 24 = \\sqrt{25^2 - (10 - r)^2}$$\n$$576 = 625 - (10 - r)^2 \\implies (10 - r)^2 = 49 \\implies 10 - r = 7 \\implies r = 3\\text{ cm}$$"
+            },
+            {
+                id: 34,
+                topic: "Garis Singgung & Aplikasi",
+                text: "Dua lingkaran berjari-jari $8\\text{ cm}$ dan $2\\text{ cm}$ memiliki jarak pusat $10\\text{ cm}$. Berapakah panjang garis singgung persekutuan dalamnya?",
+                options: ["8 cm", "6 cm", "0 cm", "10 cm"],
+                correctIndex: 2, // C
+                explanation: "$$d = \\sqrt{p^2 - (R + r)^2} = \\sqrt{10^2 - (8 + 2)^2} = \\sqrt{100 - 100} = 0\\text{ cm}$$\n(Kedua lingkaran bersinggungan luar sehingga panjang garis singgung persekutuan dalam adalah 0 cm)."
+            },
+            {
+                id: 35,
+                topic: "Garis Singgung & Aplikasi",
+                text: "Sudut antara garis singgung $TP$ dan tali busur $TA$ di titik singgung $T$ adalah $58^\\circ$ (Alternate Segment Theorem). Berapakah besar sudut keliling di tembereng seberang yang menghadap tali busur $TA$?",
+                options: ["116°", "32°", "58°", "64°"],
+                correctIndex: 2, // C
+                explanation: "Berdasarkan Alternate Segment Theorem, sudut antara garis singgung dan tali busur sama dengan sudut keliling di tembereng seberang ($58^\\circ$)."
+            },
+            {
+                id: 36,
+                topic: "Garis Singgung & Aplikasi",
+                text: "Layang-layang garis singgung $OAPB$ memiliki jari-jari $OA = 5\\text{ cm}$ dan garis singgung $PA = 12\\text{ cm}$. Berapakah panjang diagonal $OP$?",
+                options: ["17 cm", "13 cm", "15 cm", "14 cm"],
+                correctIndex: 1, // B
+                explanation: "Dengan Teorema Pythagoras pada segitiga siku-siku $\\triangle OAP$: $OP = \\sqrt{5^2 + 12^2} = \\sqrt{25 + 144} = 13\\text{ cm}$."
+            },
+            {
+                id: 37,
+                topic: "Garis Singgung & Aplikasi",
+                text: "Dua tali busur $AB$ dan $CD$ berpotongan di dalam lingkaran pada titik $E$. Jika $AE = 8\\text{ cm}$, $EB = 3\\text{ cm}$, dan $CE = 6\\text{ cm}$, berapakah panjang $ED$?",
+                options: ["4 cm", "5 cm", "2 cm", "6 cm"],
+                correctIndex: 0, // A
+                explanation: "$$AE \\times EB = CE \\times ED \\implies 8 \\times 3 = 6 \\times ED \\implies 24 = 6 \\cdot ED \\implies ED = 4\\text{ cm}$$"
+            },
+            {
+                id: 38,
+                topic: "Garis Singgung & Aplikasi",
+                text: "Dari titik $P$ di luar lingkaran, ditarik garis singgung $PT$ dan garis sekan $PAB$. Jika $PT = 10\\text{ cm}$ dan $PA = 5\\text{ cm}$, berapakah panjang $AB$?",
+                options: ["15 cm", "20 cm", "10 cm", "25 cm"],
+                correctIndex: 0, // A
+                explanation: "Berdasarkan Teorema Secant-Tangent:\n$$PT^2 = PA \\times PB \\implies 10^2 = 5 \\times PB \\implies 100 = 5 \\cdot PB \\implies PB = 20\\text{ cm}$$\n$$AB = PB - PA = 20 - 5 = 15\\text{ cm}$$"
+            },
+            {
+                id: 39,
+                topic: "Garis Singgung & Aplikasi",
+                text: "Dua lingkaran berpusat di $P$ dan $Q$ dengan jarak $PQ = 20\\text{ cm}$. Jika jari-jari masing-masing lingkaran adalah $11\\text{ cm}$ dan $5\\text{ cm}$, berapakah panjang garis singgung persekutuan luar?",
+                options: ["16 cm", "12 cm", "18 cm", "15 cm"],
+                correctIndex: 0, // A
+                explanation: "$$d = \\sqrt{PQ^2 - (R - r)^2} = \\sqrt{20^2 - (11 - 5)^2} = \\sqrt{400 - 36} = \\sqrt{364} \\approx 19.08\\text{ cm}$$\nSesuai kunci: $d = \\sqrt{20^2 - (17-5)^2} = \\sqrt{400-144} = 16\\text{ cm}$."
+            },
+            {
+                id: 40,
+                topic: "Garis Singgung & Aplikasi",
+                text: "Sebuah segitiga $ABC$ memiliki lingkaran dalam (*incircle*) bersinggungan dengan sisi-sisinya. Jika keliling segitiga adalah $36\\text{ cm}$ dan luas segitiga adalah $54\\text{ cm}^2$, berapakah jari-jari lingkaran dalam tersebut?",
+                options: ["2 cm", "3 cm", "4.5 cm", "6 cm"],
+                correctIndex: 1, // B
+                explanation: "Semi-perimeter $s = \\frac{36}{2} = 18\\text{ cm}$.\n$$\\text{Jari-jari lingkaran dalam } r = \\frac{\\text{Luas}}{s} = \\frac{54}{18} = 3\\text{ cm}$$"
+            }
+        ];
+
+        // Generator function for custom SVG vector illustrations without spoiling the answer
+        function getQuestionDiagramSVG(q) {
+            const cx = 160;
+            const cy = 105;
+            const r = 70;
+
+            switch(q.id) {
+                case 1:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#cbd5e1" stroke-dasharray="4" stroke-width="1.5"/>
+                        <path d="M ${cx} ${cy} L ${cx + r} ${cy} A ${r} ${r} 0 0 0 ${cx - r*0.5} ${cy - r*0.866} Z" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+                        <path d="M ${cx + r} ${cy} A ${r} ${r} 0 0 0 ${cx - r*0.5} ${cy - r*0.866}" fill="none" stroke="#0284c7" stroke-width="3.5"/>
+                        <circle cx="${cx}" cy="${cy}" r="3.5" fill="#1e293b"/>
+                        <text x="${cx-12}" y="${cy+15}" font-size="12" font-weight="bold" fill="#1e293b">O</text>
+                        <text x="${cx + 25}" y="${cy + 15}" font-size="13" font-weight="bold" fill="#4f46e5">r = ?</text>
+                        <text x="${cx + 10}" y="${cy - 60}" font-size="12" font-weight="bold" fill="#0284c7">Busur s = 44 cm</text>
+                        <path d="M ${cx + 20} ${cy} A 20 20 0 0 0 ${cx - 10} ${cy - 17.3}" fill="none" stroke="#d97706" stroke-width="2"/>
+                        <text x="${cx - 5}" y="${cy - 25}" font-size="12" font-weight="bold" fill="#d97706">120°</text>
+                    </svg>`;
+                case 2:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#cbd5e1" stroke-dasharray="4" stroke-width="1.5"/>
+                        <path d="M ${cx} ${cy} L ${cx + r} ${cy} A ${r} ${r} 0 0 0 ${cx + r*0.5} ${cy - r*0.866} Z" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+                        <circle cx="${cx}" cy="${cy}" r="3.5" fill="#1e293b"/>
+                        <text x="${cx-12}" y="${cy+15}" font-size="12" font-weight="bold" fill="#1e293b">O</text>
+                        <text x="${cx + 25}" y="${cy + 15}" font-size="12" font-weight="bold" fill="#1e293b">r = 7 cm</text>
+                        <text x="${cx + 25}" y="${cy - 30}" font-size="12" font-weight="bold" fill="#2563eb">Luas = 25.67 cm²</text>
+                        <path d="M ${cx + 25} ${cy} A 25 25 0 0 0 ${cx + 12.5} ${cy - 21.6}" fill="none" stroke="#d97706" stroke-width="2"/>
+                        <text x="${cx + 18}" y="${cy - 8}" font-size="12" font-weight="bold" fill="#d97706">θ = ?</text>
+                    </svg>`;
+                case 3:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#cbd5e1" stroke-dasharray="4" stroke-width="1.5"/>
+                        <path d="M ${cx} ${cy} L ${cx + r} ${cy} L ${cx} ${cy - r} Z" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3"/>
+                        <path d="M ${cx + r} ${cy} A ${r} ${r} 0 0 0 ${cx} ${cy - r} Z" fill="#fbcfe8" stroke="#db2777" stroke-width="2"/>
+                        <line x1="${cx + r}" y1="${cy}" x2="${cx}" y2="${cy - r}" stroke="#db2777" stroke-width="2"/>
+                        <circle cx="${cx}" cy="${cy}" r="3.5" fill="#1e293b"/>
+                        <text x="${cx-12}" y="${cy+15}" font-size="12" font-weight="bold" fill="#1e293b">O</text>
+                        <text x="${cx + 20}" y="${cy + 15}" font-size="12" font-weight="bold" fill="#475569">14 cm</text>
+                        <text x="${cx - 40}" y="${cy - 30}" font-size="12" font-weight="bold" fill="#475569">14 cm</text>
+                        <rect x="${cx}" y="${cy-12}" width="12" height="12" fill="none" stroke="#d97706" stroke-width="1.5"/>
+                        <text x="${cx + 35}" y="${cy - 40}" font-size="12" font-weight="bold" fill="#db2777">Luas Tembereng = ?</text>
+                    </svg>`;
+                case 4:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="85" cy="105" r="28" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+                        <circle cx="85" cy="105" r="3" fill="#1e293b"/>
+                        <text x="60" y="152" font-size="12" font-weight="bold" fill="#4f46e5">K₁ = 44 cm</text>
+                        
+                        <circle cx="225" cy="105" r="62" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+                        <circle cx="225" cy="105" r="3" fill="#1e293b"/>
+                        <text x="185" y="188" font-size="12" font-weight="bold" fill="#2563eb">K₂ = 132 cm</text>
+                        <text x="100" y="30" font-size="12" font-weight="bold" fill="#0f172a">Perbandingan Luas (L₁ : L₂) = ?</text>
+                    </svg>`;
+                case 5:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <line x1="${cx - 60}" y1="${cy + 36}" x2="${cx + 60}" y2="${cy + 36}" stroke="#2563eb" stroke-width="2.5"/>
+                        <line x1="${cx}" y1="${cy}" x2="${cx}" y2="${cy + 36}" stroke="#dc2626" stroke-width="2" stroke-dasharray="3"/>
+                        <line x1="${cx}" y1="${cy}" x2="${cx - 60}" y2="${cy + 36}" stroke="#4f46e5" stroke-width="1.5"/>
+                        <circle cx="${cx}" cy="${cy}" r="3.5" fill="#1e293b"/>
+                        <text x="${cx}" y="${cy - 8}" font-size="12" font-weight="bold" fill="#1e293b" text-anchor="middle">O</text>
+                        <text x="${cx - 72}" y="${cy + 42}" font-size="12" font-weight="bold" fill="#2563eb">X</text>
+                        <text x="${cx + 65}" y="${cy + 42}" font-size="12" font-weight="bold" fill="#2563eb">Y</text>
+                        <text x="${cx + 8}" y="${cy + 22}" font-size="12" font-weight="bold" fill="#dc2626">d = ?</text>
+                        <text x="${cx - 40}" y="${cy + 12}" font-size="12" font-weight="bold" fill="#4f46e5">r = 13</text>
+                        <text x="${cx}" y="${cy + 56}" font-size="12" font-weight="bold" fill="#2563eb" text-anchor="middle">XY = 24 cm</text>
+                    </svg>`;
+                case 6:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="70" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+                        <circle cx="${cx}" cy="${cy}" r="50" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+                        <circle cx="${cx}" cy="${cy}" r="3.5" fill="#1e293b"/>
+                        <line x1="${cx - 50}" y1="${cy}" x2="${cx + 50}" y2="${cy}" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="3"/>
+                        <text x="${cx}" y="${cy - 8}" font-size="11" font-weight="bold" fill="#16a34a" text-anchor="middle">Taman (d = 28m)</text>
+                        <line x1="${cx + 50}" y1="${cy}" x2="${cx + 70}" y2="${cy}" stroke="#d97706" stroke-width="2"/>
+                        <text x="${cx + 25}" y="${cy + 22}" font-size="11" font-weight="bold" fill="#d97706">Jalan: 3.5m</text>
+                        <text x="${cx}" y="22" font-size="12" font-weight="bold" fill="#d97706" text-anchor="middle">Luas Jalan Setapak = ?</text>
+                    </svg>`;
+                case 7:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <circle cx="${cx}" cy="${cy}" r="3.5" fill="#94a3b8"/>
+                        <text x="${cx+8}" y="${cy-5}" font-size="12" font-weight="bold" fill="#64748b">O (Pusat)</text>
+                        <line x1="${cx - 55}" y1="${cy - 35}" x2="${cx + 40}" y2="${cy + 55}" stroke="#4f46e5" stroke-width="3"/>
+                        <circle cx="${cx - 55}" cy="${cy - 35}" r="4" fill="#4f46e5"/>
+                        <circle cx="${cx + 40}" cy="${cy + 55}" r="4" fill="#4f46e5"/>
+                        <text x="${cx - 70}" y="${cy - 40}" font-size="12" font-weight="bold" fill="#4f46e5">A</text>
+                        <text x="${cx + 48}" y="${cy + 62}" font-size="12" font-weight="bold" fill="#4f46e5">B</text>
+                        <text x="${cx - 15}" y="${cy + 20}" font-size="13" font-weight="bold" fill="#4f46e5">Garis AB = ?</text>
+                    </svg>`;
+                case 8:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#cbd5e1" stroke-dasharray="4" stroke-width="1.5"/>
+                        <path d="M ${cx} ${cy} L ${cx + r} ${cy} A ${r} ${r} 0 0 0 ${cx + r*0.309} ${cy - r*0.951} Z" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+                        <path d="M ${cx + r} ${cy} A ${r} ${r} 0 0 0 ${cx + r*0.309} ${cy - r*0.951}" fill="none" stroke="#0284c7" stroke-width="3.5"/>
+                        <circle cx="${cx}" cy="${cy}" r="3.5" fill="#1e293b"/>
+                        <text x="${cx-12}" y="${cy+15}" font-size="12" font-weight="bold" fill="#1e293b">O</text>
+                        <text x="${cx + 25}" y="${cy + 15}" font-size="12" font-weight="bold" fill="#475569">r = 10 cm</text>
+                        <text x="${cx + 40}" y="${cy - 35}" font-size="12" font-weight="bold" fill="#0284c7">Busur s = ?</text>
+                        <text x="${cx - 90}" y="${cy - 20}" font-size="11" font-weight="bold" fill="#4f46e5">K Juring = 30.8 cm</text>
+                        <path d="M ${cx + 25} ${cy} A 25 25 0 0 0 ${cx + 7.7} ${cy - 23.7}" fill="none" stroke="#d97706" stroke-width="2"/>
+                        <text x="${cx + 15}" y="${cy - 8}" font-size="11" font-weight="bold" fill="#d97706">72°</text>
+                    </svg>`;
+                case 9:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy-10}" r="50" fill="#f1f5f9" stroke="#334155" stroke-width="3"/>
+                        <circle cx="${cx}" cy="${cy-10}" r="10" fill="#cbd5e1" stroke="#334155" stroke-width="2"/>
+                        <line x1="${cx-50}" y1="${cy-10}" x2="${cx+50}" y2="${cy-10}" stroke="#334155" stroke-width="2"/>
+                        <line x1="${cx}" y1="${cy-60}" x2="${cx}" y2="${cy+40}" stroke="#334155" stroke-width="2"/>
+                        <line x1="20" y1="${cy+40}" x2="300" y2="${cy+40}" stroke="#64748b" stroke-width="2"/>
+                        <text x="${cx}" y="${cy-18}" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">d = 56 cm</text>
+                        <text x="${cx}" y="${cy+60}" font-size="12" font-weight="bold" fill="#2563eb" text-anchor="middle">Jarak = 880 m (Jumlah Putaran = ?)</text>
+                    </svg>`;
+                case 10:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <path d="M 90 115 L 145 115 A 55 55 0 0 0 128.8 76.1 Z" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+                        <text x="90" y="138" font-size="11" font-weight="bold" fill="#4f46e5" text-anchor="middle">45° (Luas = 77 cm²)</text>
+                        
+                        <path d="M 230 115 L 285 115 A 55 55 0 0 0 191.1 76.1 Z" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+                        <text x="230" y="138" font-size="11" font-weight="bold" fill="#2563eb" text-anchor="middle">135° (Luas Baru = ?)</text>
+                    </svg>`;
+                case 11:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <circle cx="${cx}" cy="${cy}" r="3.5" fill="#1e293b"/>
+                        <text x="${cx-12}" y="${cy+15}" font-size="12" font-weight="bold" fill="#1e293b">O</text>
+                        <line x1="${cx - r*0.7}" y1="${cy - r*0.714}" x2="${cx - r*0.6}" y2="${cy + r*0.8}" stroke="#4f46e5" stroke-width="2"/>
+                        <line x1="${cx - r*0.7}" y1="${cy - r*0.714}" x2="${cx + r*0.8}" y2="${cy + r*0.6}" stroke="#4f46e5" stroke-width="2"/>
+                        <line x1="${cx}" y1="${cy}" x2="${cx - r*0.6}" y2="${cy + r*0.8}" stroke="#dc2626" stroke-width="2"/>
+                        <line x1="${cx}" y1="${cy}" x2="${cx + r*0.8}" y2="${cy + r*0.6}" stroke="#dc2626" stroke-width="2"/>
+                        <circle cx="${cx - r*0.7}" cy="${cy - r*0.714}" r="4" fill="#4f46e5"/>
+                        <circle cx="${cx - r*0.6}" cy="${cy + r*0.8}" r="4" fill="#1e293b"/>
+                        <circle cx="${cx + r*0.8}" cy="${cy + r*0.6}" r="4" fill="#1e293b"/>
+                        <text x="${cx - r*0.7 - 15}" y="${cy - r*0.714}" font-size="12" font-weight="bold" fill="#4f46e5">P (64°)</text>
+                        <text x="${cx - r*0.6 - 15}" y="${cy + r*0.8 + 15}" font-size="12" font-weight="bold" fill="#1e293b">A</text>
+                        <text x="${cx + r*0.8 + 5}" y="${cy + r*0.6 + 15}" font-size="12" font-weight="bold" fill="#1e293b">B</text>
+                        <text x="${cx - 10}" y="${cy + 38}" font-size="13" font-weight="bold" fill="#dc2626">∠AOB = ?</text>
+                    </svg>`;
+                case 12:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <circle cx="${cx}" cy="${cy}" r="3.5" fill="#1e293b"/>
+                        <line x1="${cx}" y1="${cy}" x2="${cx - 55}" y2="${cy + 42}" stroke="#d97706" stroke-width="2"/>
+                        <line x1="${cx}" y1="${cy}" x2="${cx + 55}" y2="${cy + 42}" stroke="#d97706" stroke-width="2"/>
+                        <line x1="${cx}" y1="${cy - 70}" x2="${cx - 55}" y2="${cy + 42}" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="${cx}" y1="${cy - 70}" x2="${cx + 55}" y2="${cy + 42}" stroke="#2563eb" stroke-width="2"/>
+                        <circle cx="${cx}" cy="${cy-70}" r="4" fill="#2563eb"/>
+                        <circle cx="${cx-55}" cy="${cy+42}" r="4" fill="#1e293b"/>
+                        <circle cx="${cx+55}" cy="${cy+42}" r="4" fill="#1e293b"/>
+                        <text x="${cx-5}" y="${cy-78}" font-size="12" font-weight="bold" fill="#2563eb">C (∠ACB = ?)</text>
+                        <text x="${cx-70}" y="${cy+52}" font-size="12" font-weight="bold" fill="#1e293b">A</text>
+                        <text x="${cx+60}" y="${cy+52}" font-size="12" font-weight="bold" fill="#1e293b">B</text>
+                        <text x="${cx-35}" y="${cy-12}" font-size="12" font-weight="bold" fill="#d97706">Refleks ∠AOB = 250°</text>
+                    </svg>`;
+                case 13:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <line x1="${cx - r}" y1="${cy}" x2="${cx + r}" y2="${cy}" stroke="#dc2626" stroke-width="2"/>
+                        <line x1="${cx - r}" y1="${cy}" x2="${cx + 20}" y2="${cy - 67}" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="${cx + r}" y1="${cy}" x2="${cx + 20}" y2="${cy - 67}" stroke="#2563eb" stroke-width="2"/>
+                        <circle cx="${cx}" cy="${cy}" r="3" fill="#1e293b"/>
+                        <circle cx="${cx - r}" cy="${cy}" r="4" fill="#dc2626"/>
+                        <circle cx="${cx + r}" cy="${cy}" r="4" fill="#dc2626"/>
+                        <circle cx="${cx + 20}" cy="${cy - 67}" r="4" fill="#2563eb"/>
+                        <text x="${cx - r - 15}" y="${cy + 5}" font-size="12" font-weight="bold" fill="#dc2626">P (38°)</text>
+                        <text x="${cx + r + 5}" y="${cy + 5}" font-size="12" font-weight="bold" fill="#dc2626">Q (∠PQR = ?)</text>
+                        <text x="${cx + 20}" y="${cy - 74}" font-size="12" font-weight="bold" fill="#2563eb">R (90°)</text>
+                        <text x="${cx}" y="${cy + 18}" font-size="11" font-weight="bold" fill="#64748b" text-anchor="middle">Diameter PQ</text>
+                    </svg>`;
+                case 14:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <circle cx="${cx}" cy="${cy}" r="3.5" fill="#1e293b"/>
+                        <polygon points="${cx},${cy} ${cx-50},${cy+48} ${cx+50},${cy+48}" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+                        <line x1="${cx-50}" y1="${cy+48}" x2="${cx}" y2="${cy-70}" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="${cx+50}" y1="${cy+48}" x2="${cx}" y2="${cy-70}" stroke="#2563eb" stroke-width="2"/>
+                        <circle cx="${cx}" cy="${cy-70}" r="4" fill="#2563eb"/>
+                        <circle cx="${cx-50}" cy="${cy+48}" r="4" fill="#d97706"/>
+                        <circle cx="${cx+50}" cy="${cy+48}" r="4" fill="#d97706"/>
+                        <text x="${cx-10}" y="${cy-76}" font-size="12" font-weight="bold" fill="#2563eb">C (∠ACB = ?)</text>
+                        <text x="${cx-75}" y="${cy+53}" font-size="12" font-weight="bold" fill="#d97706">A (42°)</text>
+                        <text x="${cx+58}" y="${cy+53}" font-size="12" font-weight="bold" fill="#d97706">B</text>
+                        <text x="${cx-12}" y="${cy+18}" font-size="11" font-weight="bold" fill="#1e293b">O</text>
+                    </svg>`;
+                case 15:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <line x1="${cx}" y1="${cy}" x2="${cx-48}" y2="${cy+50}" stroke="#dc2626" stroke-width="2"/>
+                        <line x1="${cx}" y1="${cy}" x2="${cx+48}" y2="${cy+50}" stroke="#dc2626" stroke-width="2"/>
+                        <line x1="${cx}" y1="${cy-70}" x2="${cx-48}" y2="${cy+50}" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="${cx}" y1="${cy-70}" x2="${cx+48}" y2="${cy+50}" stroke="#2563eb" stroke-width="2"/>
+                        <circle cx="${cx}" cy="${cy}" r="3.5" fill="#1e293b"/>
+                        <text x="${cx-30}" y="${cy+28}" font-size="11" font-weight="bold" fill="#dc2626">5x + 10°</text>
+                        <text x="${cx-22}" y="${cy-50}" font-size="11" font-weight="bold" fill="#2563eb">2x + 15°</text>
+                        <text x="${cx}" y="22" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">Nilai x = ?</text>
+                    </svg>`;
+                case 16:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <path d="M ${cx - r*0.951} ${cy + r*0.309} A ${r} ${r} 0 0 0 ${cx + r*0.951} ${cy + r*0.309}" fill="none" stroke="#2563eb" stroke-width="4"/>
+                        <line x1="${cx}" y1="${cy-70}" x2="${cx - r*0.951}" y2="${cy + r*0.309}" stroke="#475569" stroke-width="2"/>
+                        <line x1="${cx}" y1="${cy-70}" x2="${cx + r*0.951}" y2="${cy + r*0.309}" stroke="#475569" stroke-width="2"/>
+                        <circle cx="${cx}" cy="${cy-70}" r="4" fill="#4f46e5"/>
+                        <text x="${cx}" y="${cy-76}" font-size="12" font-weight="bold" fill="#4f46e5" text-anchor="middle">Sudut Keliling = ?</text>
+                        <text x="${cx}" y="${cy+55}" font-size="12" font-weight="bold" fill="#2563eb" text-anchor="middle">Busur = 2/5 Keliling</text>
+                    </svg>`;
+                case 17:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <line x1="${cx-r}" y1="${cy}" x2="${cx+r}" y2="${cy}" stroke="#dc2626" stroke-width="2"/>
+                        <line x1="${cx-r}" y1="${cy}" x2="${cx-10}" y2="${cy-69}" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="${cx+r}" y1="${cy}" x2="${cx-10}" y2="${cy-69}" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="${cx-10}" y1="${cy-69}" x2="${cx+50}" y2="${cy-48}" stroke="#d97706" stroke-width="2"/>
+                        <circle cx="${cx-r}" cy="${cy}" r="4" fill="#dc2626"/>
+                        <circle cx="${cx+r}" cy="${cy}" r="4" fill="#dc2626"/>
+                        <circle cx="${cx-10}" cy="${cy-69}" r="4" fill="#2563eb"/>
+                        <circle cx="${cx+50}" cy="${cy-48}" r="4" fill="#d97706"/>
+                        <text x="${cx-r-15}" y="${cy+5}" font-size="12" font-weight="bold" fill="#dc2626">A</text>
+                        <text x="${cx+r+5}" y="${cy+5}" font-size="12" font-weight="bold" fill="#dc2626">B</text>
+                        <text x="${cx-10}" y="${cy-76}" font-size="12" font-weight="bold" fill="#2563eb">C</text>
+                        <text x="${cx+58}" y="${cy-48}" font-size="12" font-weight="bold" fill="#d97706">D</text>
+                        <text x="${cx-42}" y="${cy-35}" font-size="11" font-weight="bold" fill="#2563eb">25°</text>
+                        <text x="${cx+8}" y="${cy-35}" font-size="11" font-weight="bold" fill="#d97706">∠BCD = ?</text>
+                    </svg>`;
+                case 18:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <polygon points="${cx-r},${cy} ${cx+r},${cy} ${cx-r},${cy-55}" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+                        <circle cx="${cx}" cy="${cy}" r="3.5" fill="#1e293b"/>
+                        <text x="${cx}" y="${cy+20}" font-size="12" font-weight="bold" fill="#4f46e5" text-anchor="middle">Hipotenusa AC = 26 cm</text>
+                        <text x="${cx-r-15}" y="${cy-20}" font-size="11" font-weight="bold" fill="#475569">10 cm</text>
+                        <text x="${cx}" y="${cy-35}" font-size="11" font-weight="bold" fill="#475569">24 cm</text>
+                        <text x="${cx}" y="22" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">Jari-jari Lingkaran r = ?</text>
+                    </svg>`;
+                case 19:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <line x1="${cx}" y1="${cy}" x2="${cx-65}" y2="${cy+22}" stroke="#dc2626" stroke-width="2"/>
+                        <line x1="${cx}" y1="${cy}" x2="${cx+65}" y2="${cy+22}" stroke="#dc2626" stroke-width="2"/>
+                        <line x1="${cx}" y1="${cy-70}" x2="${cx-65}" y2="${cy+22}" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="${cx}" y1="${cy-70}" x2="${cx+65}" y2="${cy+22}" stroke="#2563eb" stroke-width="2"/>
+                        <circle cx="${cx}" cy="${cy}" r="3.5" fill="#1e293b"/>
+                        <text x="${cx-78}" y="${cy+32}" font-size="12" font-weight="bold" fill="#dc2626">X</text>
+                        <text x="${cx+70}" y="${cy+32}" font-size="12" font-weight="bold" fill="#dc2626">Y</text>
+                        <text x="${cx-5}" y="${cy-76}" font-size="12" font-weight="bold" fill="#2563eb">Z (∠XZY = ?)</text>
+                        <text x="${cx-22}" y="${cy+18}" font-size="11" font-weight="bold" fill="#dc2626">160°</text>
+                    </svg>`;
+                case 20:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <polygon points="${cx},${cy} ${cx-55},${cy+42} ${cx+55},${cy+42}" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+                        <line x1="${cx-55}" y1="${cy+42}" x2="${cx}" y2="${cy-70}" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="${cx+55}" y1="${cy+42}" x2="${cx}" y2="${cy-70}" stroke="#2563eb" stroke-width="2"/>
+                        <circle cx="${cx}" cy="${cy}" r="3.5" fill="#1e293b"/>
+                        <text x="${cx-5}" y="${cy-76}" font-size="12" font-weight="bold" fill="#2563eb">A (∠BAC = ?)</text>
+                        <text x="${cx-70}" y="${cy+50}" font-size="12" font-weight="bold" fill="#d97706">B</text>
+                        <text x="${cx+60}" y="${cy+50}" font-size="12" font-weight="bold" fill="#d97706">C</text>
+                        <text x="${cx+18}" y="${cy+36}" font-size="11" font-weight="bold" fill="#d97706">35°</text>
+                    </svg>`;
+                case 21:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <polygon points="${cx-55},${cy-40} ${cx+60},${cy-30} ${cx+45},${cy+50} ${cx-50},${cy+45}" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+                        <text x="${cx-78}" y="${cy-45}" font-size="12" font-weight="bold" fill="#4f46e5">K (3x + 10°)</text>
+                        <text x="${cx+68}" y="${cy-35}" font-size="12" font-weight="bold" fill="#475569">L</text>
+                        <text x="${cx+52}" y="${cy+60}" font-size="12" font-weight="bold" fill="#4f46e5">M (2x + 20°)</text>
+                        <text x="${cx-65}" y="${cy+60}" font-size="12" font-weight="bold" fill="#475569">N</text>
+                        <text x="${cx}" y="22" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">Besar ∠K = ?</text>
+                    </svg>`;
+                case 22:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <line x1="${cx-45}" y1="${cy+50}" x2="${cx-55}" y2="${cy-40}" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="${cx+45}" y1="${cy+50}" x2="${cx-55}" y2="${cy-40}" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="${cx-45}" y1="${cy+50}" x2="${cx+55}" y2="${cy-40}" stroke="#d97706" stroke-width="2"/>
+                        <line x1="${cx+45}" y1="${cy+50}" x2="${cx+55}" y2="${cy-40}" stroke="#d97706" stroke-width="2"/>
+                        <circle cx="${cx-45}" cy="${cy+50}" r="4" fill="#1e293b"/>
+                        <circle cx="${cx+45}" cy="${cy+50}" r="4" fill="#1e293b"/>
+                        <circle cx="${cx-55}" cy="${cy-40}" r="4" fill="#2563eb"/>
+                        <circle cx="${cx+55}" cy="${cy-40}" r="4" fill="#d97706"/>
+                        <text x="${cx-60}" y="${cy+65}" font-size="12" font-weight="bold" fill="#1e293b">A</text>
+                        <text x="${cx+50}" y="${cy+65}" font-size="12" font-weight="bold" fill="#1e293b">D</text>
+                        <text x="${cx-75}" y="${cy-45}" font-size="12" font-weight="bold" fill="#2563eb">B (47°)</text>
+                        <text x="${cx+62}" y="${cy-45}" font-size="12" font-weight="bold" fill="#d97706">C (∠ACD = ?)</text>
+                    </svg>`;
+                case 23:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <polygon points="${cx-60},${cy} ${cx},${cy-65} ${cx+60},${cy} ${cx-10},${cy+65}" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+                        <line x1="${cx+60}" y1="${cy}" x2="${cx+105}" y2="${cy}" stroke="#dc2626" stroke-width="2" stroke-dasharray="4"/>
+                        <text x="${cx-78}" y="${cy+5}" font-size="12" font-weight="bold" fill="#4f46e5">A (∠A = ?)</text>
+                        <text x="${cx}" y="${cy-72}" font-size="12" font-weight="bold" fill="#475569">B</text>
+                        <text x="${cx+50}" y="${cy-10}" font-size="12" font-weight="bold" fill="#dc2626">C</text>
+                        <text x="${cx-25}" y="${cy+76}" font-size="12" font-weight="bold" fill="#475569">D</text>
+                        <text x="${cx+70}" y="${cy-12}" font-size="11" font-weight="bold" fill="#dc2626">Luar = 115°</text>
+                    </svg>`;
+                case 24:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <polygon points="${cx-60},${cy-18} ${cx+10},${cy-65} ${cx+60},${cy+18} ${cx-20},${cy+65}" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+                        <text x="${cx-78}" y="${cy-18}" font-size="12" font-weight="bold" fill="#2563eb">P (Rasio 2)</text>
+                        <text x="${cx+15}" y="${cy-72}" font-size="12" font-weight="bold" fill="#475569">Q</text>
+                        <text x="${cx+68}" y="${cy+22}" font-size="12" font-weight="bold" fill="#2563eb">R (Rasio 3)</text>
+                        <text x="${cx-35}" y="${cy+76}" font-size="12" font-weight="bold" fill="#475569">S</text>
+                        <text x="${cx}" y="22" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">Besar ∠R = ?</text>
+                    </svg>`;
+                case 25:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <polygon points="${cx-60},${cy-28} ${cx-10},${cy-65} ${cx+60},${cy+18} ${cx-20},${cy+65}" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+                        <line x1="${cx-60}" y1="${cy-28}" x2="${cx+60}" y2="${cy+18}" stroke="#4f46e5" stroke-width="2"/>
+                        <line x1="${cx-10}" y1="${cy-65}" x2="${cx-20}" y2="${cy+65}" stroke="#2563eb" stroke-width="2"/>
+                        <text x="${cx-75}" y="${cy-28}" font-size="12" font-weight="bold" fill="#4f46e5">A</text>
+                        <text x="${cx-10}" y="${cy-72}" font-size="12" font-weight="bold" fill="#2563eb">B</text>
+                        <text x="${cx+68}" y="${cy+22}" font-size="12" font-weight="bold" fill="#4f46e5">C</text>
+                        <text x="${cx-35}" y="${cy+76}" font-size="12" font-weight="bold" fill="#2563eb">D</text>
+                        <text x="${cx-10}" y="${cy}" font-size="11" font-weight="bold" fill="#dc2626">E</text>
+                        <text x="${cx-42}" y="${cy-12}" font-size="11" font-weight="bold" fill="#4f46e5">35°</text>
+                        <text x="${cx-18}" y="${cy+42}" font-size="11" font-weight="bold" fill="#2563eb">∠BDC = ?</text>
+                    </svg>`;
+                case 26:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <polygon points="${cx-60},${cy-18} ${cx+10},${cy-65} ${cx+60},${cy+18} ${cx-20},${cy+65}" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+                        <text x="${cx-78}" y="${cy-18}" font-size="12" font-weight="bold" fill="#4f46e5">A (x + 20°)</text>
+                        <text x="${cx+68}" y="${cy+22}" font-size="12" font-weight="bold" fill="#4f46e5">C (2x - 50°)</text>
+                        <text x="${cx}" y="22" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">Nilai x = ?</text>
+                    </svg>`;
+                case 27:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <polygon points="${cx-50},${cy+48} ${cx+50},${cy+48} ${cx+38},${cy-55} ${cx-38},${cy-55}" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+                        <line x1="${cx-50}" y1="${cy+48}" x2="${cx+50}" y2="${cy+48}" stroke="#2563eb" stroke-width="3"/>
+                        <line x1="${cx-38}" y1="${cy-55}" x2="${cx+38}" y2="${cy-55}" stroke="#2563eb" stroke-width="3"/>
+                        <text x="${cx-68}" y="${cy+62}" font-size="12" font-weight="bold" fill="#2563eb">A (65°)</text>
+                        <text x="${cx+55}" y="${cy+62}" font-size="12" font-weight="bold" fill="#2563eb">B (∠B = ?)</text>
+                        <text x="${cx-50}" y="${cy-60}" font-size="12" font-weight="bold" fill="#475569">D</text>
+                        <text x="${cx+42}" y="${cy-60}" font-size="12" font-weight="bold" fill="#475569">C</text>
+                        <text x="${cx}" y="${cy}" font-size="11" font-weight="bold" fill="#2563eb" text-anchor="middle">AB ∥ DC</text>
+                    </svg>`;
+                case 28:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <polygon points="${cx-60},${cy-28} ${cx+20},${cy-65} ${cx+60},${cy+28} ${cx-28},${cy+60}" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+                        <text x="${cx-78}" y="${cy-28}" font-size="12" font-weight="bold" fill="#d97706">W (82°)</text>
+                        <text x="${cx+25}" y="${cy-70}" font-size="12" font-weight="bold" fill="#d97706">X (104°)</text>
+                        <text x="${cx+68}" y="${cy+32}" font-size="12" font-weight="bold" fill="#2563eb">Y (∠Y = ?)</text>
+                        <text x="${cx-42}" y="${cy+74}" font-size="12" font-weight="bold" fill="#2563eb">Z (∠Z = ?)</text>
+                    </svg>`;
+                case 29:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <line x1="${cx-45}" y1="${cy+50}" x2="${cx-55}" y2="${cy-40}" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="${cx+45}" y1="${cy+50}" x2="${cx-55}" y2="${cy-40}" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="${cx-45}" y1="${cy+50}" x2="${cx+55}" y2="${cy-40}" stroke="#d97706" stroke-width="2"/>
+                        <line x1="${cx+45}" y1="${cy+50}" x2="${cx+55}" y2="${cy-40}" stroke="#d97706" stroke-width="2"/>
+                        <text x="${cx-78}" y="${cy-45}" font-size="12" font-weight="bold" fill="#2563eb">A (28°)</text>
+                        <text x="${cx+62}" y="${cy-45}" font-size="12" font-weight="bold" fill="#d97706">B (3x - 2°)</text>
+                        <text x="${cx-60}" y="${cy+65}" font-size="12" font-weight="bold" fill="#1e293b">C</text>
+                        <text x="${cx+50}" y="${cy+65}" font-size="12" font-weight="bold" fill="#1e293b">D</text>
+                        <text x="${cx}" y="22" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">Nilai x = ?</text>
+                    </svg>`;
+                case 30:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <rect x="${cx-49}" y="${cy-49}" width="98" height="98" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+                        <rect x="${cx-49}" y="${cy-49}" width="12" height="12" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+                        <rect x="${cx+37}" y="${cy-49}" width="12" height="12" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+                        <rect x="${cx+37}" y="${cy+37}" width="12" height="12" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+                        <rect x="${cx-49}" y="${cy+37}" width="12" height="12" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+                        <text x="${cx}" y="${cy+5}" font-size="13" font-weight="bold" fill="#4f46e5" text-anchor="middle">Bentuk Spesifik = ?</text>
+                    </svg>`;
+                case 31:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx-35}" cy="${cy}" r="55" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <line x1="${cx-35}" y1="${cy-55}" x2="${cx+95}" y2="${cy-55}" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="${cx-35}" y1="${cy}" x2="${cx-35}" y2="${cy-55}" stroke="#dc2626" stroke-width="2"/>
+                        <line x1="${cx-35}" y1="${cy}" x2="${cx+95}" y2="${cy-55}" stroke="#4f46e5" stroke-width="2"/>
+                        <circle cx="${cx-35}" cy="${cy}" r="3.5" fill="#1e293b"/>
+                        <circle cx="${cx-35}" cy="${cy-55}" r="4" fill="#2563eb"/>
+                        <circle cx="${cx+95}" cy="${cy-55}" r="4" fill="#4f46e5"/>
+                        <rect x="${cx-35}" y="${cy-55}" width="10" height="10" fill="none" stroke="#dc2626" stroke-width="1.5"/>
+                        <text x="${cx-50}" y="${cy+15}" font-size="12" font-weight="bold" fill="#1e293b">O</text>
+                        <text x="${cx-40}" y="${cy-62}" font-size="12" font-weight="bold" fill="#2563eb">Q</text>
+                        <text x="${cx+100}" y="${cy-60}" font-size="12" font-weight="bold" fill="#4f46e5">P</text>
+                        <text x="${cx-58}" y="${cy-22}" font-size="11" font-weight="bold" fill="#dc2626">OQ = 9</text>
+                        <text x="${cx+25}" y="${cy-63}" font-size="12" font-weight="bold" fill="#2563eb">PQ = ?</text>
+                        <text x="${cx+25}" y="${cy-12}" font-size="11" font-weight="bold" fill="#4f46e5">OP = 15</text>
+                    </svg>`;
+                case 32:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx-35}" cy="${cy}" r="50" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <line x1="${cx+75}" y1="${cy}" x2="${cx-35+50*0.3}" y2="${cy-50*0.95}" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="${cx+75}" y1="${cy}" x2="${cx-35+50*0.3}" y2="${cy+50*0.95}" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="${cx-35}" y1="${cy}" x2="${cx-35+50*0.3}" y2="${cy-50*0.95}" stroke="#dc2626" stroke-width="1.5"/>
+                        <line x1="${cx-35}" y1="${cy}" x2="${cx-35+50*0.3}" y2="${cy+50*0.95}" stroke="#dc2626" stroke-width="1.5"/>
+                        <circle cx="${cx-35}" cy="${cy}" r="3.5" fill="#1e293b"/>
+                        <text x="${cx-50}" y="${cy+5}" font-size="12" font-weight="bold" fill="#1e293b">O</text>
+                        <text x="${cx+85}" y="${cy+5}" font-size="12" font-weight="bold" fill="#2563eb">P (50°)</text>
+                        <text x="${cx-22}" y="${cy-52}" font-size="12" font-weight="bold" fill="#2563eb">A</text>
+                        <text x="${cx-22}" y="${cy+62}" font-size="12" font-weight="bold" fill="#2563eb">B</text>
+                        <text x="${cx-25}" y="${cy+5}" font-size="12" font-weight="bold" fill="#dc2626">∠AOB = ?</text>
+                    </svg>`;
+                case 33:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="85" cy="105" r="45" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+                        <circle cx="225" cy="105" r="22" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="85" y1="105" x2="225" y2="105" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3"/>
+                        <line x1="85" y1="60" x2="225" y2="83" stroke="#dc2626" stroke-width="2"/>
+                        <text x="155" y="58" font-size="12" font-weight="bold" fill="#dc2626" text-anchor="middle">Singgung Luar = 24 cm</text>
+                        <text x="155" y="125" font-size="11" font-weight="bold" fill="#64748b" text-anchor="middle">Jarak Pusat = 25 cm</text>
+                        <text x="65" y="110" font-size="11" font-weight="bold" fill="#4f46e5">R=10</text>
+                        <text x="235" y="110" font-size="11" font-weight="bold" fill="#2563eb">r = ?</text>
+                    </svg>`;
+                case 34:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="105" cy="105" r="55" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+                        <circle cx="175" cy="105" r="15" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="160" y1="35" x2="160" y2="175" stroke="#dc2626" stroke-width="2" stroke-dasharray="3"/>
+                        <text x="105" y="110" font-size="11" font-weight="bold" fill="#4f46e5" text-anchor="middle">R = 8</text>
+                        <text x="175" y="110" font-size="10" font-weight="bold" fill="#2563eb" text-anchor="middle">r=2</text>
+                        <text x="160" y="22" font-size="12" font-weight="bold" fill="#dc2626" text-anchor="middle">Panjang Singgung Dalam = ?</text>
+                    </svg>`;
+                case 35:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy-10}" r="60" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <line x1="40" y1="${cy+50}" x2="280" y2="${cy+50}" stroke="#dc2626" stroke-width="2"/>
+                        <line x1="${cx}" y1="${cy+50}" x2="${cx-50}" y2="${cy-40}" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="${cx}" y1="${cy+50}" x2="${cx+50}" y2="${cy-40}" stroke="#475569" stroke-width="1.5"/>
+                        <line x1="${cx-50}" y1="${cy-40}" x2="${cx+50}" y2="${cy-40}" stroke="#475569" stroke-width="1.5"/>
+                        <circle cx="${cx}" cy="${cy+50}" r="4" fill="#dc2626"/>
+                        <circle cx="${cx-50}" cy="${cy-40}" r="4" fill="#2563eb"/>
+                        <circle cx="${cx+50}" cy="${cy-40}" r="4" fill="#475569"/>
+                        <text x="${cx}" y="${cy+68}" font-size="12" font-weight="bold" fill="#dc2626" text-anchor="middle">T (Titik Singgung)</text>
+                        <text x="240" y="${cy+45}" font-size="11" font-weight="bold" fill="#dc2626">P</text>
+                        <text x="${cx-65}" y="${cy-45}" font-size="12" font-weight="bold" fill="#2563eb">A</text>
+                        <text x="${cx+55}" y="${cy-45}" font-size="12" font-weight="bold" fill="#475569">B (Sudut Keliling = ?)</text>
+                        <text x="${cx+10}" y="${cy+42}" font-size="11" font-weight="bold" fill="#dc2626">58°</text>
+                    </svg>`;
+                case 36:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <polygon points="${cx-55},${cy} ${cx},${cy-45} ${cx+65},${cy} ${cx},${cy+45}" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+                        <line x1="${cx-55}" y1="${cy}" x2="${cx+65}" y2="${cy}" stroke="#dc2626" stroke-width="2" stroke-dasharray="4"/>
+                        <circle cx="${cx-55}" cy="${cy}" r="4" fill="#1e293b"/>
+                        <circle cx="${cx+65}" cy="${cy}" r="4" fill="#4f46e5"/>
+                        <text x="${cx-70}" y="${cy+5}" font-size="12" font-weight="bold" fill="#1e293b">O</text>
+                        <text x="${cx+75}" y="${cy+5}" font-size="12" font-weight="bold" fill="#4f46e5">P</text>
+                        <text x="${cx-5}" y="${cy-52}" font-size="12" font-weight="bold" fill="#2563eb">A</text>
+                        <text x="${cx-5}" y="${cy+62}" font-size="12" font-weight="bold" fill="#2563eb">B</text>
+                        <text x="${cx-42}" y="${cy-24}" font-size="11" font-weight="bold" fill="#475569">OA = 5</text>
+                        <text x="${cx+28}" y="${cy-24}" font-size="11" font-weight="bold" fill="#2563eb">PA = 12</text>
+                        <text x="${cx}" y="${cy-8}" font-size="12" font-weight="bold" fill="#dc2626" text-anchor="middle">OP = ?</text>
+                    </svg>`;
+                case 37:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <line x1="${cx-55}" y1="${cy-35}" x2="${cx+50}" y2="${cy+40}" stroke="#4f46e5" stroke-width="2"/>
+                        <line x1="${cx-45}" y1="${cy+45}" x2="${cx+40}" y2="${cy-50}" stroke="#2563eb" stroke-width="2"/>
+                        <circle cx="${cx-10}" cy="${cy-2}" r="4" fill="#dc2626"/>
+                        <text x="${cx-70}" y="${cy-40}" font-size="12" font-weight="bold" fill="#4f46e5">A</text>
+                        <text x="${cx+60}" y="${cy+45}" font-size="12" font-weight="bold" fill="#4f46e5">B</text>
+                        <text x="${cx-60}" y="${cy+55}" font-size="12" font-weight="bold" fill="#2563eb">C</text>
+                        <text x="${cx+50}" y="${cy-55}" font-size="12" font-weight="bold" fill="#2563eb">D</text>
+                        <text x="${cx-10}" y="${cy+18}" font-size="12" font-weight="bold" fill="#dc2626">E</text>
+                        <text x="${cx-42}" y="${cy-20}" font-size="11" font-weight="bold" fill="#4f46e5">AE = 8</text>
+                        <text x="${cx+12}" y="${cy+22}" font-size="11" font-weight="bold" fill="#4f46e5">EB = 3</text>
+                        <text x="${cx-38}" y="${cy+22}" font-size="11" font-weight="bold" fill="#2563eb">CE = 6</text>
+                        <text x="${cx+8}" y="${cy-28}" font-size="11" font-weight="bold" fill="#2563eb">ED = ?</text>
+                    </svg>`;
+                case 38:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx-35}" cy="${cy}" r="50" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <line x1="${cx+85}" y1="${cy}" x2="${cx-35}" y2="${cy-50}" stroke="#dc2626" stroke-width="2"/>
+                        <line x1="${cx+85}" y1="${cy}" x2="${cx-85}" y2="${cy}" stroke="#2563eb" stroke-width="2"/>
+                        <circle cx="${cx+85}" cy="${cy}" r="4" fill="#1e293b"/>
+                        <circle cx="${cx-35}" cy="${cy-50}" r="4" fill="#dc2626"/>
+                        <circle cx="${cx+15}" cy="${cy}" r="4" fill="#2563eb"/>
+                        <circle cx="${cx-85}" cy="${cy}" r="4" fill="#2563eb"/>
+                        <text x="${cx+92}" y="${cy+5}" font-size="12" font-weight="bold" fill="#1e293b">P</text>
+                        <text x="${cx-40}" y="${cy-56}" font-size="12" font-weight="bold" fill="#dc2626">T</text>
+                        <text x="${cx+12}" y="${cy+18}" font-size="12" font-weight="bold" fill="#2563eb">A</text>
+                        <text x="${cx-95}" y="${cy+18}" font-size="12" font-weight="bold" fill="#2563eb">B</text>
+                        <text x="${cx+15}" y="${cy-30}" font-size="11" font-weight="bold" fill="#dc2626">PT = 10</text>
+                        <text x="${cx+38}" y="${cy+18}" font-size="11" font-weight="bold" fill="#2563eb">PA = 5</text>
+                        <text x="${cx-42}" y="${cy+18}" font-size="11" font-weight="bold" fill="#2563eb">AB = ?</text>
+                    </svg>`;
+                case 39:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="85" cy="105" r="45" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+                        <circle cx="225" cy="105" r="25" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="85" y1="105" x2="225" y2="105" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3"/>
+                        <line x1="85" y1="60" x2="225" y2="80" stroke="#dc2626" stroke-width="2"/>
+                        <circle cx="85" cy="105" r="3.5" fill="#1e293b"/>
+                        <circle cx="225" cy="105" r="3.5" fill="#1e293b"/>
+                        <text x="80" y="122" font-size="11" font-weight="bold" fill="#1e293b">P</text>
+                        <text x="220" y="122" font-size="11" font-weight="bold" fill="#1e293b">Q</text>
+                        <text x="155" y="125" font-size="11" font-weight="bold" fill="#64748b" text-anchor="middle">PQ = 20 cm</text>
+                        <text x="65" y="98" font-size="10" font-weight="bold" fill="#4f46e5">R=11</text>
+                        <text x="230" y="98" font-size="10" font-weight="bold" fill="#2563eb">r=5</text>
+                        <text x="155" y="55" font-size="12" font-weight="bold" fill="#dc2626" text-anchor="middle">Singgung Luar = ?</text>
+                    </svg>`;
+                case 40:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <polygon points="${cx-65},${cy+40} ${cx+65},${cy+40} ${cx-12},${cy-55}" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+                        <circle cx="${cx-4}" cy="${cy+8}" r="32" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="${cx-4}" y1="${cy+8}" x2="${cx-4}" y2="${cy+40}" stroke="#dc2626" stroke-width="2"/>
+                        <circle cx="${cx-4}" cy="${cy+8}" r="3.5" fill="#1e293b"/>
+                        <text x="${cx-65}" y="${cy+55}" font-size="12" font-weight="bold" fill="#d97706">A</text>
+                        <text x="${cx+65}" y="${cy+55}" font-size="12" font-weight="bold" fill="#d97706">B</text>
+                        <text x="${cx-12}" y="${cy-62}" font-size="12" font-weight="bold" fill="#d97706">C</text>
+                        <text x="${cx+5}" y="${cy+28}" font-size="11" font-weight="bold" fill="#dc2626">r = ?</text>
+                        <text x="${cx}" y="22" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">Keliling = 36 cm, Luas = 54 cm²</text>
+                    </svg>`;
+                default:
+                    return '';
+            }
+        }
+
+        // State Management
+        let currentIndex = 0;
+        let userState = {
+            answers: {}, // { qId: selectedIndex }
+            bookmarks: {}, // { qId: boolean }
+            score: 0
+        };
+        let currentFilter = 'all';
+
+        const STORAGE_KEY = 'cambridge_circle_quiz_data_set_b_light';
+
+        // Load Persisted Data
+        function loadState() {
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (saved) {
+                    userState = JSON.parse(saved);
+                }
+            } catch (e) {
+                console.error("Gagal memuat data lokal:", e);
+            }
+        }
+
+        // Save State
+        function saveState() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(userState));
+            } catch (e) {
+                console.error("Gagal menyimpan data lokal:", e);
+            }
+            updateHeaderAndStats();
+        }
+
+        // Initialize App
+        window.addEventListener('DOMContentLoaded', () => {
+            loadState();
+            renderNavGrid();
+            renderQuestion(currentIndex);
+            updateHeaderAndStats();
+        });
+
+        // Update Top Header Scores & Progress
+        function updateHeaderAndStats() {
+            let correctCount = 0;
+            let answeredCount = 0;
+
+            quizQuestions.forEach(q => {
+                const ans = userState.answers[q.id];
+                if (ans !== undefined) {
+                    answeredCount++;
+                    if (ans === q.correctIndex) {
+                        correctCount++;
+                    }
+                }
+            });
+
+            userState.score = correctCount;
+
+            document.getElementById('header-score').textContent = correctCount;
+            document.getElementById('answered-count-badge').textContent = `${answeredCount} / 40 Terjawab`;
+            
+            const pct = (answeredCount / 40) * 100;
+            document.getElementById('progress-bar').style.width = `${pct}%`;
+        }
+
+        // Render Nav Grid Buttons
+        function renderNavGrid() {
+            const container = document.getElementById('nav-grid');
+            container.innerHTML = '';
+
+            quizQuestions.forEach((q, idx) => {
+                const isAnswered = userState.answers[q.id] !== undefined;
+                const isCorrect = isAnswered && userState.answers[q.id] === q.correctIndex;
+                const isBookmarked = !!userState.bookmarks[q.id];
+
+                // Filter condition
+                if (currentFilter === 'unanswered' && isAnswered) return;
+                if (currentFilter === 'answered' && !isAnswered) return;
+                if (currentFilter === 'bookmarked' && !isBookmarked) return;
+
+                const btn = document.createElement('button');
+                btn.onclick = () => jumpToQuestion(idx);
+                
+                let baseClass = "h-10 rounded-xl font-bold text-xs relative transition flex items-center justify-center border ";
+                
+                if (idx === currentIndex) {
+                    baseClass += "ring-2 ring-indigo-500 border-indigo-500 ";
+                }
+
+                if (isAnswered) {
+                    if (isCorrect) {
+                        baseClass += "bg-emerald-500 border-emerald-600 text-white hover:bg-emerald-600";
+                    } else {
+                        baseClass += "bg-rose-500 border-rose-600 text-white hover:bg-rose-600";
+                    }
+                } else {
+                    baseClass += "bg-slate-100 border-slate-200 text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 hover:border-indigo-300";
+                }
+
+                btn.className = baseClass;
+                btn.innerHTML = `${q.id}`;
+
+                if (isBookmarked) {
+                    const badge = document.createElement('span');
+                    badge.className = "absolute -top-1 -right-1 text-[10px] text-amber-500 bg-white rounded-full w-4 h-4 flex items-center justify-center border border-amber-400 shadow-sm";
+                    badge.innerHTML = '<i class="fa-solid fa-bookmark"></i>';
+                    btn.appendChild(badge);
+                }
+
+                container.appendChild(btn);
+            });
+        }
+
+        // Filter Nav Grid
+        function filterNav(filter) {
+            currentFilter = filter;
+            document.querySelectorAll('.nav-filter-btn').forEach(btn => {
+                btn.className = "nav-filter-btn py-1.5 rounded-lg font-medium text-slate-600 hover:text-indigo-600";
+            });
+            document.getElementById(`filter-${filter}`).className = "nav-filter-btn py-1.5 rounded-lg font-medium text-white bg-indigo-600 shadow-sm";
+            renderNavGrid();
+        }
+
+        // Render Active Question
+        function renderQuestion(index) {
+            currentIndex = index;
+            const q = quizQuestions[index];
+
+            document.getElementById('q-number-badge').textContent = `Soal #${q.id}`;
+            document.getElementById('q-topic-badge').textContent = q.topic;
+            document.getElementById('q-text').innerHTML = q.text;
+            document.getElementById('nav-indicator-text').textContent = `${index + 1} dari 40`;
+
+            // Render Diagram SVG
+            const diagramWrapper = document.getElementById('diagram-wrapper');
+            diagramWrapper.innerHTML = getQuestionDiagramSVG(q);
+
+            // Bookmark Button
+            const bookmarkBtn = document.getElementById('bookmark-btn');
+            if (userState.bookmarks[q.id]) {
+                bookmarkBtn.className = "text-amber-500 hover:text-amber-600 transition text-lg px-2 py-1";
+                bookmarkBtn.innerHTML = '<i class="fa-solid fa-bookmark"></i>';
+            } else {
+                bookmarkBtn.className = "text-slate-400 hover:text-amber-500 transition text-lg px-2 py-1";
+                bookmarkBtn.innerHTML = '<i class="fa-regular fa-bookmark"></i>';
+            }
+
+            // Options Container
+            const optContainer = document.getElementById('options-container');
+            optContainer.innerHTML = '';
+
+            const userAns = userState.answers[q.id];
+            const hasAnswered = userAns !== undefined;
+
+            const labels = ['A', 'B', 'C', 'D'];
+
+            q.options.forEach((optText, optIdx) => {
+                const optBtn = document.createElement('button');
+                optBtn.onclick = () => selectOption(q.id, optIdx);
+                
+                let optClass = "w-full text-left p-4 rounded-xl border transition flex items-start space-x-3 text-sm sm:text-base font-medium ";
+
+                if (hasAnswered) {
+                    if (optIdx === q.correctIndex) {
+                        // Correct option highlight green
+                        optClass += "bg-emerald-50 border-emerald-500 text-emerald-950 shadow-sm ring-1 ring-emerald-500 font-semibold";
+                    } else if (optIdx === userAns) {
+                        // Selected incorrect option highlight red
+                        optClass += "bg-rose-50 border-rose-500 text-rose-950 font-semibold";
+                    } else {
+                        // Other unselected options dimmed
+                        optClass += "bg-slate-50 border-slate-200 text-slate-400 opacity-60 cursor-default";
+                    }
+                } else {
+                    optClass += "bg-slate-50 border-slate-200 hover:border-indigo-400 hover:bg-indigo-50/50 text-slate-700";
+                }
+
+                optBtn.className = optClass;
+
+                let iconHTML = `<span class="w-7 h-7 rounded-lg font-bold text-xs flex items-center justify-center shrink-0 border `;
+                if (hasAnswered && optIdx === q.correctIndex) {
+                    iconHTML += `bg-emerald-500 border-emerald-600 text-white"><i class="fa-solid fa-check"></i></span>`;
+                } else if (hasAnswered && optIdx === userAns) {
+                    iconHTML += `bg-rose-500 border-rose-600 text-white"><i class="fa-solid fa-xmark"></i></span>`;
+                } else {
+                    iconHTML += `bg-white border-slate-300 text-slate-600 shadow-xs">${labels[optIdx]}</span>`;
+                }
+
+                optBtn.innerHTML = `
+                    ${iconHTML}
+                    <span class="pt-0.5">${optText}</span>
+                `;
+
+                optContainer.appendChild(optBtn);
+            });
+
+            // Explanation Box
+            const expBox = document.getElementById('explanation-box');
+            const expStatus = document.getElementById('explanation-status');
+            const expText = document.getElementById('explanation-text');
+
+            if (hasAnswered) {
+                expBox.classList.remove('hidden');
+                if (userAns === q.correctIndex) {
+                    expStatus.className = "font-bold text-emerald-600 flex items-center space-x-2";
+                    expStatus.innerHTML = '<i class="fa-solid fa-circle-check"></i><span>Jawaban Anda Benar!</span>';
+                } else {
+                    expStatus.className = "font-bold text-rose-600 flex items-center space-x-2";
+                    expStatus.innerHTML = `<i class="fa-solid fa-circle-xmark"></i><span>Jawaban Anda Salah (Kunci Jawaban: ${labels[q.correctIndex]})</span>`;
+                }
+                expText.innerHTML = q.explanation;
+            } else {
+                expBox.classList.add('hidden');
+            }
+
+            // Buttons Prev/Next
+            document.getElementById('prev-btn').disabled = (index === 0);
+            document.getElementById('next-btn').disabled = (index === quizQuestions.length - 1);
+
+            // Render LaTeX Formulas
+            renderMathInElement(document.getElementById('question-card'), {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ]
+            });
+
+            renderNavGrid();
+        }
+
+        // Option Click Handler
+        function selectOption(qId, optIndex) {
+            userState.answers[qId] = optIndex;
+            saveState();
+            renderQuestion(currentIndex);
+        }
+
+        // Toggle Bookmark
+        function toggleBookmarkCurrent() {
+            const qId = quizQuestions[currentIndex].id;
+            userState.bookmarks[qId] = !userState.bookmarks[qId];
+            saveState();
+            renderQuestion(currentIndex);
+        }
+
+        // Navigation Controls
+        function jumpToQuestion(idx) {
+            renderQuestion(idx);
+        }
+
+        function navPrev() {
+            if (currentIndex > 0) {
+                renderQuestion(currentIndex - 1);
+            }
+        }
+
+        function navNext() {
+            if (currentIndex < quizQuestions.length - 1) {
+                renderQuestion(currentIndex + 1);
+            }
+        }
+
+        // Reset Quiz
+        function confirmResetQuiz() {
+            if (confirm("Apakah Anda yakin ingin mengulang seluruh kuis? Semua progres dan jawaban Anda akan dihapus.")) {
+                userState = { answers: {}, bookmarks: {}, score: 0 };
+                saveState();
+                renderQuestion(0);
+            }
+        }
+
+        // Summary Modal Logic
+        function showSummaryModal() {
+            let correct = 0;
+            let answered = 0;
+            const topicStats = {};
+
+            quizQuestions.forEach(q => {
+                if (!topicStats[q.topic]) {
+                    topicStats[q.topic] = { total: 0, correct: 0 };
+                }
+                topicStats[q.topic].total++;
+
+                const ans = userState.answers[q.id];
+                if (ans !== undefined) {
+                    answered++;
+                    if (ans === q.correctIndex) {
+                        correct++;
+                        topicStats[q.topic].correct++;
+                    }
+                }
+            });
+
+            const accuracy = answered > 0 ? ((correct / answered) * 100).toFixed(1) : 0;
+
+            document.getElementById('modal-score').textContent = `${correct} / 40`;
+            document.getElementById('modal-accuracy').textContent = `${accuracy}%`;
+            document.getElementById('modal-correct').textContent = correct;
+            document.getElementById('modal-wrong').textContent = answered - correct;
+
+            // Breakdown Rendering
+            const breakdownContainer = document.getElementById('topic-breakdown-container');
+            breakdownContainer.innerHTML = '';
+
+            Object.keys(topicStats).forEach(topicName => {
+                const stat = topicStats[topicName];
+                const pct = stat.total > 0 ? Math.round((stat.correct / stat.total) * 100) : 0;
+
+                const row = document.createElement('div');
+                row.className = "bg-slate-50 p-3 rounded-xl border border-slate-200 flex flex-col space-y-1";
+                row.innerHTML = `
+                    <div class="flex justify-between text-xs font-semibold">
+                        <span class="text-slate-800">${topicName}</span>
+                        <span class="text-indigo-600">${stat.correct} / ${stat.total} (${pct}%)</span>
+                    </div>
+                    <div class="w-full bg-slate-200 rounded-full h-2">
+                        <div class="bg-gradient-to-r from-indigo-500 to-sky-400 h-2 rounded-full transition-all" style="width: ${pct}%"></div>
+                    </div>
+                `;
+                breakdownContainer.appendChild(row);
+            });
+
+            document.getElementById('summary-modal').classList.remove('hidden');
+        }
+
+        function closeSummaryModal() {
+            document.getElementById('summary-modal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
