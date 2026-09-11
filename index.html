@@ -18,43 +18,43 @@
             height: 6px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
-            background: #1e293b;
+            background: #f1f5f9;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #475569;
+            background: #cbd5e1;
             border-radius: 4px;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #64748b;
+            background: #94a3b8;
         }
     </style>
 </head>
-<body class="bg-slate-900 text-slate-100 font-sans min-h-screen flex flex-col selection:bg-indigo-500 selection:text-white">
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col selection:bg-indigo-500 selection:text-white">
 
     <!-- Top Header -->
-    <header class="bg-indigo-950 border-b border-indigo-800/60 sticky top-0 z-40 shadow-xl">
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
             <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-xl bg-indigo-600/30 border border-indigo-400/40 flex items-center justify-center text-indigo-400">
+                <div class="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-200 flex items-center justify-center text-indigo-600">
                     <i class="fa-solid fa-circle-dot text-xl animate-pulse"></i>
                 </div>
                 <div>
-                    <h1 class="text-lg font-bold leading-tight text-white flex items-center gap-2">
+                    <h1 class="text-lg font-bold leading-tight text-slate-900 flex items-center gap-2">
                         <span>Cambridge Circle Geometry - Set B</span>
-                        <span class="text-xs bg-indigo-800 text-indigo-200 px-2.5 py-0.5 rounded-full font-semibold border border-indigo-600">40 Soal Baru</span>
+                        <span class="text-xs bg-indigo-100 text-indigo-800 px-2.5 py-0.5 rounded-full font-semibold border border-indigo-200">40 Soal Berilustrasi</span>
                     </h1>
-                    <p class="text-xs text-indigo-300/80">Syllabus 0580 / 0607 Masterclass Exam Prep</p>
+                    <p class="text-xs text-slate-500">Syllabus 0580 / 0607 Masterclass Exam Prep</p>
                 </div>
             </div>
 
             <!-- Stats & Status Badge -->
             <div class="flex items-center space-x-3 text-xs sm:text-sm">
-                <div class="bg-slate-800/80 border border-slate-700/80 px-3 py-1.5 rounded-xl flex items-center space-x-2">
-                    <i class="fa-solid fa-trophy text-amber-400"></i>
-                    <span>Skor: <strong id="header-score" class="text-amber-400 font-extrabold">0</strong> / 40</span>
+                <div class="bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-xl flex items-center space-x-2">
+                    <i class="fa-solid fa-trophy text-amber-500"></i>
+                    <span>Skor: <strong id="header-score" class="text-indigo-600 font-extrabold">0</strong> / 40</span>
                 </div>
-                <div id="connection-status" class="bg-emerald-950/80 text-emerald-400 border border-emerald-800/80 px-3 py-1.5 rounded-xl flex items-center space-x-1.5 font-medium">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                <div id="connection-status" class="bg-emerald-50 text-emerald-700 border border-emerald-200 px-3 py-1.5 rounded-xl flex items-center space-x-1.5 font-medium">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
                     <span class="hidden sm:inline">Offline-Ready & Tersimpan</span>
                     <span class="sm:hidden">Tersimpan</span>
                 </div>
@@ -62,8 +62,8 @@
         </div>
 
         <!-- Progress Bar -->
-        <div class="w-full bg-slate-800 h-1.5">
-            <div id="progress-bar" class="bg-gradient-to-r from-indigo-500 via-cyan-400 to-emerald-400 h-1.5 transition-all duration-300" style="width: 0%;"></div>
+        <div class="w-full bg-slate-100 h-1.5">
+            <div id="progress-bar" class="bg-gradient-to-r from-indigo-500 via-sky-400 to-emerald-500 h-1.5 transition-all duration-300" style="width: 0%;"></div>
         </div>
     </header>
 
@@ -71,23 +71,23 @@
     <main class="max-w-7xl mx-auto px-4 py-6 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 w-full">
         
         <!-- Left: Navigation Drawer / Grid Panel -->
-        <aside class="lg:col-span-4 bg-slate-800/70 border border-slate-700/80 rounded-2xl p-5 flex flex-col justify-between h-fit shadow-lg">
+        <aside class="lg:col-span-4 bg-white border border-slate-200 rounded-2xl p-5 flex flex-col justify-between h-fit shadow-sm">
             <div>
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="font-bold text-slate-200 flex items-center text-sm uppercase tracking-wider">
-                        <i class="fa-solid fa-compass text-indigo-400 mr-2"></i> Navigasi Soal
+                    <h3 class="font-bold text-slate-800 flex items-center text-sm uppercase tracking-wider">
+                        <i class="fa-solid fa-compass text-indigo-600 mr-2"></i> Navigasi Soal
                     </h3>
-                    <span id="answered-count-badge" class="text-xs bg-slate-700 text-slate-300 font-semibold px-2.5 py-1 rounded-lg">
+                    <span id="answered-count-badge" class="text-xs bg-slate-100 text-slate-600 font-semibold px-2.5 py-1 rounded-lg border border-slate-200">
                         0 / 40 Terjawab
                     </span>
                 </div>
 
                 <!-- Filters -->
-                <div class="grid grid-cols-4 gap-1 bg-slate-900/80 p-1 rounded-xl mb-4 border border-slate-700/50 text-xs">
-                    <button onclick="filterNav('all')" id="filter-all" class="nav-filter-btn py-1.5 rounded-lg font-medium text-slate-300 bg-indigo-600 text-white">Semua</button>
-                    <button onclick="filterNav('unanswered')" id="filter-unanswered" class="nav-filter-btn py-1.5 rounded-lg font-medium text-slate-400 hover:text-white">Belum</button>
-                    <button onclick="filterNav('answered')" id="filter-answered" class="nav-filter-btn py-1.5 rounded-lg font-medium text-slate-400 hover:text-white">Sudah</button>
-                    <button onclick="filterNav('bookmarked')" id="filter-bookmarked" class="nav-filter-btn py-1.5 rounded-lg font-medium text-slate-400 hover:text-white"><i class="fa-solid fa-bookmark text-amber-400"></i></button>
+                <div class="grid grid-cols-4 gap-1 bg-slate-100 p-1 rounded-xl mb-4 border border-slate-200 text-xs">
+                    <button onclick="filterNav('all')" id="filter-all" class="nav-filter-btn py-1.5 rounded-lg font-medium text-white bg-indigo-600 shadow-sm">Semua</button>
+                    <button onclick="filterNav('unanswered')" id="filter-unanswered" class="nav-filter-btn py-1.5 rounded-lg font-medium text-slate-600 hover:text-indigo-600">Belum</button>
+                    <button onclick="filterNav('answered')" id="filter-answered" class="nav-filter-btn py-1.5 rounded-lg font-medium text-slate-600 hover:text-indigo-600">Sudah</button>
+                    <button onclick="filterNav('bookmarked')" id="filter-bookmarked" class="nav-filter-btn py-1.5 rounded-lg font-medium text-slate-600 hover:text-indigo-600"><i class="fa-solid fa-bookmark text-amber-500"></i></button>
                 </div>
 
                 <!-- Question Grid Buttons -->
@@ -97,34 +97,34 @@
             </div>
 
             <!-- Legend & Action Controls -->
-            <div class="mt-6 pt-4 border-t border-slate-700/80 space-y-4">
+            <div class="mt-6 pt-4 border-t border-slate-200 space-y-4">
                 <!-- Legend -->
-                <div class="grid grid-cols-2 gap-2 text-xs text-slate-400">
+                <div class="grid grid-cols-2 gap-2 text-xs text-slate-600">
                     <div class="flex items-center space-x-2">
-                        <span class="w-3 h-3 rounded-md bg-emerald-600 border border-emerald-400 inline-block"></span>
+                        <span class="w-3 h-3 rounded-md bg-emerald-500 border border-emerald-400 inline-block"></span>
                         <span>Benar</span>
                     </div>
                     <div class="flex items-center space-x-2">
-                        <span class="w-3 h-3 rounded-md bg-rose-600 border border-rose-400 inline-block"></span>
+                        <span class="w-3 h-3 rounded-md bg-rose-500 border border-rose-400 inline-block"></span>
                         <span>Salah</span>
                     </div>
                     <div class="flex items-center space-x-2">
-                        <span class="w-3 h-3 rounded-md bg-slate-700 border border-slate-500 inline-block"></span>
+                        <span class="w-3 h-3 rounded-md bg-slate-100 border border-slate-300 inline-block"></span>
                         <span>Belum Dijawab</span>
                     </div>
                     <div class="flex items-center space-x-2">
-                        <span class="w-3 h-3 rounded-md bg-amber-500/30 border border-amber-400 flex items-center justify-center text-[9px] text-amber-300"><i class="fa-solid fa-bookmark"></i></span>
+                        <span class="w-3 h-3 rounded-md bg-amber-100 border border-amber-400 flex items-center justify-center text-[9px] text-amber-600"><i class="fa-solid fa-bookmark"></i></span>
                         <span>Ditandai</span>
                     </div>
                 </div>
 
                 <!-- Actions -->
                 <div class="flex flex-col gap-2 pt-2">
-                    <button onclick="showSummaryModal()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-2.5 rounded-xl text-xs transition flex items-center justify-center space-x-2 shadow-md">
+                    <button onclick="showSummaryModal()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 rounded-xl text-xs transition flex items-center justify-center space-x-2 shadow-sm">
                         <i class="fa-solid fa-chart-pie"></i>
                         <span>Lihat Ringkasan Hasil</span>
                     </button>
-                    <button onclick="confirmResetQuiz()" class="w-full bg-slate-800 hover:bg-rose-900/40 text-slate-400 hover:text-rose-300 border border-slate-700 hover:border-rose-800 font-semibold py-2 rounded-xl text-xs transition flex items-center justify-center space-x-2">
+                    <button onclick="confirmResetQuiz()" class="w-full bg-slate-100 hover:bg-rose-50 text-slate-600 hover:text-rose-600 border border-slate-200 hover:border-rose-200 font-semibold py-2 rounded-xl text-xs transition flex items-center justify-center space-x-2">
                         <i class="fa-solid fa-rotate-right"></i>
                         <span>Ulangi Seluruh Kuis</span>
                     </button>
@@ -135,28 +135,33 @@
         <!-- Right: Active Question Card -->
         <section class="lg:col-span-8 flex flex-col justify-between space-y-6">
             
-            <div id="question-card" class="bg-slate-800/90 border border-slate-700 rounded-2xl p-6 shadow-xl relative transition-all duration-200">
+            <div id="question-card" class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm relative transition-all duration-200">
                 
                 <!-- Card Header -->
-                <div class="flex justify-between items-center pb-4 mb-4 border-b border-slate-700/80">
+                <div class="flex justify-between items-center pb-4 mb-4 border-b border-slate-200">
                     <div class="flex items-center space-x-3">
-                        <span id="q-number-badge" class="bg-indigo-600 text-white font-extrabold text-sm px-3 py-1 rounded-xl shadow-md">
+                        <span id="q-number-badge" class="bg-indigo-600 text-white font-extrabold text-sm px-3 py-1 rounded-xl shadow-sm">
                             Soal #1
                         </span>
-                        <span id="q-topic-badge" class="text-xs bg-indigo-950 text-indigo-300 border border-indigo-800 px-3 py-1 rounded-full font-medium">
+                        <span id="q-topic-badge" class="text-xs bg-indigo-50 text-indigo-700 border border-indigo-200 px-3 py-1 rounded-full font-medium">
                             Anatomi & Perhitungan Dasar
                         </span>
                     </div>
-                    <button id="bookmark-btn" onclick="toggleBookmarkCurrent()" class="text-slate-500 hover:text-amber-400 transition text-lg px-2 py-1" title="Tandai Soal Ini">
+                    <button id="bookmark-btn" onclick="toggleBookmarkCurrent()" class="text-slate-400 hover:text-amber-500 transition text-lg px-2 py-1" title="Tandai Soal Ini">
                         <i class="fa-regular fa-bookmark"></i>
                     </button>
                 </div>
 
                 <!-- Question Text -->
-                <div class="mb-6">
-                    <p id="q-text" class="text-slate-100 font-medium text-base sm:text-lg leading-relaxed">
+                <div class="mb-4">
+                    <p id="q-text" class="text-slate-800 font-medium text-base sm:text-lg leading-relaxed">
                         <!-- Dynamic Question Text -->
                     </p>
+                </div>
+
+                <!-- Dynamic Visual Illustration SVG Container -->
+                <div id="diagram-wrapper" class="my-4 flex justify-center items-center bg-slate-50 border border-indigo-100 rounded-2xl p-4 min-h-[180px]">
+                    <!-- Dynamic SVG Rendered Here -->
                 </div>
 
                 <!-- Multiple Choice Options -->
@@ -165,12 +170,12 @@
                 </div>
 
                 <!-- Explanation Box -->
-                <div id="explanation-box" class="hidden mt-6 p-4 rounded-xl border border-slate-700 bg-slate-900/90 space-y-2 text-sm text-slate-300">
+                <div id="explanation-box" class="hidden mt-6 p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2 text-sm text-slate-700">
                     <div id="explanation-status" class="font-bold flex items-center space-x-2">
                         <!-- Dynamic Status -->
                     </div>
-                    <div class="pt-2 border-t border-slate-800">
-                        <strong class="text-slate-200 block mb-1">Pembahasan Langkah-demi-Langkah:</strong>
+                    <div class="pt-2 border-t border-slate-200">
+                        <strong class="text-slate-900 block mb-1">Pembahasan Langkah-demi-Langkah:</strong>
                         <div id="explanation-text" class="leading-relaxed"></div>
                     </div>
                 </div>
@@ -178,17 +183,17 @@
             </div>
 
             <!-- Bottom Navigation Bar -->
-            <div class="flex justify-between items-center bg-slate-800/80 border border-slate-700 p-4 rounded-2xl shadow-md">
-                <button id="prev-btn" onclick="navPrev()" class="bg-slate-700 hover:bg-slate-600 disabled:opacity-40 disabled:cursor-not-allowed text-white px-5 py-2.5 rounded-xl font-medium text-sm transition flex items-center space-x-2">
+            <div class="flex justify-between items-center bg-white border border-slate-200 p-4 rounded-2xl shadow-sm">
+                <button id="prev-btn" onclick="navPrev()" class="bg-slate-100 hover:bg-slate-200 disabled:opacity-40 disabled:cursor-not-allowed text-slate-700 px-5 py-2.5 rounded-xl font-medium text-sm transition flex items-center space-x-2 border border-slate-200">
                     <i class="fa-solid fa-arrow-left"></i>
                     <span>Sebelumnya</span>
                 </button>
 
-                <span class="text-xs text-slate-400 font-mono" id="nav-indicator-text">
+                <span class="text-xs text-slate-500 font-mono" id="nav-indicator-text">
                     1 dari 40
                 </span>
 
-                <button id="next-btn" onclick="navNext()" class="bg-indigo-600 hover:bg-indigo-500 disabled:opacity-40 disabled:cursor-not-allowed text-white px-5 py-2.5 rounded-xl font-medium text-sm transition flex items-center space-x-2">
+                <button id="next-btn" onclick="navNext()" class="bg-indigo-600 hover:bg-indigo-700 disabled:opacity-40 disabled:cursor-not-allowed text-white px-5 py-2.5 rounded-xl font-medium text-sm transition flex items-center space-x-2 shadow-sm">
                     <span>Berikutnya</span>
                     <i class="fa-solid fa-arrow-right"></i>
                 </button>
@@ -198,52 +203,52 @@
     </main>
 
     <!-- Summary Modal -->
-    <div id="summary-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-slate-800 border border-slate-700 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto custom-scrollbar">
-            <div class="flex justify-between items-center border-b border-slate-700 pb-4">
-                <h3 class="text-xl font-bold text-white flex items-center gap-2">
-                    <i class="fa-solid fa-square-poll-vertical text-indigo-400"></i>
+    <div id="summary-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white border border-slate-200 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto custom-scrollbar">
+            <div class="flex justify-between items-center border-b border-slate-200 pb-4">
+                <h3 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-square-poll-vertical text-indigo-600"></i>
                     Ringkasan Hasil Kuis (Set B)
                 </h3>
-                <button onclick="closeSummaryModal()" class="text-slate-400 hover:text-white text-lg px-2">
+                <button onclick="closeSummaryModal()" class="text-slate-400 hover:text-slate-700 text-lg px-2">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
 
             <!-- Modal Content Stats -->
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-                <div class="bg-slate-900/80 p-3 rounded-2xl border border-slate-700">
-                    <span class="text-xs text-slate-400 block mb-1">Skor Akhir</span>
-                    <span id="modal-score" class="text-2xl font-extrabold text-amber-400">0 / 40</span>
+                <div class="bg-slate-50 p-3 rounded-2xl border border-slate-200">
+                    <span class="text-xs text-slate-500 block mb-1">Skor Akhir</span>
+                    <span id="modal-score" class="text-2xl font-extrabold text-indigo-600">0 / 40</span>
                 </div>
-                <div class="bg-slate-900/80 p-3 rounded-2xl border border-slate-700">
-                    <span class="text-xs text-slate-400 block mb-1">Akurasi</span>
-                    <span id="modal-accuracy" class="text-2xl font-extrabold text-cyan-400">0%</span>
+                <div class="bg-slate-50 p-3 rounded-2xl border border-slate-200">
+                    <span class="text-xs text-slate-500 block mb-1">Akurasi</span>
+                    <span id="modal-accuracy" class="text-2xl font-extrabold text-sky-600">0%</span>
                 </div>
-                <div class="bg-slate-900/80 p-3 rounded-2xl border border-slate-700">
-                    <span class="text-xs text-slate-400 block mb-1">Jawaban Benar</span>
-                    <span id="modal-correct" class="text-2xl font-extrabold text-emerald-400">0</span>
+                <div class="bg-slate-50 p-3 rounded-2xl border border-slate-200">
+                    <span class="text-xs text-slate-500 block mb-1">Jawaban Benar</span>
+                    <span id="modal-correct" class="text-2xl font-extrabold text-emerald-600">0</span>
                 </div>
-                <div class="bg-slate-900/80 p-3 rounded-2xl border border-slate-700">
-                    <span class="text-xs text-slate-400 block mb-1">Jawaban Salah</span>
-                    <span id="modal-wrong" class="text-2xl font-extrabold text-rose-400">0</span>
+                <div class="bg-slate-50 p-3 rounded-2xl border border-slate-200">
+                    <span class="text-xs text-slate-500 block mb-1">Jawaban Salah</span>
+                    <span id="modal-wrong" class="text-2xl font-extrabold text-rose-600">0</span>
                 </div>
             </div>
 
             <!-- Topic Breakdown -->
             <div class="space-y-3">
-                <h4 class="text-sm font-bold text-slate-300 uppercase tracking-wider">Performa Berdasarkan Topik</h4>
+                <h4 class="text-sm font-bold text-slate-700 uppercase tracking-wider">Performa Berdasarkan Topik</h4>
                 <div id="topic-breakdown-container" class="space-y-2">
                     <!-- JS Rendered -->
                 </div>
             </div>
 
             <!-- Modal Actions -->
-            <div class="pt-4 border-t border-slate-700 flex flex-col sm:flex-row gap-3">
-                <button onclick="closeSummaryModal()" class="w-full bg-slate-700 hover:bg-slate-600 text-white font-semibold py-2.5 rounded-xl text-sm transition">
+            <div class="pt-4 border-t border-slate-200 flex flex-col sm:flex-row gap-3">
+                <button onclick="closeSummaryModal()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-2.5 rounded-xl text-sm transition border border-slate-200">
                     Lanjutkan Review Soal
                 </button>
-                <button onclick="confirmResetQuiz(); closeSummaryModal();" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-2.5 rounded-xl text-sm transition">
+                <button onclick="confirmResetQuiz(); closeSummaryModal();" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 rounded-xl text-sm transition shadow-sm">
                     Mulai Ulang Kuis Baru
                 </button>
             </div>
@@ -252,7 +257,7 @@
 
     <!-- JavaScript Data & Logic -->
     <script>
-        // 40 Brand New Questions Dataset (Exactly 10 A, 10 B, 10 C, 10 D)
+        // 40 Questions Dataset
         const quizQuestions = [
             // TOPIC 1: Anatomi & Perhitungan Dasar (1 - 10)
             {
@@ -423,9 +428,9 @@
                 id: 21,
                 topic: "Tembereng Sama & Segiempat Tali Busur",
                 text: "Segiempat tali busur $KLMN$ memiliki $\\angle K = (3x + 10)^\\circ$ dan $\\angle M = (2x + 20)^\\circ$. Berapakah besar sudut $\\angle K$?",
-                options: ["88°", "92°", "100°", "70°"],
+                options: ["100°", "92°", "88°", "70°"],
                 correctIndex: 0, // A
-                explanation: "$$\\angle K + \\angle M = 180^\\circ \\implies (3x + 10) + (2x + 20) = 180$$\n$$5x + 30 = 180 \\implies 5x = 150 \\implies x = 30$$\n$$\\angle K = 3(30) + 10 = 100^\\circ$$... Maaf kalkulasi: $3(30)+10=100$. Pilihan A = 100° (Kunci C = 100°)."
+                explanation: "$$\\angle K + \\angle M = 180^\\circ \\implies (3x + 10) + (2x + 20) = 180$$\n$$5x + 30 = 180 \\implies 5x = 150 \\implies x = 30$$\n$$\\angle K = 3(30) + 10 = 100^\\circ$$"
             },
             {
                 id: 22,
@@ -568,10 +573,10 @@
             {
                 id: 39,
                 topic: "Garis Singgung & Aplikasi",
-                text: "Dua lingkaran berpusat di $P$ dan $Q$ dengan jarak $PQ = 20\\text{ cm}$. Jika jari-jari masing-masing lingkaran adalah $11\\text{ cm}$ dan $5\\text{ cm}$, berapakah panjang garis singgung persekutuan luar?",
+                text: "Dua lingkaran berpusat di $P$ dan $Q$ dengan jarak $PQ = 20\\text{ cm}$. Jika jari-jari masing-masing lingkaran adalah $17\\text{ cm}$ dan $5\\text{ cm}$, berapakah panjang garis singgung persekutuan luar?",
                 options: ["16 cm", "12 cm", "18 cm", "15 cm"],
                 correctIndex: 0, // A
-                explanation: "$$d = \\sqrt{PQ^2 - (R - r)^2} = \\sqrt{20^2 - (11 - 5)^2} = \\sqrt{400 - 36} = \\sqrt{364} \\approx 19.08\\text{ cm}$$\n*Kalkulasi tepat*: Jika $R=11, r=3 \\implies (11-3)=8 \\implies \\sqrt{400-64} = \\sqrt{336}$. Jika $PQ=20, R=14, r=2 \\implies \\sqrt{400-144}=16$. Sesuai kunci $d = \\sqrt{20^2 - (17-5)^2} = \\sqrt{400-144} = 16\\text{ cm}$."
+                explanation: "$$d = \\sqrt{PQ^2 - (R - r)^2} = \\sqrt{20^2 - (17 - 5)^2} = \\sqrt{20^2 - 12^2} = \\sqrt{400 - 144} = \\sqrt{256} = 16\\text{ cm}$$"
             },
             {
                 id: 40,
@@ -583,277 +588,763 @@
             }
         ];
 
-        // State Management
+        // Generator function for custom SVG vector illustrations
+        function getQuestionDiagramSVG(q) {
+            const cx = 160;
+            const cy = 105;
+            const r = 70;
+
+            switch(q.id) {
+                case 1:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#cbd5e1" stroke-dasharray="4" stroke-width="1.5"/>
+                        <path d="M ${cx} ${cy} L ${cx + r} ${cy} A ${r} ${r} 0 0 0 ${cx - r*0.5} ${cy - r*0.866} Z" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+                        <path d="M ${cx + r} ${cy} A ${r} ${r} 0 0 0 ${cx - r*0.5} ${cy - r*0.866}" fill="none" stroke="#0284c7" stroke-width="3.5"/>
+                        <circle cx="${cx}" cy="${cy}" r="3.5" fill="#1e293b"/>
+                        <text x="${cx-12}" y="${cy+15}" font-size="12" font-weight="bold" fill="#1e293b">O</text>
+                        <text x="${cx + 25}" y="${cy + 15}" font-size="13" font-weight="bold" fill="#4f46e5">r = ?</text>
+                        <text x="${cx + 10}" y="${cy - 60}" font-size="12" font-weight="bold" fill="#0284c7">Busur s = 44 cm</text>
+                        <path d="M ${cx + 20} ${cy} A 20 20 0 0 0 ${cx - 10} ${cy - 17.3}" fill="none" stroke="#d97706" stroke-width="2"/>
+                        <text x="${cx - 5}" y="${cy - 25}" font-size="12" font-weight="bold" fill="#d97706">120°</text>
+                    </svg>`;
+                case 2:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#cbd5e1" stroke-dasharray="4" stroke-width="1.5"/>
+                        <path d="M ${cx} ${cy} L ${cx + r} ${cy} A ${r} ${r} 0 0 0 ${cx + r*0.5} ${cy - r*0.866} Z" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+                        <circle cx="${cx}" cy="${cy}" r="3.5" fill="#1e293b"/>
+                        <text x="${cx-12}" y="${cy+15}" font-size="12" font-weight="bold" fill="#1e293b">O</text>
+                        <text x="${cx + 25}" y="${cy + 15}" font-size="12" font-weight="bold" fill="#1e293b">r = 7 cm</text>
+                        <text x="${cx + 25}" y="${cy - 30}" font-size="12" font-weight="bold" fill="#2563eb">Luas = 25.67 cm²</text>
+                        <path d="M ${cx + 25} ${cy} A 25 25 0 0 0 ${cx + 12.5} ${cy - 21.6}" fill="none" stroke="#d97706" stroke-width="2"/>
+                        <text x="${cx + 18}" y="${cy - 8}" font-size="12" font-weight="bold" fill="#d97706">θ = ?</text>
+                    </svg>`;
+                case 3:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#cbd5e1" stroke-dasharray="4" stroke-width="1.5"/>
+                        <path d="M ${cx} ${cy} L ${cx + r} ${cy} L ${cx} ${cy - r} Z" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3"/>
+                        <path d="M ${cx + r} ${cy} A ${r} ${r} 0 0 0 ${cx} ${cy - r} Z" fill="#fbcfe8" stroke="#db2777" stroke-width="2"/>
+                        <line x1="${cx + r}" y1="${cy}" x2="${cx}" y2="${cy - r}" stroke="#db2777" stroke-width="2"/>
+                        <circle cx="${cx}" cy="${cy}" r="3.5" fill="#1e293b"/>
+                        <text x="${cx-12}" y="${cy+15}" font-size="12" font-weight="bold" fill="#1e293b">O</text>
+                        <text x="${cx + 20}" y="${cy + 15}" font-size="12" font-weight="bold" fill="#475569">14 cm</text>
+                        <text x="${cx - 40}" y="${cy - 30}" font-size="12" font-weight="bold" fill="#475569">14 cm</text>
+                        <rect x="${cx}" y="${cy-12}" width="12" height="12" fill="none" stroke="#d97706" stroke-width="1.5"/>
+                        <text x="${cx + 35}" y="${cy - 40}" font-size="12" font-weight="bold" fill="#db2777">Luas Tembereng = ?</text>
+                    </svg>`;
+                case 4:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="85" cy="105" r="28" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+                        <circle cx="85" cy="105" r="3" fill="#1e293b"/>
+                        <text x="60" y="152" font-size="12" font-weight="bold" fill="#4f46e5">K₁ = 44 cm</text>
+                        <circle cx="225" cy="105" r="62" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+                        <circle cx="225" cy="105" r="3" fill="#1e293b"/>
+                        <text x="185" y="188" font-size="12" font-weight="bold" fill="#2563eb">K₂ = 132 cm</text>
+                        <text x="100" y="30" font-size="12" font-weight="bold" fill="#0f172a">Perbandingan Luas (L₁ : L₂) = ?</text>
+                    </svg>`;
+                case 5:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <line x1="${cx - 60}" y1="${cy + 36}" x2="${cx + 60}" y2="${cy + 36}" stroke="#2563eb" stroke-width="2.5"/>
+                        <line x1="${cx}" y1="${cy}" x2="${cx}" y2="${cy + 36}" stroke="#dc2626" stroke-width="2" stroke-dasharray="3"/>
+                        <line x1="${cx}" y1="${cy}" x2="${cx - 60}" y2="${cy + 36}" stroke="#4f46e5" stroke-width="1.5"/>
+                        <circle cx="${cx}" cy="${cy}" r="3.5" fill="#1e293b"/>
+                        <text x="${cx}" y="${cy - 8}" font-size="12" font-weight="bold" fill="#1e293b" text-anchor="middle">O</text>
+                        <text x="${cx - 72}" y="${cy + 42}" font-size="12" font-weight="bold" fill="#2563eb">X</text>
+                        <text x="${cx + 65}" y="${cy + 42}" font-size="12" font-weight="bold" fill="#2563eb">Y</text>
+                        <text x="${cx + 8}" y="${cy + 22}" font-size="12" font-weight="bold" fill="#dc2626">d = ?</text>
+                        <text x="${cx - 40}" y="${cy + 12}" font-size="12" font-weight="bold" fill="#4f46e5">r = 13</text>
+                        <text x="${cx}" y="${cy + 56}" font-size="12" font-weight="bold" fill="#2563eb" text-anchor="middle">XY = 24 cm</text>
+                    </svg>`;
+                case 6:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="70" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+                        <circle cx="${cx}" cy="${cy}" r="50" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+                        <circle cx="${cx}" cy="${cy}" r="3.5" fill="#1e293b"/>
+                        <line x1="${cx - 50}" y1="${cy}" x2="${cx + 50}" y2="${cy}" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="3"/>
+                        <text x="${cx}" y="${cy - 8}" font-size="11" font-weight="bold" fill="#16a34a" text-anchor="middle">Taman (d = 28m)</text>
+                        <line x1="${cx + 50}" y1="${cy}" x2="${cx + 70}" y2="${cy}" stroke="#d97706" stroke-width="2"/>
+                        <text x="${cx + 25}" y="${cy + 22}" font-size="11" font-weight="bold" fill="#d97706">Jalan: 3.5m</text>
+                        <text x="${cx}" y="22" font-size="12" font-weight="bold" fill="#d97706" text-anchor="middle">Luas Jalan Setapak = ?</text>
+                    </svg>`;
+                case 7:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <circle cx="${cx}" cy="${cy}" r="3.5" fill="#94a3b8"/>
+                        <text x="${cx+8}" y="${cy-5}" font-size="12" font-weight="bold" fill="#64748b">O (Pusat)</text>
+                        <line x1="${cx - 55}" y1="${cy - 35}" x2="${cx + 40}" y2="${cy + 55}" stroke="#4f46e5" stroke-width="3"/>
+                        <circle cx="${cx - 55}" cy="${cy - 35}" r="4" fill="#4f46e5"/>
+                        <circle cx="${cx + 40}" cy="${cy + 55}" r="4" fill="#4f46e5"/>
+                        <text x="${cx - 70}" y="${cy - 40}" font-size="12" font-weight="bold" fill="#4f46e5">A</text>
+                        <text x="${cx + 48}" y="${cy + 62}" font-size="12" font-weight="bold" fill="#4f46e5">B</text>
+                        <text x="${cx - 15}" y="${cy + 20}" font-size="13" font-weight="bold" fill="#4f46e5">Garis AB = ?</text>
+                    </svg>`;
+                case 8:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#cbd5e1" stroke-dasharray="4" stroke-width="1.5"/>
+                        <path d="M ${cx} ${cy} L ${cx + r} ${cy} A ${r} ${r} 0 0 0 ${cx + r*0.309} ${cy - r*0.951} Z" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+                        <path d="M ${cx + r} ${cy} A ${r} ${r} 0 0 0 ${cx + r*0.309} ${cy - r*0.951}" fill="none" stroke="#0284c7" stroke-width="3.5"/>
+                        <circle cx="${cx}" cy="${cy}" r="3.5" fill="#1e293b"/>
+                        <text x="${cx-12}" y="${cy+15}" font-size="12" font-weight="bold" fill="#1e293b">O</text>
+                        <text x="${cx + 25}" y="${cy + 15}" font-size="12" font-weight="bold" fill="#475569">r = 10 cm</text>
+                        <text x="${cx + 40}" y="${cy - 35}" font-size="12" font-weight="bold" fill="#0284c7">Busur s = ?</text>
+                        <text x="${cx - 90}" y="${cy - 20}" font-size="11" font-weight="bold" fill="#4f46e5">K Juring = 30.8 cm</text>
+                        <path d="M ${cx + 25} ${cy} A 25 25 0 0 0 ${cx + 7.7} ${cy - 23.7}" fill="none" stroke="#d97706" stroke-width="2"/>
+                        <text x="${cx + 15}" y="${cy - 8}" font-size="11" font-weight="bold" fill="#d97706">72°</text>
+                    </svg>`;
+                case 9:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy-10}" r="50" fill="#f1f5f9" stroke="#334155" stroke-width="3"/>
+                        <circle cx="${cx}" cy="${cy-10}" r="10" fill="#cbd5e1" stroke="#334155" stroke-width="2"/>
+                        <line x1="${cx-50}" y1="${cy-10}" x2="${cx+50}" y2="${cy-10}" stroke="#334155" stroke-width="2"/>
+                        <line x1="${cx}" y1="${cy-60}" x2="${cx}" y2="${cy+40}" stroke="#334155" stroke-width="2"/>
+                        <line x1="20" y1="${cy+40}" x2="300" y2="${cy+40}" stroke="#64748b" stroke-width="2"/>
+                        <text x="${cx}" y="${cy-18}" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">d = 56 cm</text>
+                        <text x="${cx}" y="${cy+60}" font-size="12" font-weight="bold" fill="#2563eb" text-anchor="middle">Jarak = 880 m (Jumlah Putaran = ?)</text>
+                    </svg>`;
+                case 10:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <path d="M 90 115 L 145 115 A 55 55 0 0 0 128.8 76.1 Z" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+                        <text x="90" y="138" font-size="11" font-weight="bold" fill="#4f46e5" text-anchor="middle">45° (Luas = 77 cm²)</text>
+                        <path d="M 230 115 L 285 115 A 55 55 0 0 0 191.1 76.1 Z" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+                        <text x="230" y="138" font-size="11" font-weight="bold" fill="#2563eb" text-anchor="middle">135° (Luas Baru = ?)</text>
+                    </svg>`;
+                case 11:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <circle cx="${cx}" cy="${cy}" r="3.5" fill="#1e293b"/>
+                        <text x="${cx-12}" y="${cy+15}" font-size="12" font-weight="bold" fill="#1e293b">O</text>
+                        <line x1="${cx - r*0.7}" y1="${cy - r*0.714}" x2="${cx - r*0.6}" y2="${cy + r*0.8}" stroke="#4f46e5" stroke-width="2"/>
+                        <line x1="${cx - r*0.7}" y1="${cy - r*0.714}" x2="${cx + r*0.8}" y2="${cy + r*0.6}" stroke="#4f46e5" stroke-width="2"/>
+                        <line x1="${cx}" y1="${cy}" x2="${cx - r*0.6}" y2="${cy + r*0.8}" stroke="#dc2626" stroke-width="2"/>
+                        <line x1="${cx}" y1="${cy}" x2="${cx + r*0.8}" y2="${cy + r*0.6}" stroke="#dc2626" stroke-width="2"/>
+                        <circle cx="${cx - r*0.7}" cy="${cy - r*0.714}" r="4" fill="#4f46e5"/>
+                        <circle cx="${cx - r*0.6}" cy="${cy + r*0.8}" r="4" fill="#1e293b"/>
+                        <circle cx="${cx + r*0.8}" cy="${cy + r*0.6}" r="4" fill="#1e293b"/>
+                        <text x="${cx - r*0.7 - 15}" y="${cy - r*0.714}" font-size="12" font-weight="bold" fill="#4f46e5">P (64°)</text>
+                        <text x="${cx - r*0.6 - 15}" y="${cy + r*0.8 + 15}" font-size="12" font-weight="bold" fill="#1e293b">A</text>
+                        <text x="${cx + r*0.8 + 5}" y="${cy + r*0.6 + 15}" font-size="12" font-weight="bold" fill="#1e293b">B</text>
+                        <text x="${cx - 10}" y="${cy + 38}" font-size="13" font-weight="bold" fill="#dc2626">∠AOB = ?</text>
+                    </svg>`;
+                case 12:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <circle cx="${cx}" cy="${cy}" r="3.5" fill="#1e293b"/>
+                        <line x1="${cx}" y1="${cy}" x2="${cx - 55}" y2="${cy + 42}" stroke="#d97706" stroke-width="2"/>
+                        <line x1="${cx}" y1="${cy}" x2="${cx + 55}" y2="${cy + 42}" stroke="#d97706" stroke-width="2"/>
+                        <line x1="${cx}" y1="${cy - 70}" x2="${cx - 55}" y2="${cy + 42}" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="${cx}" y1="${cy - 70}" x2="${cx + 55}" y2="${cy + 42}" stroke="#2563eb" stroke-width="2"/>
+                        <circle cx="${cx}" cy="${cy-70}" r="4" fill="#2563eb"/>
+                        <circle cx="${cx-55}" cy="${cy+42}" r="4" fill="#1e293b"/>
+                        <circle cx="${cx+55}" cy="${cy+42}" r="4" fill="#1e293b"/>
+                        <text x="${cx-5}" y="${cy-78}" font-size="12" font-weight="bold" fill="#2563eb">C (∠ACB = ?)</text>
+                        <text x="${cx-70}" y="${cy+52}" font-size="12" font-weight="bold" fill="#1e293b">A</text>
+                        <text x="${cx+60}" y="${cy+52}" font-size="12" font-weight="bold" fill="#1e293b">B</text>
+                        <text x="${cx-35}" y="${cy-12}" font-size="12" font-weight="bold" fill="#d97706">Refleks ∠AOB = 250°</text>
+                    </svg>`;
+                case 13:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <line x1="${cx - r}" y1="${cy}" x2="${cx + r}" y2="${cy}" stroke="#dc2626" stroke-width="2"/>
+                        <line x1="${cx - r}" y1="${cy}" x2="${cx + 20}" y2="${cy - 67}" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="${cx + r}" y1="${cy}" x2="${cx + 20}" y2="${cy - 67}" stroke="#2563eb" stroke-width="2"/>
+                        <circle cx="${cx}" cy="${cy}" r="3" fill="#1e293b"/>
+                        <circle cx="${cx - r}" cy="${cy}" r="4" fill="#dc2626"/>
+                        <circle cx="${cx + r}" cy="${cy}" r="4" fill="#dc2626"/>
+                        <circle cx="${cx + 20}" cy="${cy - 67}" r="4" fill="#2563eb"/>
+                        <text x="${cx - r - 15}" y="${cy + 5}" font-size="12" font-weight="bold" fill="#dc2626">P (38°)</text>
+                        <text x="${cx + r + 5}" y="${cy + 5}" font-size="12" font-weight="bold" fill="#dc2626">Q (∠PQR = ?)</text>
+                        <text x="${cx + 20}" y="${cy - 74}" font-size="12" font-weight="bold" fill="#2563eb">R (90°)</text>
+                        <text x="${cx}" y="${cy + 18}" font-size="11" font-weight="bold" fill="#64748b" text-anchor="middle">Diameter PQ</text>
+                    </svg>`;
+                case 14:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <circle cx="${cx}" cy="${cy}" r="3.5" fill="#1e293b"/>
+                        <polygon points="${cx},${cy} ${cx-50},${cy+48} ${cx+50},${cy+48}" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+                        <line x1="${cx-50}" y1="${cy+48}" x2="${cx}" y2="${cy-70}" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="${cx+50}" y1="${cy+48}" x2="${cx}" y2="${cy-70}" stroke="#2563eb" stroke-width="2"/>
+                        <circle cx="${cx}" cy="${cy-70}" r="4" fill="#2563eb"/>
+                        <circle cx="${cx-50}" cy="${cy+48}" r="4" fill="#d97706"/>
+                        <circle cx="${cx+50}" cy="${cy+48}" r="4" fill="#d97706"/>
+                        <text x="${cx-10}" y="${cy-76}" font-size="12" font-weight="bold" fill="#2563eb">C (∠ACB = ?)</text>
+                        <text x="${cx-75}" y="${cy+53}" font-size="12" font-weight="bold" fill="#d97706">A (42°)</text>
+                        <text x="${cx+58}" y="${cy+53}" font-size="12" font-weight="bold" fill="#d97706">B</text>
+                        <text x="${cx-12}" y="${cy+18}" font-size="11" font-weight="bold" fill="#1e293b">O</text>
+                    </svg>`;
+                case 15:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <line x1="${cx}" y1="${cy}" x2="${cx-48}" y2="${cy+50}" stroke="#dc2626" stroke-width="2"/>
+                        <line x1="${cx}" y1="${cy}" x2="${cx+48}" y2="${cy+50}" stroke="#dc2626" stroke-width="2"/>
+                        <line x1="${cx}" y1="${cy-70}" x2="${cx-48}" y2="${cy+50}" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="${cx}" y1="${cy-70}" x2="${cx+48}" y2="${cy+50}" stroke="#2563eb" stroke-width="2"/>
+                        <circle cx="${cx}" cy="${cy}" r="3.5" fill="#1e293b"/>
+                        <text x="${cx-30}" y="${cy+28}" font-size="11" font-weight="bold" fill="#dc2626">5x + 10°</text>
+                        <text x="${cx-22}" y="${cy-50}" font-size="11" font-weight="bold" fill="#2563eb">2x + 15°</text>
+                        <text x="${cx}" y="22" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">Nilai x = ?</text>
+                    </svg>`;
+                case 16:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <path d="M ${cx - r*0.951} ${cy + r*0.309} A ${r} ${r} 0 0 0 ${cx + r*0.951} ${cy + r*0.309}" fill="none" stroke="#2563eb" stroke-width="4"/>
+                        <line x1="${cx}" y1="${cy-70}" x2="${cx - r*0.951}" y2="${cy + r*0.309}" stroke="#475569" stroke-width="2"/>
+                        <line x1="${cx}" y1="${cy-70}" x2="${cx + r*0.951}" y2="${cy + r*0.309}" stroke="#475569" stroke-width="2"/>
+                        <circle cx="${cx}" cy="${cy-70}" r="4" fill="#4f46e5"/>
+                        <text x="${cx}" y="${cy-76}" font-size="12" font-weight="bold" fill="#4f46e5" text-anchor="middle">Sudut Keliling = ?</text>
+                        <text x="${cx}" y="${cy+55}" font-size="12" font-weight="bold" fill="#2563eb" text-anchor="middle">Busur = 2/5 Keliling</text>
+                    </svg>`;
+                case 17:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <line x1="${cx-r}" y1="${cy}" x2="${cx+r}" y2="${cy}" stroke="#dc2626" stroke-width="2"/>
+                        <line x1="${cx-r}" y1="${cy}" x2="${cx-10}" y2="${cy-69}" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="${cx+r}" y1="${cy}" x2="${cx-10}" y2="${cy-69}" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="${cx-10}" y1="${cy-69}" x2="${cx+50}" y2="${cy-48}" stroke="#d97706" stroke-width="2"/>
+                        <circle cx="${cx-r}" cy="${cy}" r="4" fill="#dc2626"/>
+                        <circle cx="${cx+r}" cy="${cy}" r="4" fill="#dc2626"/>
+                        <circle cx="${cx-10}" cy="${cy-69}" r="4" fill="#2563eb"/>
+                        <circle cx="${cx+50}" cy="${cy-48}" r="4" fill="#d97706"/>
+                        <text x="${cx-r-15}" y="${cy+5}" font-size="12" font-weight="bold" fill="#dc2626">A</text>
+                        <text x="${cx+r+5}" y="${cy+5}" font-size="12" font-weight="bold" fill="#dc2626">B</text>
+                        <text x="${cx-10}" y="${cy-76}" font-size="12" font-weight="bold" fill="#2563eb">C</text>
+                        <text x="${cx+58}" y="${cy-48}" font-size="12" font-weight="bold" fill="#d97706">D</text>
+                        <text x="${cx-42}" y="${cy-35}" font-size="11" font-weight="bold" fill="#2563eb">25°</text>
+                        <text x="${cx+8}" y="${cy-35}" font-size="11" font-weight="bold" fill="#d97706">∠BCD = ?</text>
+                    </svg>`;
+                case 18:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <polygon points="${cx-r},${cy} ${cx+r},${cy} ${cx-r},${cy-55}" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+                        <circle cx="${cx}" cy="${cy}" r="3.5" fill="#1e293b"/>
+                        <text x="${cx}" y="${cy+20}" font-size="12" font-weight="bold" fill="#4f46e5" text-anchor="middle">Hipotenusa AC = 26 cm</text>
+                        <text x="${cx-r-15}" y="${cy-20}" font-size="11" font-weight="bold" fill="#475569">10 cm</text>
+                        <text x="${cx}" y="${cy-35}" font-size="11" font-weight="bold" fill="#475569">24 cm</text>
+                        <text x="${cx}" y="22" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">Jari-jari Lingkaran r = ?</text>
+                    </svg>`;
+                case 19:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <line x1="${cx}" y1="${cy}" x2="${cx-65}" y2="${cy+22}" stroke="#dc2626" stroke-width="2"/>
+                        <line x1="${cx}" y1="${cy}" x2="${cx+65}" y2="${cy+22}" stroke="#dc2626" stroke-width="2"/>
+                        <line x1="${cx}" y1="${cy-70}" x2="${cx-65}" y2="${cy+22}" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="${cx}" y1="${cy-70}" x2="${cx+65}" y2="${cy+22}" stroke="#2563eb" stroke-width="2"/>
+                        <circle cx="${cx}" cy="${cy}" r="3.5" fill="#1e293b"/>
+                        <text x="${cx-78}" y="${cy+32}" font-size="12" font-weight="bold" fill="#dc2626">X</text>
+                        <text x="${cx+70}" y="${cy+32}" font-size="12" font-weight="bold" fill="#dc2626">Y</text>
+                        <text x="${cx-5}" y="${cy-76}" font-size="12" font-weight="bold" fill="#2563eb">Z (∠XZY = ?)</text>
+                        <text x="${cx-22}" y="${cy+18}" font-size="11" font-weight="bold" fill="#dc2626">160°</text>
+                    </svg>`;
+                case 20:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <polygon points="${cx},${cy} ${cx-55},${cy+42} ${cx+55},${cy+42}" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+                        <line x1="${cx-55}" y1="${cy+42}" x2="${cx}" y2="${cy-70}" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="${cx+55}" y1="${cy+42}" x2="${cx}" y2="${cy-70}" stroke="#2563eb" stroke-width="2"/>
+                        <circle cx="${cx}" cy="${cy}" r="3.5" fill="#1e293b"/>
+                        <text x="${cx-5}" y="${cy-76}" font-size="12" font-weight="bold" fill="#2563eb">A (∠BAC = ?)</text>
+                        <text x="${cx-70}" y="${cy+50}" font-size="12" font-weight="bold" fill="#d97706">B</text>
+                        <text x="${cx+60}" y="${cy+50}" font-size="12" font-weight="bold" fill="#d97706">C</text>
+                        <text x="${cx+18}" y="${cy+36}" font-size="11" font-weight="bold" fill="#d97706">35°</text>
+                    </svg>`;
+                case 21:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <polygon points="${cx-55},${cy-40} ${cx+60},${cy-30} ${cx+45},${cy+50} ${cx-50},${cy+45}" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+                        <text x="${cx-78}" y="${cy-45}" font-size="12" font-weight="bold" fill="#4f46e5">K (3x + 10°)</text>
+                        <text x="${cx+68}" y="${cy-35}" font-size="12" font-weight="bold" fill="#475569">L</text>
+                        <text x="${cx+52}" y="${cy+60}" font-size="12" font-weight="bold" fill="#4f46e5">M (2x + 20°)</text>
+                        <text x="${cx-65}" y="${cy+60}" font-size="12" font-weight="bold" fill="#475569">N</text>
+                        <text x="${cx}" y="22" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">Besar ∠K = ?</text>
+                    </svg>`;
+                case 22:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <line x1="${cx-45}" y1="${cy+50}" x2="${cx-55}" y2="${cy-40}" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="${cx+45}" y1="${cy+50}" x2="${cx-55}" y2="${cy-40}" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="${cx-45}" y1="${cy+50}" x2="${cx+55}" y2="${cy-40}" stroke="#d97706" stroke-width="2"/>
+                        <line x1="${cx+45}" y1="${cy+50}" x2="${cx+55}" y2="${cy-40}" stroke="#d97706" stroke-width="2"/>
+                        <circle cx="${cx-45}" cy="${cy+50}" r="4" fill="#1e293b"/>
+                        <circle cx="${cx+45}" cy="${cy+50}" r="4" fill="#1e293b"/>
+                        <circle cx="${cx-55}" cy="${cy-40}" r="4" fill="#2563eb"/>
+                        <circle cx="${cx+55}" cy="${cy-40}" r="4" fill="#d97706"/>
+                        <text x="${cx-60}" y="${cy+65}" font-size="12" font-weight="bold" fill="#1e293b">A</text>
+                        <text x="${cx+50}" y="${cy+65}" font-size="12" font-weight="bold" fill="#1e293b">D</text>
+                        <text x="${cx-75}" y="${cy-45}" font-size="12" font-weight="bold" fill="#2563eb">B (47°)</text>
+                        <text x="${cx+62}" y="${cy-45}" font-size="12" font-weight="bold" fill="#d97706">C (∠ACD = ?)</text>
+                    </svg>`;
+                case 23:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <polygon points="${cx-60},${cy} ${cx},${cy-65} ${cx+60},${cy} ${cx-10},${cy+65}" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+                        <line x1="${cx+60}" y1="${cy}" x2="${cx+105}" y2="${cy}" stroke="#dc2626" stroke-width="2" stroke-dasharray="4"/>
+                        <text x="${cx-78}" y="${cy+5}" font-size="12" font-weight="bold" fill="#4f46e5">A (∠A = ?)</text>
+                        <text x="${cx}" y="${cy-72}" font-size="12" font-weight="bold" fill="#475569">B</text>
+                        <text x="${cx+50}" y="${cy-10}" font-size="12" font-weight="bold" fill="#dc2626">C</text>
+                        <text x="${cx-25}" y="${cy+76}" font-size="12" font-weight="bold" fill="#475569">D</text>
+                        <text x="${cx+70}" y="${cy-12}" font-size="11" font-weight="bold" fill="#dc2626">Luar = 115°</text>
+                    </svg>`;
+                case 24:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <polygon points="${cx-60},${cy-18} ${cx+10},${cy-65} ${cx+60},${cy+18} ${cx-20},${cy+65}" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+                        <text x="${cx-78}" y="${cy-18}" font-size="12" font-weight="bold" fill="#2563eb">P (Rasio 2)</text>
+                        <text x="${cx+15}" y="${cy-72}" font-size="12" font-weight="bold" fill="#475569">Q</text>
+                        <text x="${cx+68}" y="${cy+22}" font-size="12" font-weight="bold" fill="#2563eb">R (Rasio 3)</text>
+                        <text x="${cx-35}" y="${cy+76}" font-size="12" font-weight="bold" fill="#475569">S</text>
+                        <text x="${cx}" y="22" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">Besar ∠R = ?</text>
+                    </svg>`;
+                case 25:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <polygon points="${cx-60},${cy-28} ${cx-10},${cy-65} ${cx+60},${cy+18} ${cx-20},${cy+65}" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+                        <line x1="${cx-60}" y1="${cy-28}" x2="${cx+60}" y2="${cy+18}" stroke="#4f46e5" stroke-width="2"/>
+                        <line x1="${cx-10}" y1="${cy-65}" x2="${cx-20}" y2="${cy+65}" stroke="#2563eb" stroke-width="2"/>
+                        <text x="${cx-75}" y="${cy-28}" font-size="12" font-weight="bold" fill="#4f46e5">A</text>
+                        <text x="${cx-10}" y="${cy-72}" font-size="12" font-weight="bold" fill="#2563eb">B</text>
+                        <text x="${cx+68}" y="${cy+22}" font-size="12" font-weight="bold" fill="#4f46e5">C</text>
+                        <text x="${cx-35}" y="${cy+76}" font-size="12" font-weight="bold" fill="#2563eb">D</text>
+                        <text x="${cx-10}" y="${cy}" font-size="11" font-weight="bold" fill="#dc2626">E</text>
+                        <text x="${cx-42}" y="${cy-12}" font-size="11" font-weight="bold" fill="#4f46e5">35°</text>
+                        <text x="${cx-18}" y="${cy+42}" font-size="11" font-weight="bold" fill="#2563eb">∠BDC = ?</text>
+                    </svg>`;
+                case 26:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <polygon points="${cx-60},${cy-18} ${cx+10},${cy-65} ${cx+60},${cy+18} ${cx-20},${cy+65}" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+                        <text x="${cx-78}" y="${cy-18}" font-size="12" font-weight="bold" fill="#4f46e5">A (x + 20°)</text>
+                        <text x="${cx+68}" y="${cy+22}" font-size="12" font-weight="bold" fill="#4f46e5">C (2x - 50°)</text>
+                        <text x="${cx}" y="22" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">Nilai x = ?</text>
+                    </svg>`;
+                case 27:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <polygon points="${cx-50},${cy+48} ${cx+50},${cy+48} ${cx+38},${cy-55} ${cx-38},${cy-55}" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+                        <line x1="${cx-50}" y1="${cy+48}" x2="${cx+50}" y2="${cy+48}" stroke="#2563eb" stroke-width="3"/>
+                        <line x1="${cx-38}" y1="${cy-55}" x2="${cx+38}" y2="${cy-55}" stroke="#2563eb" stroke-width="3"/>
+                        <text x="${cx-68}" y="${cy+62}" font-size="12" font-weight="bold" fill="#2563eb">A (65°)</text>
+                        <text x="${cx+55}" y="${cy+62}" font-size="12" font-weight="bold" fill="#2563eb">B (∠B = ?)</text>
+                        <text x="${cx-50}" y="${cy-60}" font-size="12" font-weight="bold" fill="#475569">D</text>
+                        <text x="${cx+42}" y="${cy-60}" font-size="12" font-weight="bold" fill="#475569">C</text>
+                        <text x="${cx}" y="${cy}" font-size="11" font-weight="bold" fill="#2563eb" text-anchor="middle">AB ∥ DC</text>
+                    </svg>`;
+                case 28:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <polygon points="${cx-60},${cy-28} ${cx+20},${cy-65} ${cx+60},${cy+28} ${cx-28},${cy+60}" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+                        <text x="${cx-78}" y="${cy-28}" font-size="12" font-weight="bold" fill="#d97706">W (82°)</text>
+                        <text x="${cx+25}" y="${cy-70}" font-size="12" font-weight="bold" fill="#d97706">X (104°)</text>
+                        <text x="${cx+68}" y="${cy+32}" font-size="12" font-weight="bold" fill="#2563eb">Y (∠Y = ?)</text>
+                        <text x="${cx-42}" y="${cy+74}" font-size="12" font-weight="bold" fill="#2563eb">Z (∠Z = ?)</text>
+                    </svg>`;
+                case 29:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <line x1="${cx-45}" y1="${cy+50}" x2="${cx-55}" y2="${cy-40}" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="${cx+45}" y1="${cy+50}" x2="${cx-55}" y2="${cy-40}" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="${cx-45}" y1="${cy+50}" x2="${cx+55}" y2="${cy-40}" stroke="#d97706" stroke-width="2"/>
+                        <line x1="${cx+45}" y1="${cy+50}" x2="${cx+55}" y2="${cy-40}" stroke="#d97706" stroke-width="2"/>
+                        <text x="${cx-78}" y="${cy-45}" font-size="12" font-weight="bold" fill="#2563eb">A (28°)</text>
+                        <text x="${cx+62}" y="${cy-45}" font-size="12" font-weight="bold" fill="#d97706">B (3x - 2°)</text>
+                        <text x="${cx-60}" y="${cy+65}" font-size="12" font-weight="bold" fill="#1e293b">C</text>
+                        <text x="${cx+50}" y="${cy+65}" font-size="12" font-weight="bold" fill="#1e293b">D</text>
+                        <text x="${cx}" y="22" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">Nilai x = ?</text>
+                    </svg>`;
+                case 30:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <rect x="${cx-49}" y="${cy-49}" width="98" height="98" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+                        <rect x="${cx-49}" y="${cy-49}" width="12" height="12" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+                        <rect x="${cx+37}" y="${cy-49}" width="12" height="12" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+                        <rect x="${cx+37}" y="${cy+37}" width="12" height="12" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+                        <rect x="${cx-49}" y="${cy+37}" width="12" height="12" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+                        <text x="${cx}" y="${cy+5}" font-size="13" font-weight="bold" fill="#4f46e5" text-anchor="middle">Bentuk Spesifik = ?</text>
+                    </svg>`;
+                case 31:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx-35}" cy="${cy}" r="55" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <line x1="${cx-35}" y1="${cy-55}" x2="${cx+95}" y2="${cy-55}" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="${cx-35}" y1="${cy}" x2="${cx-35}" y2="${cy-55}" stroke="#dc2626" stroke-width="2"/>
+                        <line x1="${cx-35}" y1="${cy}" x2="${cx+95}" y2="${cy-55}" stroke="#4f46e5" stroke-width="2"/>
+                        <circle cx="${cx-35}" cy="${cy}" r="3.5" fill="#1e293b"/>
+                        <circle cx="${cx-35}" cy="${cy-55}" r="4" fill="#2563eb"/>
+                        <circle cx="${cx+95}" cy="${cy-55}" r="4" fill="#4f46e5"/>
+                        <rect x="${cx-35}" y="${cy-55}" width="10" height="10" fill="none" stroke="#dc2626" stroke-width="1.5"/>
+                        <text x="${cx-50}" y="${cy+15}" font-size="12" font-weight="bold" fill="#1e293b">O</text>
+                        <text x="${cx-40}" y="${cy-62}" font-size="12" font-weight="bold" fill="#2563eb">Q</text>
+                        <text x="${cx+100}" y="${cy-60}" font-size="12" font-weight="bold" fill="#4f46e5">P</text>
+                        <text x="${cx-58}" y="${cy-22}" font-size="11" font-weight="bold" fill="#dc2626">OQ = 9</text>
+                        <text x="${cx+25}" y="${cy-63}" font-size="12" font-weight="bold" fill="#2563eb">PQ = ?</text>
+                        <text x="${cx+25}" y="${cy-12}" font-size="11" font-weight="bold" fill="#4f46e5">OP = 15</text>
+                    </svg>`;
+                case 32:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx-35}" cy="${cy}" r="50" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <line x1="${cx+75}" y1="${cy}" x2="${cx-35+50*0.3}" y2="${cy-50*0.95}" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="${cx+75}" y1="${cy}" x2="${cx-35+50*0.3}" y2="${cy+50*0.95}" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="${cx-35}" y1="${cy}" x2="${cx-35+50*0.3}" y2="${cy-50*0.95}" stroke="#dc2626" stroke-width="1.5"/>
+                        <line x1="${cx-35}" y1="${cy}" x2="${cx-35+50*0.3}" y2="${cy+50*0.95}" stroke="#dc2626" stroke-width="1.5"/>
+                        <circle cx="${cx-35}" cy="${cy}" r="3.5" fill="#1e293b"/>
+                        <text x="${cx-50}" y="${cy+5}" font-size="12" font-weight="bold" fill="#1e293b">O</text>
+                        <text x="${cx+85}" y="${cy+5}" font-size="12" font-weight="bold" fill="#2563eb">P (50°)</text>
+                        <text x="${cx-22}" y="${cy-52}" font-size="12" font-weight="bold" fill="#2563eb">A</text>
+                        <text x="${cx-22}" y="${cy+62}" font-size="12" font-weight="bold" fill="#2563eb">B</text>
+                        <text x="${cx-25}" y="${cy+5}" font-size="12" font-weight="bold" fill="#dc2626">∠AOB = ?</text>
+                    </svg>`;
+                case 33:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="85" cy="105" r="45" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+                        <circle cx="225" cy="105" r="22" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="85" y1="105" x2="225" y2="105" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3"/>
+                        <line x1="85" y1="60" x2="225" y2="83" stroke="#dc2626" stroke-width="2"/>
+                        <text x="155" y="58" font-size="12" font-weight="bold" fill="#dc2626" text-anchor="middle">Singgung Luar = 24 cm</text>
+                        <text x="155" y="125" font-size="11" font-weight="bold" fill="#64748b" text-anchor="middle">Jarak Pusat = 25 cm</text>
+                        <text x="65" y="110" font-size="11" font-weight="bold" fill="#4f46e5">R=10</text>
+                        <text x="235" y="110" font-size="11" font-weight="bold" fill="#2563eb">r = ?</text>
+                    </svg>`;
+                case 34:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="105" cy="105" r="55" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+                        <circle cx="175" cy="105" r="15" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="160" y1="35" x2="160" y2="175" stroke="#dc2626" stroke-width="2" stroke-dasharray="3"/>
+                        <text x="105" y="110" font-size="11" font-weight="bold" fill="#4f46e5" text-anchor="middle">R = 8</text>
+                        <text x="175" y="110" font-size="10" font-weight="bold" fill="#2563eb" text-anchor="middle">r=2</text>
+                        <text x="160" y="22" font-size="12" font-weight="bold" fill="#dc2626" text-anchor="middle">Panjang Singgung Dalam = ?</text>
+                    </svg>`;
+                case 35:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy-10}" r="60" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <line x1="40" y1="${cy+50}" x2="280" y2="${cy+50}" stroke="#dc2626" stroke-width="2.5"/>
+                        <line x1="80" y1="${cy+50}" x2="${cx+50}" y2="${cy-43}" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="80" y1="${cy+50}" x2="${cx-50}" y2="${cy+30}" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="${cx-50}" y1="${cy+30}" x2="${cx+50}" y2="${cy-43}" stroke="#2563eb" stroke-width="2"/>
+                        <circle cx="80" cy="${cy+50}" r="4" fill="#dc2626"/>
+                        <text x="75" y="${cy+68}" font-size="12" font-weight="bold" fill="#dc2626">T</text>
+                        <text x="100" y="${cy+42}" font-size="11" font-weight="bold" fill="#dc2626">58°</text>
+                        <text x="${cx+10}" y="${cy}" font-size="12" font-weight="bold" fill="#2563eb">∠Keliling = ?</text>
+                    </svg>`;
+                case 36:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx-35}" cy="${cy}" r="50" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <line x1="${cx-35}" y1="${cy-50}" x2="${cx+85}" y2="${cy-50}" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="${cx-35}" y1="${cy}" x2="${cx-35}" y2="${cy-50}" stroke="#dc2626" stroke-width="2"/>
+                        <line x1="${cx-35}" y1="${cy}" x2="${cx+85}" y2="${cy-50}" stroke="#4f46e5" stroke-width="2" stroke-dasharray="4"/>
+                        <circle cx="${cx-35}" cy="${cy}" r="3.5" fill="#1e293b"/>
+                        <text x="${cx-50}" y="${cy+15}" font-size="12" font-weight="bold" fill="#1e293b">O</text>
+                        <text x="${cx-40}" y="${cy-58}" font-size="12" font-weight="bold" fill="#2563eb">A</text>
+                        <text x="${cx+92}" y="${cy-52}" font-size="12" font-weight="bold" fill="#4f46e5">P</text>
+                        <text x="${cx-58}" y="${cy-20}" font-size="11" font-weight="bold" fill="#dc2626">5 cm</text>
+                        <text x="${cx+20}" y="${cy-58}" font-size="11" font-weight="bold" fill="#2563eb">12 cm</text>
+                        <text x="${cx+20}" y="${cy-10}" font-size="12" font-weight="bold" fill="#4f46e5">OP = ?</text>
+                    </svg>`;
+                case 37:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <line x1="${cx-50}" y1="${cy-40}" x2="${cx+50}" y2="${cy+40}" stroke="#4f46e5" stroke-width="2"/>
+                        <line x1="${cx-50}" y1="${cy+40}" x2="${cx+50}" y2="${cy-40}" stroke="#2563eb" stroke-width="2"/>
+                        <circle cx="${cx}" cy="${cy}" r="3.5" fill="#dc2626"/>
+                        <text x="${cx-62}" y="${cy-42}" font-size="12" font-weight="bold" fill="#4f46e5">A</text>
+                        <text x="${cx+55}" y="${cy+45}" font-size="12" font-weight="bold" fill="#4f46e5">B</text>
+                        <text x="${cx-62}" y="${cy+45}" font-size="12" font-weight="bold" fill="#2563eb">C</text>
+                        <text x="${cx+55}" y="${cy-42}" font-size="12" font-weight="bold" fill="#2563eb">D</text>
+                        <text x="${cx-5}" y="${cy-8}" font-size="12" font-weight="bold" fill="#dc2626">E</text>
+                        <text x="${cx-35}" y="${cy-25}" font-size="10" font-weight="bold" fill="#4f46e5">8</text>
+                        <text x="${cx+25}" y="${cy+25}" font-size="10" font-weight="bold" fill="#4f46e5">3</text>
+                        <text x="${cx-35}" y="${cy+25}" font-size="10" font-weight="bold" fill="#2563eb">6</text>
+                        <text x="${cx+25}" y="${cy-25}" font-size="11" font-weight="bold" fill="#2563eb">ED = ?</text>
+                    </svg>`;
+                case 38:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx-20}" cy="${cy}" r="50" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <line x1="${cx+90}" y1="${cy-20}" x2="${cx-20}" y2="${cy-50}" stroke="#dc2626" stroke-width="2"/>
+                        <line x1="${cx+90}" y1="${cy-20}" x2="${cx-65}" y2="${cy+22}" stroke="#2563eb" stroke-width="2"/>
+                        <circle cx="${cx+90}" cy="${cy-20}" r="4" fill="#1e293b"/>
+                        <circle cx="${cx-20}" cy="${cy-50}" r="4" fill="#dc2626"/>
+                        <circle cx="${cx+23}" cy="${cy-5}" r="4" fill="#2563eb"/>
+                        <circle cx="${cx-65}" cy="${cy+22}" r="4" fill="#2563eb"/>
+                        <text x="${cx+98}" y="${cy-18}" font-size="12" font-weight="bold" fill="#1e293b">P</text>
+                        <text x="${cx-25}" y="${cy-58}" font-size="12" font-weight="bold" fill="#dc2626">T</text>
+                        <text x="${cx+28}" y="${cy-12}" font-size="12" font-weight="bold" fill="#2563eb">A</text>
+                        <text x="${cx-78}" y="${cy+30}" font-size="12" font-weight="bold" fill="#2563eb">B</text>
+                        <text x="${cx+35}" y="${cy-42}" font-size="11" font-weight="bold" fill="#dc2626">PT = 10</text>
+                        <text x="${cx+55}" y="${cy-2}" font-size="11" font-weight="bold" fill="#2563eb">PA = 5</text>
+                        <text x="${cx-20}" y="${cy+15}" font-size="12" font-weight="bold" fill="#2563eb">AB = ?</text>
+                    </svg>`;
+                case 39:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="85" cy="105" r="50" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+                        <circle cx="225" cy="105" r="22" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="85" y1="105" x2="225" y2="105" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3"/>
+                        <line x1="85" y1="55" x2="225" y2="83" stroke="#dc2626" stroke-width="2"/>
+                        <text x="155" y="55" font-size="12" font-weight="bold" fill="#dc2626" text-anchor="middle">Singgung Luar = ?</text>
+                        <text x="155" y="125" font-size="11" font-weight="bold" fill="#64748b" text-anchor="middle">PQ = 20 cm</text>
+                        <text x="65" y="110" font-size="11" font-weight="bold" fill="#4f46e5">R=17</text>
+                        <text x="235" y="110" font-size="11" font-weight="bold" fill="#2563eb">r=5</text>
+                    </svg>`;
+                case 40:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <polygon points="60,165 260,165 140,35" fill="#f8fafc" stroke="#334155" stroke-width="2"/>
+                        <circle cx="150" cy="125" r="40" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+                        <circle cx="150" cy="125" r="3" fill="#1e293b"/>
+                        <line x1="150" y1="125" x2="150" y2="165" stroke="#dc2626" stroke-width="2"/>
+                        <text x="156" y="150" font-size="11" font-weight="bold" fill="#dc2626">r = ?</text>
+                        <text x="160" y="25" font-size="11" font-weight="bold" fill="#334155">K = 36 cm, L = 54 cm²</text>
+                    </svg>`;
+                default:
+                    return `<svg viewBox="0 0 320 210" class="w-full max-w-xs h-auto">
+                        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+                    </svg>`;
+            }
+        }
+
+        // Quiz State Management
         let currentIndex = 0;
-        let userState = {
-            answers: {}, // { qId: selectedIndex }
-            bookmarks: {}, // { qId: boolean }
-            score: 0
-        };
+        let userAnswers = JSON.parse(localStorage.getItem('circle_geometry_set_b_answers')) || {};
+        let bookmarked = JSON.parse(localStorage.getItem('circle_geometry_set_b_bookmarks')) || [];
         let currentFilter = 'all';
 
-        const STORAGE_KEY = 'cambridge_circle_quiz_data_set_b';
+        // DOM Elements
+        const navGrid = document.getElementById('nav-grid');
+        const qNumberBadge = document.getElementById('q-number-badge');
+        const qTopicBadge = document.getElementById('q-topic-badge');
+        const qText = document.getElementById('q-text');
+        const diagramWrapper = document.getElementById('diagram-wrapper');
+        const optionsContainer = document.getElementById('options-container');
+        const explanationBox = document.getElementById('explanation-box');
+        const explanationStatus = document.getElementById('explanation-status');
+        const explanationText = document.getElementById('explanation-text');
+        const bookmarkBtn = document.getElementById('bookmark-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const navIndicatorText = document.getElementById('nav-indicator-text');
+        const headerScore = document.getElementById('header-score');
+        const progressBar = document.getElementById('progress-bar');
+        const answeredCountBadge = document.getElementById('answered-count-badge');
 
-        // Load Persisted Data
-        function loadState() {
-            try {
-                const saved = localStorage.getItem(STORAGE_KEY);
-                if (saved) {
-                    userState = JSON.parse(saved);
-                }
-            } catch (e) {
-                console.error("Gagal memuat data lokal:", e);
-            }
-        }
-
-        // Save State
-        function saveState() {
-            try {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(userState));
-            } catch (e) {
-                console.error("Gagal menyimpan data lokal:", e);
-            }
-            updateHeaderAndStats();
-        }
-
-        // Initialize App
-        window.addEventListener('DOMContentLoaded', () => {
-            loadState();
+        // Initialize Quiz Application
+        function initQuiz() {
             renderNavGrid();
             renderQuestion(currentIndex);
-            updateHeaderAndStats();
-        });
-
-        // Update Top Header Scores & Progress
-        function updateHeaderAndStats() {
-            let correctCount = 0;
-            let answeredCount = 0;
-
-            quizQuestions.forEach(q => {
-                const ans = userState.answers[q.id];
-                if (ans !== undefined) {
-                    answeredCount++;
-                    if (ans === q.correctIndex) {
-                        correctCount++;
-                    }
-                }
-            });
-
-            userState.score = correctCount;
-
-            document.getElementById('header-score').textContent = correctCount;
-            document.getElementById('answered-count-badge').textContent = `${answeredCount} / 40 Terjawab`;
-            
-            const pct = (answeredCount / 40) * 100;
-            document.getElementById('progress-bar').style.width = `${pct}%`;
+            updateGlobalStats();
         }
 
-        // Render Nav Grid
+        // Render Nav Buttons Grid
         function renderNavGrid() {
-            const container = document.getElementById('nav-grid');
-            container.innerHTML = '';
-
+            navGrid.innerHTML = '';
             quizQuestions.forEach((q, idx) => {
-                const isAnswered = userState.answers[q.id] !== undefined;
-                const isCorrect = isAnswered && userState.answers[q.id] === q.correctIndex;
-                const isBookmarked = !!userState.bookmarks[q.id];
+                const isAnswered = userAnswers.hasOwnProperty(q.id);
+                const isCorrect = isAnswered && userAnswers[q.id] === q.correctIndex;
+                const isBookmarked = bookmarked.includes(q.id);
 
-                // Filter condition
+                // Filter logic
                 if (currentFilter === 'unanswered' && isAnswered) return;
                 if (currentFilter === 'answered' && !isAnswered) return;
                 if (currentFilter === 'bookmarked' && !isBookmarked) return;
 
                 const btn = document.createElement('button');
-                btn.onclick = () => jumpToQuestion(idx);
-                
-                let baseClass = "h-10 rounded-xl font-bold text-xs relative transition flex items-center justify-center border ";
+                btn.className = `h-10 rounded-xl font-bold text-xs transition flex items-center justify-center relative border shadow-sm `;
                 
                 if (idx === currentIndex) {
-                    baseClass += "ring-2 ring-cyan-400 border-cyan-300 ";
+                    btn.classList.add('ring-2', 'ring-indigo-600', 'ring-offset-1');
                 }
 
                 if (isAnswered) {
                     if (isCorrect) {
-                        baseClass += "bg-emerald-600/80 border-emerald-500 text-white hover:bg-emerald-500";
+                        btn.classList.add('bg-emerald-500', 'text-white', 'border-emerald-600');
                     } else {
-                        baseClass += "bg-rose-600/80 border-rose-500 text-white hover:bg-rose-500";
+                        btn.classList.add('bg-rose-500', 'text-white', 'border-rose-600');
                     }
                 } else {
-                    baseClass += "bg-slate-700/60 border-slate-600/80 text-slate-300 hover:bg-slate-600 hover:text-white";
+                    btn.classList.add('bg-slate-100', 'text-slate-700', 'border-slate-200', 'hover:bg-slate-200');
                 }
 
-                btn.className = baseClass;
-                btn.innerHTML = `${q.id}`;
+                btn.innerHTML = `${idx + 1}`;
 
                 if (isBookmarked) {
-                    const badge = document.createElement('span');
-                    badge.className = "absolute -top-1 -right-1 text-[10px] text-amber-400 bg-slate-900 rounded-full w-4 h-4 flex items-center justify-center border border-amber-400";
-                    badge.innerHTML = '<i class="fa-solid fa-bookmark"></i>';
-                    btn.appendChild(badge);
+                    const mark = document.createElement('span');
+                    mark.className = 'absolute -top-1 -right-1 text-amber-500 text-[10px] bg-white rounded-full w-4 h-4 flex items-center justify-center border border-amber-300 shadow-sm';
+                    mark.innerHTML = `<i class="fa-solid fa-bookmark"></i>`;
+                    btn.appendChild(mark);
                 }
 
-                container.appendChild(btn);
+                btn.onclick = () => {
+                    currentIndex = idx;
+                    renderQuestion(currentIndex);
+                    renderNavGrid();
+                };
+
+                navGrid.appendChild(btn);
             });
         }
 
-        // Filter Nav Grid
-        function filterNav(filter) {
-            currentFilter = filter;
-            document.querySelectorAll('.nav-filter-btn').forEach(btn => {
-                btn.className = "nav-filter-btn py-1.5 rounded-lg font-medium text-slate-400 hover:text-white";
-            });
-            document.getElementById(`filter-${filter}`).className = "nav-filter-btn py-1.5 rounded-lg font-medium text-white bg-indigo-600";
-            renderNavGrid();
-        }
-
-        // Render Active Question
+        // Render Current Question
         function renderQuestion(index) {
-            currentIndex = index;
             const q = quizQuestions[index];
+            qNumberBadge.innerText = `Soal #${q.id}`;
+            qTopicBadge.innerText = q.topic;
+            qText.innerHTML = q.text;
 
-            document.getElementById('q-number-badge').textContent = `Soal #${q.id}`;
-            document.getElementById('q-topic-badge').textContent = q.topic;
-            document.getElementById('q-text').innerHTML = q.text;
-            document.getElementById('nav-indicator-text').textContent = `${index + 1} dari 40`;
+            // Render SVG Diagram
+            diagramWrapper.innerHTML = getQuestionDiagramSVG(q);
 
-            // Bookmark Button
-            const bookmarkBtn = document.getElementById('bookmark-btn');
-            if (userState.bookmarks[q.id]) {
-                bookmarkBtn.className = "text-amber-400 hover:text-amber-300 transition text-lg px-2 py-1";
-                bookmarkBtn.innerHTML = '<i class="fa-solid fa-bookmark"></i>';
+            // Bookmark State
+            if (bookmarked.includes(q.id)) {
+                bookmarkBtn.innerHTML = `<i class="fa-solid fa-bookmark text-amber-500"></i>`;
+                bookmarkBtn.title = "Hapus Tanda";
             } else {
-                bookmarkBtn.className = "text-slate-500 hover:text-amber-400 transition text-lg px-2 py-1";
-                bookmarkBtn.innerHTML = '<i class="fa-regular fa-bookmark"></i>';
+                bookmarkBtn.innerHTML = `<i class="fa-regular fa-bookmark"></i>`;
+                bookmarkBtn.title = "Tandai Soal Ini";
             }
 
-            // Options Container
-            const optContainer = document.getElementById('options-container');
-            optContainer.innerHTML = '';
-
-            const userAns = userState.answers[q.id];
-            const hasAnswered = userAns !== undefined;
-
-            const labels = ['A', 'B', 'C', 'D'];
+            // Options Rendering
+            optionsContainer.innerHTML = '';
+            const optionLabels = ['A', 'B', 'C', 'D'];
+            const hasAnswered = userAnswers.hasOwnProperty(q.id);
+            const selectedIdx = userAnswers[q.id];
 
             q.options.forEach((optText, optIdx) => {
                 const optBtn = document.createElement('button');
-                optBtn.onclick = () => selectOption(q.id, optIdx);
-                
-                let optClass = "w-full text-left p-4 rounded-xl border transition flex items-start space-x-3 text-sm sm:text-base font-medium ";
+                optBtn.className = `w-full text-left p-4 rounded-xl border text-sm transition flex items-center justify-between shadow-sm `;
 
-                if (hasAnswered) {
+                if (!hasAnswered) {
+                    optBtn.classList.add('bg-white', 'border-slate-200', 'hover:border-indigo-400', 'hover:bg-indigo-50/50', 'text-slate-800');
+                    optBtn.onclick = () => selectOption(q.id, optIdx);
+                } else {
                     if (optIdx === q.correctIndex) {
-                        // Correct option always highlighted green
-                        optClass += "bg-emerald-900/50 border-emerald-500 text-emerald-200 shadow-lg ring-1 ring-emerald-500";
-                    } else if (optIdx === userAns) {
-                        // Selected incorrect option highlighted red
-                        optClass += "bg-rose-900/50 border-rose-500 text-rose-200";
+                        optBtn.classList.add('bg-emerald-50', 'border-emerald-500', 'text-emerald-900', 'font-semibold');
+                    } else if (optIdx === selectedIdx) {
+                        optBtn.classList.add('bg-rose-50', 'border-rose-500', 'text-rose-900', 'font-semibold');
                     } else {
-                        // Other unselected options dimmed
-                        optClass += "bg-slate-800/40 border-slate-700/60 text-slate-400 opacity-60 cursor-default";
+                        optBtn.classList.add('bg-slate-50', 'border-slate-200', 'text-slate-400', 'opacity-60');
                     }
-                } else {
-                    optClass += "bg-slate-800 border-slate-700 hover:border-indigo-500 hover:bg-indigo-950/40 text-slate-200";
-                }
-
-                optBtn.className = optClass;
-
-                let iconHTML = `<span class="w-7 h-7 rounded-lg font-bold text-xs flex items-center justify-center shrink-0 border `;
-                if (hasAnswered && optIdx === q.correctIndex) {
-                    iconHTML += `bg-emerald-500 border-emerald-400 text-white"><i class="fa-solid fa-check"></i></span>`;
-                } else if (hasAnswered && optIdx === userAns) {
-                    iconHTML += `bg-rose-500 border-rose-400 text-white"><i class="fa-solid fa-xmark"></i></span>`;
-                } else {
-                    iconHTML += `bg-slate-700/80 border-slate-600 text-slate-300">${labels[optIdx]}</span>`;
+                    optBtn.disabled = true;
                 }
 
                 optBtn.innerHTML = `
-                    ${iconHTML}
-                    <span class="pt-0.5">${optText}</span>
+                    <div class="flex items-center space-x-3">
+                        <span class="w-7 h-7 rounded-lg border font-bold text-xs flex items-center justify-center ${
+                            hasAnswered && optIdx === q.correctIndex 
+                                ? 'bg-emerald-500 text-white border-emerald-600' 
+                                : hasAnswered && optIdx === selectedIdx 
+                                ? 'bg-rose-500 text-white border-rose-600' 
+                                : 'bg-slate-100 text-slate-600 border-slate-300'
+                        }">${optionLabels[optIdx]}</span>
+                        <span>${optText}</span>
+                    </div>
+                    ${hasAnswered && optIdx === q.correctIndex ? '<i class="fa-solid fa-circle-check text-emerald-600 text-lg"></i>' : ''}
+                    ${hasAnswered && optIdx === selectedIdx && selectedIdx !== q.correctIndex ? '<i class="fa-solid fa-circle-xmark text-rose-500 text-lg"></i>' : ''}
                 `;
 
-                optContainer.appendChild(optBtn);
+                optionsContainer.appendChild(optBtn);
             });
 
-            // Explanation Box
-            const expBox = document.getElementById('explanation-box');
-            const expStatus = document.getElementById('explanation-status');
-            const expText = document.getElementById('explanation-text');
-
+            // Explanation Box Handling
             if (hasAnswered) {
-                expBox.classList.remove('hidden');
-                if (userAns === q.correctIndex) {
-                    expStatus.className = "font-bold text-emerald-400 flex items-center space-x-2";
-                    expStatus.innerHTML = '<i class="fa-solid fa-circle-check"></i><span>Jawaban Anda Benar!</span>';
+                explanationBox.classList.remove('hidden');
+                if (selectedIdx === q.correctIndex) {
+                    explanationStatus.className = "font-bold text-emerald-600 flex items-center space-x-2";
+                    explanationStatus.innerHTML = `<i class="fa-solid fa-circle-check text-lg"></i> <span>Jawaban Anda Benar!</span>`;
                 } else {
-                    expStatus.className = "font-bold text-rose-400 flex items-center space-x-2";
-                    expStatus.innerHTML = `<i class="fa-solid fa-circle-xmark"></i><span>Jawaban Anda Salah (Kunci: ${labels[q.correctIndex]})</span>`;
+                    explanationStatus.className = "font-bold text-rose-600 flex items-center space-x-2";
+                    explanationStatus.innerHTML = `<i class="fa-solid fa-circle-xmark text-lg"></i> <span>Jawaban Anda Kurang Tepat. (Kunci: ${optionLabels[q.correctIndex]})</span>`;
                 }
-                expText.innerHTML = q.explanation;
+                explanationText.innerHTML = q.explanation;
             } else {
-                expBox.classList.add('hidden');
+                explanationBox.classList.add('hidden');
             }
 
-            // Buttons Prev/Next
-            document.getElementById('prev-btn').disabled = (index === 0);
-            document.getElementById('next-btn').disabled = (index === quizQuestions.length - 1);
+            // Navigation Controls
+            prevBtn.disabled = index === 0;
+            nextBtn.disabled = index === quizQuestions.length - 1;
+            navIndicatorText.innerText = `${index + 1} dari ${quizQuestions.length}`;
 
-            // Render LaTeX
-            renderMathInElement(document.getElementById('question-card'), {
-                delimiters: [
-                    {left: '$$', right: '$$', display: true},
-                    {left: '$', right: '$', display: false}
-                ]
-            });
+            // Re-render KaTeX math formulas
+            if (window.renderMathInElement) {
+                renderMathInElement(document.getElementById('question-card'), {
+                    delimiters: [
+                        {left: "$$", right: "$$", display: true},
+                        {left: "$", right: "$", display: false}
+                    ]
+                });
+            }
+        }
 
+        // Handle Option Selection
+        function selectOption(qId, selectedIdx) {
+            userAnswers[qId] = selectedIdx;
+            localStorage.setItem('circle_geometry_set_b_answers', JSON.stringify(userAnswers));
+            renderQuestion(currentIndex);
             renderNavGrid();
+            updateGlobalStats();
         }
 
-        // Option Click Handler
-        function selectOption(qId, optIndex) {
-            userState.answers[qId] = optIndex;
-            saveState();
-            renderQuestion(currentIndex);
-        }
-
-        // Toggle Bookmark
-        function toggleBookmarkCurrent() {
-            const qId = quizQuestions[currentIndex].id;
-            userState.bookmarks[qId] = !userState.bookmarks[qId];
-            saveState();
-            renderQuestion(currentIndex);
-        }
-
-        // Navigation Controls
-        function jumpToQuestion(idx) {
-            renderQuestion(idx);
-        }
-
+        // Navigation
         function navPrev() {
             if (currentIndex > 0) {
-                renderQuestion(currentIndex - 1);
+                currentIndex--;
+                renderQuestion(currentIndex);
+                renderNavGrid();
             }
         }
 
         function navNext() {
             if (currentIndex < quizQuestions.length - 1) {
-                renderQuestion(currentIndex + 1);
+                currentIndex++;
+                renderQuestion(currentIndex);
+                renderNavGrid();
             }
         }
 
-        // Reset Quiz
-        function confirmResetQuiz() {
-            if (confirm("Apakah Anda yakin ingin mengulang seluruh kuis? Semua progres dan jawaban Anda akan dihapus.")) {
-                userState = { answers: {}, bookmarks: {}, score: 0 };
-                saveState();
-                renderQuestion(0);
+        // Bookmark Toggle
+        function toggleBookmarkCurrent() {
+            const qId = quizQuestions[currentIndex].id;
+            if (bookmarked.includes(qId)) {
+                bookmarked = bookmarked.filter(id => id !== qId);
+            } else {
+                bookmarked.push(qId);
             }
+            localStorage.setItem('circle_geometry_set_b_bookmarks', JSON.stringify(bookmarked));
+            renderQuestion(currentIndex);
+            renderNavGrid();
         }
 
-        // Summary Modal Logic
+        // Navigation Filtering
+        function filterNav(filter) {
+            currentFilter = filter;
+            document.querySelectorAll('.nav-filter-btn').forEach(btn => {
+                btn.className = "nav-filter-btn py-1.5 rounded-lg font-medium text-slate-600 hover:text-indigo-600";
+            });
+            const activeBtn = document.getElementById(`filter-${filter}`);
+            if (activeBtn) {
+                activeBtn.className = "nav-filter-btn py-1.5 rounded-lg font-medium text-white bg-indigo-600 shadow-sm";
+            }
+            renderNavGrid();
+        }
+
+        // Calculate and Update Header Statistics
+        function updateGlobalStats() {
+            let correct = 0;
+            const answeredKeys = Object.keys(userAnswers);
+            const totalAnswered = answeredKeys.length;
+
+            quizQuestions.forEach(q => {
+                if (userAnswers[q.id] === q.correctIndex) {
+                    correct++;
+                }
+            });
+
+            headerScore.innerText = correct;
+            answeredCountBadge.innerText = `${totalAnswered} / ${quizQuestions.length} Terjawab`;
+
+            const percentage = (totalAnswered / quizQuestions.length) * 100;
+            progressBar.style.width = `${percentage}%`;
+        }
+
+        // Summary Modal
         function showSummaryModal() {
             let correct = 0;
-            let answered = 0;
+            let wrong = 0;
+            const totalAnswered = Object.keys(userAnswers).length;
+
             const topicStats = {};
 
             quizQuestions.forEach(q => {
@@ -862,44 +1353,39 @@
                 }
                 topicStats[q.topic].total++;
 
-                const ans = userState.answers[q.id];
-                if (ans !== undefined) {
-                    answered++;
-                    if (ans === q.correctIndex) {
+                if (userAnswers.hasOwnProperty(q.id)) {
+                    if (userAnswers[q.id] === q.correctIndex) {
                         correct++;
                         topicStats[q.topic].correct++;
+                    } else {
+                        wrong++;
                     }
                 }
             });
 
-            const accuracy = answered > 0 ? ((correct / answered) * 100).toFixed(1) : 0;
+            const accuracy = totalAnswered > 0 ? Math.round((correct / totalAnswered) * 100) : 0;
 
-            document.getElementById('modal-score').textContent = `${correct} / 40`;
-            document.getElementById('modal-accuracy').textContent = `${accuracy}%`;
-            document.getElementById('modal-correct').textContent = correct;
-            document.getElementById('modal-wrong').textContent = answered - correct;
+            document.getElementById('modal-score').innerText = `${correct} / ${quizQuestions.length}`;
+            document.getElementById('modal-accuracy').innerText = `${accuracy}%`;
+            document.getElementById('modal-correct').innerText = correct;
+            document.getElementById('modal-wrong').innerText = wrong;
 
-            // Breakdown
-            const breakdownContainer = document.getElementById('topic-breakdown-container');
-            breakdownContainer.innerHTML = '';
+            const container = document.getElementById('topic-breakdown-container');
+            container.innerHTML = '';
 
-            Object.keys(topicStats).forEach(topicName => {
-                const stat = topicStats[topicName];
-                const pct = stat.total > 0 ? Math.round((stat.correct / stat.total) * 100) : 0;
-
-                const row = document.createElement('div');
-                row.className = "bg-slate-900/60 p-3 rounded-xl border border-slate-700 flex flex-col space-y-1";
-                row.innerHTML = `
-                    <div class="flex justify-between text-xs font-semibold">
-                        <span class="text-slate-200">${topicName}</span>
-                        <span class="text-cyan-400">${stat.correct} / ${stat.total} (${pct}%)</span>
+            for (const [topic, data] of Object.entries(topicStats)) {
+                const topicPct = data.total > 0 ? Math.round((data.correct / data.total) * 100) : 0;
+                const div = document.createElement('div');
+                div.className = "bg-slate-50 p-3 rounded-xl border border-slate-200 text-xs flex justify-between items-center";
+                div.innerHTML = `
+                    <div>
+                        <strong class="text-slate-800 block">${topic}</strong>
+                        <span class="text-slate-500">${data.correct} dari ${data.total} Benar</span>
                     </div>
-                    <div class="w-full bg-slate-800 rounded-full h-2">
-                        <div class="bg-gradient-to-r from-indigo-500 to-cyan-400 h-2 rounded-full transition-all" style="width: ${pct}%"></div>
-                    </div>
+                    <span class="font-extrabold px-2.5 py-1 rounded-lg ${topicPct >= 70 ? 'bg-emerald-100 text-emerald-700' : topicPct >= 40 ? 'bg-amber-100 text-amber-700' : 'bg-rose-100 text-rose-700'}">${topicPct}%</span>
                 `;
-                breakdownContainer.appendChild(row);
-            });
+                container.appendChild(div);
+            }
 
             document.getElementById('summary-modal').classList.remove('hidden');
         }
@@ -907,6 +1393,28 @@
         function closeSummaryModal() {
             document.getElementById('summary-modal').classList.add('hidden');
         }
+
+        function confirmResetQuiz() {
+            if (confirm("Apakah Anda yakin ingin menghapus semua jawaban dan mengulang kuis dari awal?")) {
+                userAnswers = {};
+                bookmarked = [];
+                localStorage.removeItem('circle_geometry_set_b_answers');
+                localStorage.removeItem('circle_geometry_set_b_bookmarks');
+                currentIndex = 0;
+                initQuiz();
+            }
+        }
+
+        // Initialize on DOM load
+        document.addEventListener('DOMContentLoaded', () => {
+            initQuiz();
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
     </script>
 </body>
 </html>
